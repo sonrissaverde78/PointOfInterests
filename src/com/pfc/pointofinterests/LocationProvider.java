@@ -64,6 +64,7 @@ public class LocationProvider implements ILocationProvider {
 	public void onResume() {
 		if ( this.locationManager != null && this.locationListener != null ) {
 
+			this.gpsProviderEnabled = this.locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER );
 			// check which providers are available are available
 			this.gpsProviderEnabled = this.locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER );
 			this.networkProviderEnabled = this.locationManager.isProviderEnabled( LocationManager.NETWORK_PROVIDER );

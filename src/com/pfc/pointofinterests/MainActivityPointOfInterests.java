@@ -49,15 +49,15 @@ public class MainActivityPointOfInterests extends ActionBarActivity {
 		// com.pfc.pointofinterests.SampleCamHandlePoiDetailActivity
 		/* launch activity */
 		/* store className of activity to call*/
-		final String className = "com.pfc.pointofinterests.SampleCamHandlePoiDetailActivity";
-
+		// final String className = "com.pfc.pointofinterests.SampleCamHandlePoiDetailActivity";
+		final String className = "com.pfc.pointofinterests.SampleCamActivity";
 		try {
 
 			final Intent intent = new Intent(this, Class.forName(className));
 			intent.putExtra(EXTRAS_KEY_ACTIVITY_TITLE_STRING,
 					"POI");
 			intent.putExtra(EXTRAS_KEY_ACTIVITY_ARCHITECT_WORLD_URL, // "samples" +
-					"5_Browsing$Pois_5_Native$Detail$Screen" //this.getArchitectWorldUrls()[position]
+					"99_Demo_1_Image$Recognition$And$Geo" //this.getArchitectWorldUrls()[position]
 					+ File.separator + "index.html");
 			/*
 			 * intent.putExtra(EXTRAS_KEY_ACTIVITY_ARCHITECT_WORLD_URL, "samples"

@@ -42,7 +42,8 @@ public class SampleCamActivity extends AbstractArchitectCamActivity {
 
 	@Override
 	public int getContentViewId() {
-		return R.layout.sample_cam;
+		//return R.layout.sample_cam;
+		return R.layout.prueba;
 	}
 
 	@Override
