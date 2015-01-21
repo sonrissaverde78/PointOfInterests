@@ -4,9 +4,18 @@
     tools:context="com.example.pointofinterests.MainActivityPointOfInterests" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/POI_NativeDetailScreen_5_5"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/POI_NativeDetailScreen"
         app:showAsAction="never"/>
-
+    <item
+        android:id="@+id/CaptureScreenBonus_5_6"
+        android:orderInCategory="100"
+        android:title="@string/POI_CaptureScreenBonus"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/ImageRecognitionAndGeo_99_1"
+        android:orderInCategory="100"
+        android:title="@string/ImageRecognitionAndGeo"
+        app:showAsAction="never"/>
 </menu>

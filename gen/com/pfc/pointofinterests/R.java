@@ -1080,6 +1080,9 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020057;
     }
     public static final class id {
+        public static final int CaptureScreenBonus_5_6=0x7f050043;
+        public static final int ImageRecognitionAndGeo_99_1=0x7f050044;
+        public static final int POI_NativeDetailScreen_5_5=0x7f050042;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1091,7 +1094,6 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050042;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int architectView=0x7f05003c;
@@ -1208,6 +1210,9 @@ containing a value of this type.
         public static final int main_activity_point_of_interests=0x7f0c0000;
     }
     public static final class string {
+        public static final int ImageRecognitionAndGeo=0x7f0a001d;
+        public static final int POI_CaptureScreenBonus=0x7f0a001c;
+        public static final int POI_NativeDetailScreen=0x7f0a001b;
         public static final int TexrViewAndroid=0x7f0a0015;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */

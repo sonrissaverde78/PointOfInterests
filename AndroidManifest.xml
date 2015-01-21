@@ -53,9 +53,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.pfc.pointofinterests.SampleCamActivity" android:configChanges="orientation|keyboardHidden|screenSize"/>
-        <activity android:name="com.pfc.pointofinterests.SampleCamHandlePoiDetailActivity" android:configChanges="orientation|keyboardHidden|screenSize"/>boardHidden|screenSize"/>
+        <activity android:name="com.pfc.pointofinterests.SampleCamHandlePoiDetailActivity" android:configChanges="orientation|keyboardHidden|screenSize"/>
                 <!-- poi detail screen -->
-        <activity android:name="com.wikitude.samples.SamplePoiDetailActivity"/>
+        <activity android:name="com.pfc.pointofinterests.SamplePoiDetailActivity"/>
+        <activity android:name="com.pfc.pointofinterests.SampleCamCaptureScreenActivity" android:configChanges="orientation|keyboardHidden|screenSize"/>
     </application>
 
 </manifest>

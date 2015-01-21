@@ -235,6 +235,9 @@ int drawable abc_textfield_searchview_holo_light 0x7f020054
 int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable ic_launcher 0x7f020057
+int id CaptureScreenBonus_5_6 0x7f050043
+int id ImageRecognitionAndGeo_99_1 0x7f050044
+int id POI_NativeDetailScreen_5_5 0x7f050042
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b
@@ -246,7 +249,6 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
-int id action_settings 0x7f050042
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id architectView 0x7f05003c
@@ -333,6 +335,9 @@ int layout sample_cam 0x7f03001a
 int layout sample_poidetail 0x7f03001b
 int layout support_simple_spinner_dropdown_item 0x7f03001c
 int menu main_activity_point_of_interests 0x7f0c0000
+int string ImageRecognitionAndGeo 0x7f0a001d
+int string POI_CaptureScreenBonus 0x7f0a001c
+int string POI_NativeDetailScreen 0x7f0a001b
 int string TexrViewAndroid 0x7f0a0015
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_up_description 0x7f0a0002

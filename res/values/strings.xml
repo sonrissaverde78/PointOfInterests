@@ -15,4 +15,8 @@
 	<string name="message">message</string>  
 	<string name="subject">subject</string>
 	<string name="to">to</string>
+	
+	<string name="POI_NativeDetailScreen">POI_NativeDetailScreen</string>
+	<string name="POI_CaptureScreenBonus">POI_CaptureScreenBonus</string>
+	<string name="ImageRecognitionAndGeo">ImageRecognitionAndGeo</string>
 </resources>
