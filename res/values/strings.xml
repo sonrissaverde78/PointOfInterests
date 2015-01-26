@@ -19,4 +19,5 @@
 	<string name="POI_NativeDetailScreen">POI_NativeDetailScreen</string>
 	<string name="POI_CaptureScreenBonus">POI_CaptureScreenBonus</string>
 	<string name="ImageRecognitionAndGeo">ImageRecognitionAndGeo</string>
+	<string name="SpeechToText">Escribe Texto Para leer</string>
 </resources>

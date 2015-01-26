@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Environment;
+import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectView;
@@ -92,6 +93,8 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 				
 				// pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
 				else if ("button".equalsIgnoreCase(invokedUri.getHost())) {
+					vReadText ("button");
+					/*
 					SampleCamCaptureScreenActivity.this.architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new CaptureScreenCallback() {
 						
 						@Override
@@ -127,7 +130,7 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 								});
 							}
 						}
-					});
+					});*/
 				}
 				return true;
 			}
@@ -145,6 +148,48 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 	public float getInitialCullingDistanceMeters() {
 		// you need to adjust this in case your POIs are more than 50km away from user here while loading or in JS code (compare 'AR.context.scene.cullingDistance')
 		return ArchitectViewHolderInterface.CULLING_DISTANCE_DEFAULT_METERS;
+	}
+	
+	public void onClickTextToSpeech()
+	{
+		vReadText ("pp");
+	}
+
+	@Override
+	public void onInit(int status)
+	{
+		// TODO Auto-generated method stub
+        if ( status == TextToSpeech.LANG_MISSING_DATA | status == TextToSpeech.LANG_NOT_SUPPORTED )
+        {
+                Toast.makeText( this, "ERROR LANG_MISSING_DATA | LANG_NOT_SUPPORTED", Toast.LENGTH_SHORT ).show();
+        }
+	}
+	
+	@Override 
+	public float vSetSpeechRate () 
+	{	
+		return 0.0f;
+	}
+	
+	@Override 
+	public float vSetPitch () 
+	{
+		return 0.0f;
+	}
+
+
+	@Override
+	public String vSetLocalA()
+	{
+		// TODO Auto-generated method stub
+		return "spa";
+	}
+
+	@Override
+	public String vSetLocalB()
+	{
+		// TODO Auto-generated method stub
+		return "ESP";
 	}
 
 }

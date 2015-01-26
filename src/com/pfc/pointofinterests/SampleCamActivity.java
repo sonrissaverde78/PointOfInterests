@@ -165,4 +165,39 @@ public class SampleCamActivity extends AbstractArchitectCamActivity {
 		return ArchitectViewHolderInterface.CULLING_DISTANCE_DEFAULT_METERS;
 	}
 
+	@Override
+	public void onInit (int status)
+	{
+		
+	}
+
+
+
+	@Override
+	public float vSetSpeechRate()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float vSetPitch()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String vSetLocalA()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String vSetLocalB()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

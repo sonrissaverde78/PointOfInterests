@@ -1,6 +1,8 @@
 package com.pfc.pointofinterests;
 
 import java.io.IOException;
+import java.util.Locale;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
@@ -10,11 +12,15 @@ import android.media.AudioManager;
 import android.opengl.GLES20;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import android.speech.tts.TextToSpeech;
 
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectConfig;
@@ -26,8 +32,12 @@ import com.wikitude.architect.ArchitectView.SensorAccuracyChangeListener;
  * Feel free to extend from this activity when setting up your own AR-Activity 
  *
  */
-public abstract class AbstractArchitectCamActivity extends ActionBarActivity implements ArchitectViewHolderInterface{
+public abstract class AbstractArchitectCamActivity extends ActionBarActivity 
 
+implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
+{
+    public 		TextToSpeech 	textToSpeech;
+    
 	/**
 	 * holds the Wikitude SDK AR-View, this is where camera, markers, compass, 3D models etc. are rendered
 	 */
@@ -64,13 +74,27 @@ public abstract class AbstractArchitectCamActivity extends ActionBarActivity imp
 	public void onCreate( final Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
 
+		onWikitudeCreate ( savedInstanceState );
+		onSpeechCreate	( savedInstanceState);
+		
+
+
+	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_activity_point_of_interests, menu);
+        return true;
+    }
+	public void onWikitudeCreate ( final Bundle savedInstanceState )
+	{		
 		/* pressing volume up/down should cause music volume changes */
 		this.setVolumeControlStream( AudioManager.STREAM_MUSIC );
-
+	
 		/* set samples content view */
-		this.setContentView( this.getContentViewId() );
+		this.setContentView	( this.getContentViewId() );
 		
-		this.setTitle( this.getActivityTitle() );
+		this.setTitle		( this.getActivityTitle() );
 		
 		/*  
 		 *	this enables remote debugging of a WebView on Android 4.4+ when debugging = true in AndroidManifest.xml
@@ -83,13 +107,13 @@ public abstract class AbstractArchitectCamActivity extends ActionBarActivity imp
 		        WebView.setWebContentsDebuggingEnabled(true);
 		    }
 		}
-
+	
 		/* set AR-view for life-cycle notifications etc. */
 		this.architectView = (ArchitectView)this.findViewById( this.getArchitectViewId()  );
-
+	
 		/* pass SDK key if you have one, this one is only valid for this package identifier and must not be used somewhere else */
 		final ArchitectConfig config = new ArchitectConfig( this.getWikitudeSDKLicenseKey() );
-
+	
 		try {
 			/* first mandatory life-cycle notification */
 			this.architectView.onCreate( config );
@@ -98,7 +122,7 @@ public abstract class AbstractArchitectCamActivity extends ActionBarActivity imp
 			Toast.makeText(getApplicationContext(), "can't create Architect View", Toast.LENGTH_SHORT).show();
 			Log.e(this.getClass().getName(), "Exception in ArchitectView.onCreate()", rex);
 		}
-
+	
 		// set accuracy listener if implemented, you may e.g. show calibration prompt for compass using this listener
 		this.sensorAccuracyListener = this.getSensorAccuracyListener();
 		
@@ -112,19 +136,19 @@ public abstract class AbstractArchitectCamActivity extends ActionBarActivity imp
 		
 		// listener passed over to locationProvider, any location update is handled here
 		this.locationListener = new LocationListener() {
-
+	
 			@Override
 			public void onStatusChanged( String provider, int status, Bundle extras ) {
 			}
-
+	
 			@Override
 			public void onProviderEnabled( String provider ) {
 			}
-
+	
 			@Override
 			public void onProviderDisabled( String provider ) {
 			}
-
+	
 			@Override
 			public void onLocationChanged( final Location location ) {
 				// forward location updates fired by LocationProvider to architectView, you can set lat/lon from any location-strategy
@@ -142,17 +166,33 @@ public abstract class AbstractArchitectCamActivity extends ActionBarActivity imp
 				}
 			}
 		};
-
+	
 		// locationProvider used to fetch user position
 		this.locationProvider = getLocationProvider( this.locationListener );
-		
 	}
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity_point_of_interests, menu);
-        return true;
-    }
+	private 	String 	szLanguage;
+	private 	Locale 	Location;
+	private		float 	gfPitch;
+	private		float 	gfSpeechRate;
+	private		String 	gLocaleA; 
+	private		String 	gLocaleB;
+	public void onSpeechCreate( final Bundle savedInstanceState )
+	{
+		textToSpeech = new TextToSpeech( this, this );
+	
+		gfPitch		= vSetPitch ();
+		gfSpeechRate = vSetSpeechRate();
+		gLocaleA	 = vSetLocalA();
+		gLocaleB	 = vSetLocalB();
+
+		Location = new Locale( gLocaleA, gLocaleA);
+		
+		textToSpeech.setLanguage(Location );
+		
+		textToSpeech.setPitch( gfPitch );
+		
+		textToSpeech.setSpeechRate( gfSpeechRate );
+	}
 	@Override
 	protected void onPostCreate( final Bundle savedInstanceState ) {
 		super.onPostCreate( savedInstanceState );
@@ -299,5 +339,23 @@ public abstract class AbstractArchitectCamActivity extends ActionBarActivity imp
 		String extensions = GLES20.glGetString( GLES20.GL_EXTENSIONS );
 		return extensions != null && extensions.contains( "GL_OES_EGL_image_external" ) && android.os.Build.VERSION.SDK_INT >= 14 ;
 	}
+
+
+
+	/*
+
+	*/
+
+	public void vReadText (String szReadText) 
+	{
+        textToSpeech.speak( szReadText, TextToSpeech.QUEUE_FLUSH, null );
+	}
+	
+	public abstract float 	vSetSpeechRate ();
+	
+	public abstract float 	vSetPitch ();
+
+	public abstract String 	vSetLocalA ();
+	public abstract String 	vSetLocalB ();
 
 }

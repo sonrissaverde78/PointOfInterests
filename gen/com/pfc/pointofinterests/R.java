@@ -1213,6 +1213,7 @@ containing a value of this type.
         public static final int ImageRecognitionAndGeo=0x7f0a001d;
         public static final int POI_CaptureScreenBonus=0x7f0a001c;
         public static final int POI_NativeDetailScreen=0x7f0a001b;
+        public static final int SpeechToText=0x7f0a001e;
         public static final int TexrViewAndroid=0x7f0a0015;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */

@@ -52,14 +52,14 @@ public class MainActivityPointOfInterests extends ActionBarActivity {
 	    		case R.id.ImageRecognitionAndGeo_99_1:
 	    			activityUrl 			= "99_Demo_1_Image$Recognition$And$Geo"; //this.getArchitectWorldUrls()[position]
 	    			activityTitle 			= (String) getResources().getText(R.string.ImageRecognitionAndGeo);
-	    			classNameCamActivity 	= "com.pfc.pointofinterests.SampleCamActivity";
-	    			intent = new Intent( this, SampleCamActivity.class );
+	    			classNameCamActivity 	= "com.pfc.pointofinterests.SampleCamCaptureScreenActivity";
+	    			intent = new Intent( this, SampleCamCaptureScreenActivity.class );
 	    			break;
 	    		case R.id.POI_NativeDetailScreen_5_5:
 	    			activityUrl = "5_Browsing$Pois_5_Native$Detail$Screen";  			
 	    			activityTitle = (String) getResources().getText(R.string.POI_NativeDetailScreen);
-	    			classNameCamActivity = "com.pfc.pointofinterests.SampleCamActivity";
-	    			intent = new Intent( this, SampleCamActivity.class );
+	    			classNameCamActivity = "com.pfc.pointofinterests.SampleCamCaptureScreenActivity";
+	    			intent = new Intent( this, SampleCamCaptureScreenActivity.class );
 	    			break;	
 	    		case R.id.CaptureScreenBonus_5_6:
 	    			activityUrl = "5_Browsing$Pois_6_Capture$Screen$Bonus";
@@ -68,7 +68,7 @@ public class MainActivityPointOfInterests extends ActionBarActivity {
 	    			intent = new Intent( this, SampleCamCaptureScreenActivity.class );
 	    			break;
 	    		default:
-	    			intent = new Intent( this, SampleCamActivity.class );
+	    			intent = new Intent( this, SampleCamCaptureScreenActivity.class );
 	    			break;
 	    	}
 	
