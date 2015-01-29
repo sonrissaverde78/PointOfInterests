@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Environment;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
@@ -80,8 +81,15 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 			public boolean urlWasInvoked(final String uriString) {
 				
 				Uri invokedUri = Uri.parse(uriString);
+				String name;
+				name = invokedUri.getQueryParameter("id");
+				vReadText (name);
 				
+				startVoiceRecognitionActivity();
+				
+				return true;
 				// pressed "More" button on POI-detail panel
+				/*
 				if ("markerselected".equalsIgnoreCase(invokedUri.getHost())) {
 					final Intent poiDetailIntent = new Intent(SampleCamCaptureScreenActivity.this, SamplePoiDetailActivity.class);
 					poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_ID, String.valueOf(invokedUri.getQueryParameter("id")) );
@@ -94,7 +102,7 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 				// pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
 				else if ("button".equalsIgnoreCase(invokedUri.getHost())) {
 					vReadText ("button");
-					/*
+					
 					SampleCamCaptureScreenActivity.this.architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new CaptureScreenCallback() {
 						
 						@Override
@@ -130,9 +138,9 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 								});
 							}
 						}
-					});*/
+					});
 				}
-				return true;
+				return true;*/
 			}
 				
 		};
@@ -191,5 +199,16 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 		// TODO Auto-generated method stub
 		return "ESP";
 	}
-
+	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1;
+  	 private void startVoiceRecognitionActivity() {
+  	   	  // Definici�n del intent para realizar en an�lisis del mensaje
+  	   	  Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+  	   	  // Indicamos el modelo de lenguaje para el intent
+  	   	  intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+  	   	    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+  	   	  // Definimos el mensaje que aparecer� 
+  	   	  intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Diga, Llamar a ...");
+  	   	  // Lanzamos la actividad esperando resultados
+  	   	  startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+  	   	 }
 }

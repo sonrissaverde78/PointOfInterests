@@ -215,21 +215,31 @@ var World = {
 		World.currentMarker = marker;
 
 		// update panel values
-		$("#poi-detail-title").html(marker.poiData.title);
-		$("#poi-detail-description").html(marker.poiData.description);
+		//$("#poi-detail-title").html(marker.poiData.title);
+		//$("#poi-detail-description").html(marker.poiData.description);
 
-		var distanceToUserValue = (marker.distanceToUser > 999) ? ((marker.distanceToUser / 1000).toFixed(2) + " km") : (Math.round(marker.distanceToUser) + " m");
+		//var distanceToUserValue = (marker.distanceToUser > 999) ? ((marker.distanceToUser / 1000).toFixed(2) + " km") : (Math.round(marker.distanceToUser) + " m");
 
-		$("#poi-detail-distance").html(distanceToUserValue);
+		//$("#poi-detail-distance").html(distanceToUserValue);
 
-		// show panel
-		$("#panel-poidetail").panel("open", 123);
+		//// show panel
+		//$("#panel-poidetail").panel("open", 123);
 
-		$(".ui-panel-dismiss").unbind("mousedown");
+		//$(".ui-panel-dismiss").unbind("mousedown");
 
-		$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
-			World.currentMarker.setDeselected(World.currentMarker);
-		});
+		//$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
+		//	World.currentMarker.setDeselected(World.currentMarker);
+		//});
+		var currentMarker = World.currentMarker;
+		var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description);
+		/*
+			The urlListener of the native project intercepts this call and parses the arguments. 
+			This is the only way to pass information from JavaSCript to your native code. 
+			Ensure to properly encode and decode arguments.
+			Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native. 
+			! This will cause an HTTP error if you didn't register a urlListener in native architectView !
+		*/
+		document.location = architectSdkUrl;
 	},
 
 	// screen was clicked but no geo-object was hit

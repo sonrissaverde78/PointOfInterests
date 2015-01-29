@@ -38,7 +38,18 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
     imageDrawable[id] = new AR.ImageDrawable(IrAndGeo.res.marker, 2, {
         scale: 0.0,
         onClick: function() {
-            alert(name);
+            // alert(name);
+		//var currentMarker = World.currentMarker;
+		// var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description);
+		var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(name) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+		/*
+			The urlListener of the native project intercepts this call and parses the arguments. 
+			This is the only way to pass information from JavaSCript to your native code. 
+			Ensure to properly encode and decode arguments.
+			Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native. 
+			! This will cause an HTTP error if you didn't register a urlListener in native architectView !
+		*/
+		document.location = architectSdkUrl;
         }
     });
 
