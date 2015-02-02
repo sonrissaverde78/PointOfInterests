@@ -3,6 +3,8 @@ package com.pfc.pointofinterests;
 import java.io.IOException;
 import java.util.Locale;
 
+import org.json.JSONArray;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
@@ -26,6 +28,7 @@ import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectConfig;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView.SensorAccuracyChangeListener;
+
 
 /**
  * Abstract activity which handles live-cycle events.
@@ -67,7 +70,7 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 	 * urlListener handling "document.location= 'architectsdk://...' " calls in JavaScript"
 	 */
 	protected ArchitectUrlListener 			urlListener;
-	
+	protected JSONArray poiData;
 	/** Called when the activity is first created. */
 	@SuppressLint("NewApi")
 	@Override
@@ -166,16 +169,44 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 				}
 			}
 		};
-	
+
 		// locationProvider used to fetch user position
 		this.locationProvider = getLocationProvider( this.locationListener );
 	}
+	
+	public abstract String JSonFuntion();
+	
+	
+	public abstract JSONArray getPoiInformation();
+	
+	public abstract JSONArray getPoiInformation(final Location userLocation, final int numberOfPlaces);
+ 	/**
+ 	 * call JacaScript in architectView
+ 	 * @param methodName
+ 	 * @param arguments
+ 	 */
+ 	private void callJavaScript(final String methodName, final String[] arguments) {
+ 		final StringBuilder argumentsString = new StringBuilder("");
+ 		for (int i= 0; i<arguments.length; i++) {
+ 			argumentsString.append(arguments[i]);
+ 			if (i<arguments.length-1) 
+ 			{
+ 				argumentsString.append(", ");
+ 			}
+ 		}
+ 		
+ 		if (this.architectView!=null) {
+ 			final String js = ( methodName + "( " + argumentsString.toString() + " );" );
+ 			this.architectView.callJavascript(js);
+ 		}
+ 	}
 	private 	String 	szLanguage;
 	private 	Locale 	Location;
 	private		float 	gfPitch;
 	private		float 	gfSpeechRate;
 	private		String 	gLocaleA; 
 	private		String 	gLocaleB;
+	
 	public void onSpeechCreate( final Bundle savedInstanceState )
 	{
 		textToSpeech = new TextToSpeech( this, this );
@@ -198,7 +229,10 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		super.onPostCreate( savedInstanceState );
 		
 		if ( this.architectView != null ) {
-			
+			// AbstractArchitectCamActivity.this.poiData = this.getPoiInformation(AbstractArchitectCamActivity.this.lastKnownLocaton, 20);
+			AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
+			AbstractArchitectCamActivity.this.callJavaScript(JSonFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
+	
 			// call mandatory live-cycle method of architectView
 			this.architectView.onPostCreate();
 			
@@ -224,6 +258,8 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		// call mandatory live-cycle method of architectView
 		if ( this.architectView != null ) {
 			this.architectView.onResume();
+			AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
+			AbstractArchitectCamActivity.this.callJavaScript(JSonFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
 			
 			// register accuracy listener in architectView, if set
 			if (this.sensorAccuracyListener!=null) {

@@ -3,6 +3,8 @@ package com.pfc.pointofinterests;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.json.JSONArray;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.SensorManager;
@@ -196,6 +198,28 @@ public class SampleCamActivity extends AbstractArchitectCamActivity {
 
 	@Override
 	public String vSetLocalB()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String JSonFuntion()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JSONArray getPoiInformation()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JSONArray getPoiInformation(android.location.Location userLocation,
+			int numberOfPlaces)
 	{
 		// TODO Auto-generated method stub
 		return null;

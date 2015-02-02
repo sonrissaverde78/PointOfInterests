@@ -2,10 +2,17 @@ package com.pfc.pointofinterests;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.hardware.SensorManager;
+import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Environment;
@@ -211,4 +218,169 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
   	   	  // Lanzamos la actividad esperando resultados
   	   	  startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
   	   	 }
+
+
+
+ 	@Override
+ 	public String JSonFuntion()
+ 	{
+ 		return "IrAndGeo.loadPoisFromJSon";
+ 	}
+ 	
+ 	/**
+ 	 * loads poiInformation and returns them as JSONArray. Ensure attributeNames of JSON POIs are well known in JavaScript, so you can parse them easily
+ 	 * @param userLocation the location of the user
+ 	 * @param numberOfPlaces number of places to load (at max)
+ 	 * @return POI information in JSONArray
+ 	 */
+ 	@Override
+ 	public JSONArray getPoiInformation()
+ 	{
+ 		vInitDataBase();
+ 		final JSONArray pois = new JSONArray();
+ 		final String ATTR_ID 			= "id";
+ 		final String ATTR_NAME 			= "name";
+ 		final String ATTR_DESCRIPTION 	= "description";
+ 		final String ATTR_LATITUDE 		= "latitude";
+ 		final String ATTR_LONGITUDE 	= "longitude";
+ 		final String ATTR_ALTITUDE 		= "altitude";
+ 		int numberOfPlaces = 10;
+ 		for (int i=1;i <= numberOfPlaces; i++) {
+ 			final HashMap<String, String> poiInformation = new HashMap<String, String>();
+ 			
+ 			//= getInfoPlace (i);
+ 			String pp = readRegister (i);
+ 			poiInformation.put(ATTR_ID, pp);
+ 			poiInformation.put(ATTR_NAME, "POI#" + pp);
+ 			poiInformation.put(ATTR_DESCRIPTION, "This is the description of POI#" + pp);
+ 			//double[] poiLocationLatLon = getRandomLatLonNearby(lastKnownLocaton.getLatitude(), lastKnownLocaton.getLongitude());
+ 			// poiInformation.put(ATTR_LATITUDE, String.valueOf(poiLocationLatLon[0]));
+ 			poiInformation.put(ATTR_LATITUDE, "ATTR_LATITUDE" + pp);
+ 			// poiInformation.put(ATTR_LONGITUDE, String.valueOf(poiLocationLatLon[1]));
+ 			poiInformation.put(ATTR_LONGITUDE, "ATTR_LONGITUDE"  + pp);
+ 			final float UNKNOWN_ALTITUDE = -32768f;  // equals "AR.CONST.UNKNOWN_ALTITUDE" in JavaScript (compare AR.GeoLocation specification)
+ 			// Use "AR.CONST.UNKNOWN_ALTITUDE" to tell ARchitect that altitude of places should be on user level. Be aware to handle altitude properly in locationManager in case you use valid POI altitude value (e.g. pass altitude only if GPS accuracy is <7m).
+ 			poiInformation.put(ATTR_ALTITUDE, String.valueOf(UNKNOWN_ALTITUDE) + pp);
+ 			pois.put(new JSONObject(poiInformation));
+ 		}
+ 		
+ 		return pois;
+ 	}
+
+  	@Override
+  	public JSONArray getPoiInformation(final Location userLocation, final int numberOfPlaces) {
+  	
+ 		
+ 		if (userLocation==null) {
+ 			return null;
+ 		}
+ 		
+ 		final JSONArray pois = new JSONArray();
+ 		
+ 		// ensure these attributes are also used in JavaScript when extracting POI data
+ 		final String ATTR_ID 			= "id";
+ 		final String ATTR_NAME 			= "name";
+ 		final String ATTR_DESCRIPTION 	= "description";
+ 		final String ATTR_LATITUDE 		= "latitude";
+ 		final String ATTR_LONGITUDE 	= "longitude";
+ 		final String ATTR_ALTITUDE 	= "altitude";
+ 		
+ 		for (int i=1;i <= numberOfPlaces; i++) {
+ 			final HashMap<String, String> poiInformation = new HashMap<String, String>();
+ 			poiInformation.put(ATTR_ID, String.valueOf(i));
+ 			poiInformation.put(ATTR_NAME, "POI#" + i);
+ 			poiInformation.put(ATTR_DESCRIPTION, "This is the description of POI#" + i);
+ 			double[] poiLocationLatLon = getRandomLatLonNearby(userLocation.getLatitude(), userLocation.getLongitude());
+ 			poiInformation.put(ATTR_LATITUDE, String.valueOf(poiLocationLatLon[0]));
+ 			poiInformation.put(ATTR_LONGITUDE, String.valueOf(poiLocationLatLon[1]));
+ 			final float UNKNOWN_ALTITUDE = -32768f;  // equals "AR.CONST.UNKNOWN_ALTITUDE" in JavaScript (compare AR.GeoLocation specification)
+ 			// Use "AR.CONST.UNKNOWN_ALTITUDE" to tell ARchitect that altitude of places should be on user level. Be aware to handle altitude properly in locationManager in case you use valid POI altitude value (e.g. pass altitude only if GPS accuracy is <7m).
+ 			poiInformation.put(ATTR_ALTITUDE, String.valueOf(UNKNOWN_ALTITUDE));
+ 			pois.put(new JSONObject(poiInformation));
+ 		}
+ 		
+ 		return pois;
+ 	}
+ 	public HashMap <String, String> DataPoints ()
+ 	{
+		return null;
+ 	}
+ 	/**
+ 	 * helper for creation of dummy places.
+ 	 * @param lat center latitude
+ 	 * @param lon center longitude
+ 	 * @return lat/lon values in given position's vicinity
+ 	 */
+ 	private static double[] getRandomLatLonNearby(final double lat, final double lon) {
+ 		return new double[] { lat + Math.random()/5-0.1 , lon + Math.random()/5-0.1};
+ 	}
+ 	
+ 	
+ 	
+ 	private String 					dbPoi = "dbPoi";
+ 	private SQLiteDatabase 			db;
+ 	private PoiSQLiteHelper 		usdbh;
+ 	void vInitDataBase ()
+	{
+        // db Opening. Name 'dbPoi' with RW permissions.
+ 		// db location:
+ 		// 		/data/data/paquete.java.de.la.aplicacion/databases/nombre_base_datos
+ 		usdbh =
+            new PoiSQLiteHelper(this, "dbPoi", null, 1); // RW Opened. 
+ 
+        db = usdbh.getWritableDatabase();
+ 
+        //If db was properly openned 5 samples are inserted
+        if(db != null)
+        {
+            // 
+            for(int i=1; i<=5; i++)
+            {
+                //Generamos los datos                
+                String szPoi = 
+                i + ", "				+ 
+				"' " + i + "'" + ", "	+
+				"' " + i + "'" + ", "	+ 
+				i + ", "				+ 
+				i + ", "				+
+				i;
+                //Insertamos los datos en la tabla Usuarios
+                String szInsertIntoPOItable = "INSERT INTO POI (iId, name, description, lat, long, alt) " +
+                "VALUES (" + szPoi +")";
+                db.execSQL(szInsertIntoPOItable);
+            }
+ 
+            //Cerramos la base de datos
+            db.close();
+        }
+	}
+ 	
+ 	private String readRegister (int i)
+ 	{
+ 		String cols = (	"iId, " 			+
+						"name, " 			+
+						"description, " 	+ 
+						"lat, " 			+ 
+						"long, " 			+
+						"alt");
+ 		String Select = "SELECT " + cols + " FROM " +  usdbh.tableName + " WHERE " + " iId= " + i;
+  		db = usdbh.getReadableDatabase();
+ 		
+ 		// String[] args = new String[] {"usu1"};
+ 		// sql select is sent.
+ 		Cursor c = db.rawQuery( Select, null);
+ 		// End of pointer is checked and then we take the result.
+ 		String iId = null;
+ 		if (c.moveToFirst()) {
+ 		     //Recorremos el cursor hasta que no haya más registros
+ 		     do {
+ 		          // String codigo= c.getString(0);
+ 		          iId = c.getString(1);
+ 		     } while(c.moveToNext());
+ 		}
+ 		
+ 		db.close();
+ 		return iId;
+ 	}
+ 	
 }

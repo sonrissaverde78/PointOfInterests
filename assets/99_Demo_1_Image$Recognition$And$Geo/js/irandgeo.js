@@ -10,7 +10,22 @@ IrAndGeo.error = false;
 IrAndGeo.receivedLocation = false;
 var imageDrawable = [];
 IrAndGeo.res = {};
-
+IrAndGeo.singlePoi = {};
+IrAndGeo.loadPoisFromJSon = function(poiData)
+{
+    alert("loadPoisFromJSon");
+        // loop through POI-information and create an AR.GeoObject (=Marker) per POI
+    /*for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+        var singlePoi = {
+            "id": poiData[currentPlaceNr].id,
+            "latitude": parseFloat(poiData[currentPlaceNr].latitude),
+            "longitude": parseFloat(poiData[currentPlaceNr].longitude),
+            "altitude": parseFloat(poiData[currentPlaceNr].altitude),
+            "title": poiData[currentPlaceNr].name,
+            "description": poiData[currentPlaceNr].description
+        };
+    }*/
+}
 IrAndGeo.setupScene = function(lat, lon, alt) {
     // create 8 random markers with different marker names
     alert("setupScene()");
