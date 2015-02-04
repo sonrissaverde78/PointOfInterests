@@ -91,7 +91,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 				String szIdPoiSelected;
 				szIdPoiSelected = invokedUri.getQueryParameter("id");
 				int i = Integer.parseInt(szIdPoiSelected);
-				String pp = vGet_db_PoiInfo (i);
+				String pp = szGet_db_PoiInfo (i);
 				vReadText (pp);
 				
 				
