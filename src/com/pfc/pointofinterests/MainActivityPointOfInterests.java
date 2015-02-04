@@ -68,7 +68,7 @@ public class MainActivityPointOfInterests extends ActionBarActivity {
 	    			intent = new Intent( this, SampleCamCaptureScreenActivity.class );
 	    			break;
 	    		default:
-	    			intent = new Intent( this, SampleCamCaptureScreenActivity.class );
+	    			intent = new Intent( this, PoiDatabase.class );
 	    			break;
 	    	}
 	
