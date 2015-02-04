@@ -88,10 +88,14 @@ public class SampleCamCaptureScreenActivity extends AbstractArchitectCamActivity
 			public boolean urlWasInvoked(final String uriString) {
 				
 				Uri invokedUri = Uri.parse(uriString);
-				String name;
-				name = invokedUri.getQueryParameter("id");
-				vReadText (name);
+				String szIdPoiSelected;
+				szIdPoiSelected = invokedUri.getQueryParameter("id");
+				int i = Integer.parseInt(szIdPoiSelected);
+				String pp = readRegister (i);
+				vReadText (pp);
 				
+				
+				vReadText (pp + "¿Tiene alguna pregunta?");
 				startVoiceRecognitionActivity();
 				
 				return true;

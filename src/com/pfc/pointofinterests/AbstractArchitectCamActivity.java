@@ -258,8 +258,8 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		// call mandatory live-cycle method of architectView
 		if ( this.architectView != null ) {
 			this.architectView.onResume();
-			AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
-			AbstractArchitectCamActivity.this.callJavaScript(JSonFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
+//			AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
+//			AbstractArchitectCamActivity.this.callJavaScript(JSonFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
 			
 			// register accuracy listener in architectView, if set
 			if (this.sensorAccuracyListener!=null) {
@@ -384,6 +384,7 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 
 	public void vReadText (String szReadText) 
 	{
+		// textToSpeech.isSpeaking();
         textToSpeech.speak( szReadText, TextToSpeech.QUEUE_FLUSH, null );
 	}
 	

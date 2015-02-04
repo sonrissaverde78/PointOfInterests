@@ -10,13 +10,14 @@ IrAndGeo.error = false;
 IrAndGeo.receivedLocation = false;
 var imageDrawable = [];
 IrAndGeo.res = {};
-IrAndGeo.singlePoi = {};
+dbPoi = [];
 IrAndGeo.loadPoisFromJSon = function(poiData)
 {
     alert("loadPoisFromJSon");
-        // loop through POI-information and create an AR.GeoObject (=Marker) per POI
-    /*for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
-        var singlePoi = {
+    var singlePoi 
+    // loop through POI-information and create an AR.GeoObject (=Marker) per POI
+    for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+        singlePoi = {
             "id": poiData[currentPlaceNr].id,
             "latitude": parseFloat(poiData[currentPlaceNr].latitude),
             "longitude": parseFloat(poiData[currentPlaceNr].longitude),
@@ -24,7 +25,11 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
             "title": poiData[currentPlaceNr].name,
             "description": poiData[currentPlaceNr].description
         };
-    }*/
+        // alert("loadPoisFromJSon in side loop" + " " + singlePoi.id);
+        dbPoi[currentPlaceNr] = singlePoi;
+        alert("loadPoisFromJSon in side loop asign" + " " + dbPoi[currentPlaceNr]);
+        //World.markerList.push(new Marker(singlePoi));
+    }
 }
 IrAndGeo.setupScene = function(lat, lon, alt) {
     // create 8 random markers with different marker names
@@ -56,7 +61,7 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
             // alert(name);
 		//var currentMarker = World.currentMarker;
 		// var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description);
-		var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(name) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+		var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 		/*
 			The urlListener of the native project intercepts this call and parses the arguments. 
 			This is the only way to pass information from JavaSCript to your native code. 
