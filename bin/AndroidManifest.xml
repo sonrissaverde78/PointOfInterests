@@ -52,6 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.pfc.pointofinterests.PoiDatabase" android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name="com.pfc.pointofinterests.SampleCamActivity" android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name="com.pfc.pointofinterests.SampleCamHandlePoiDetailActivity" android:configChanges="orientation|keyboardHidden|screenSize"/>
                 <!-- poi detail screen -->

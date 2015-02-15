@@ -38,6 +38,11 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	 */
 	protected static final String EXTRAS_KEY_ACTIVITY_ARCHITECT_WORLD_URL = "activityArchitectWorldUrl";
 
+	int iTotalPois 		= 0;
+ 	int	iTotalPoiFields	= 0;
+ 	String [] szPoiFieldsName;
+	
+	
 	@Override
 	public String getARchitectWorldPath() {
 		return getIntent().getExtras().getString(
@@ -91,9 +96,9 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 				String szIdPoiSelected;
 				szIdPoiSelected = invokedUri.getQueryParameter("id");
 				int i = Integer.parseInt(szIdPoiSelected);
-				String pp = szGet_db_PoiInfo (i);
-				vReadText (pp);
-				
+				String pp [] = szPoiInfo (i);
+				int iField = 0;
+				vReadText (pp[iField]);
 				
 				vReadText (pp + "¿Tiene alguna pregunta?");
 				startVoiceRecognitionActivity();
@@ -226,14 +231,78 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	  startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
   	}
 
-
+  	
 
  	@Override
- 	public String JSonFuntion()
+ 	public String JSonGetPoiInformationFuntion()
  	{
  		return "IrAndGeo.loadPoisFromJSon";
  	}
+ 	@Override
+ 	public String JSonUploadMoreInfoFuntion()
+ 	{
+ 		return "IrAndGeo.GetExecuteOperationFromJSon";
+ 	}
  	
+ 	@Override 
+ 	public JSONArray 	UploadMoreInfoFuntionToJavaScript()
+ 	{
+ 		String [][] pruebadeEnvio = new String [1][2];
+ 		pruebadeEnvio [0] [0] = "envio";
+ 		pruebadeEnvio [0] [1] = "Estos son los datos";
+ 		
+		return ExecuteJavaScript(0, pruebadeEnvio, 1);
+
+ 		
+ 	}
+ 	public JSONArray ExecuteJavaScript (String szFunction,  int iOperation, String [] [] info, int iTotalInfo)
+ 	{		
+ 		final HashMap<String, String> HashMapOperationToExecute = new HashMap<String, String>();	
+ 		final JSONArray JSONArrayOperation = new JSONArray();
+ 		
+ 		////////////////////////////////////////////////////////////////////////////////
+ 		// Operation To Execute in Java Script
+ 		////////////////////////////////////////////////////////////////////////////////
+ 		String [] szOperation = new String [2];
+ 		szOperation[0] = "Operation";
+ 		szOperation[1] = "" + iOperation;
+ 		HashMapOperationToExecute.put (szOperation[0], szOperation[1]);
+ 		JSONArrayOperation.put(new JSONObject(HashMapOperationToExecute));
+ 		////////////////////////////////////////////////////////////////////////////////
+ 		final HashMap<String, String> HashMapOperationInformation = new HashMap<String, String>();
+		
+		for (int j = 0; j < iTotalInfo; j++)
+		{ 
+			HashMapOperationInformation.put (info[j][0], info[j][1]);
+		}
+		JSONArrayOperation.put(new JSONObject(HashMapOperationInformation));
+		SampleCamCaptureScreenActivity.this.callJavaScript(szFunction, new String[] { JSONArrayOperation.toString() });
+
+ 		return JSONArrayOperation;
+ 	}
+ 	public JSONArray ExecuteJavaScript (int iOperation, String [] [] info, int iTotalInfo)
+ 	{		
+ 		final HashMap<String, String> HashMapOperationToExecute = new HashMap<String, String>();	
+ 		final JSONArray JSONArrayOperation = new JSONArray();
+ 		
+ 		////////////////////////////////////////////////////////////////////////////////
+ 		// Operation To Execute in Java Script
+ 		////////////////////////////////////////////////////////////////////////////////
+ 		String [] szOperation = new String [2];
+ 		szOperation[0] = "Operation";
+ 		szOperation[1] = "" + iOperation;
+ 		HashMapOperationToExecute.put (szOperation[0], szOperation[1]);
+ 		JSONArrayOperation.put(new JSONObject(HashMapOperationToExecute));
+ 		////////////////////////////////////////////////////////////////////////////////
+ 		final HashMap<String, String> HashMapOperationInformation = new HashMap<String, String>();
+		
+		for (int j = 0; j < iTotalInfo; j++)
+		{ 
+			HashMapOperationInformation.put (info[j][0], info[j][1]);
+		}
+		JSONArrayOperation.put(new JSONObject(HashMapOperationInformation));
+ 		return JSONArrayOperation;
+ 	}
  	/**
  	 * loads poiInformation and returns them as JSONArray. Ensure attributeNames of JSON POIs are well known in JavaScript, so you can parse them easily
  	 * @param userLocation the location of the user
@@ -244,10 +313,19 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	public JSONArray getPoiInformation()
  	{
  		final HashMap<String, String> poiInformation = new HashMap<String, String>();
- 		int numberOfPlaces = iInitPlaces	();
+ 		iTotalPois 		= iInitPlaces	(); 
+ 	 	iTotalPoiFields	= iSetTotalPoiFields ();
+ 	 	szPoiFieldsName = szPoiNameFields();
  		final JSONArray pois = new JSONArray();
- 		for (int i=1;i <= numberOfPlaces; i++) 
+ 		String [] PoiInformation = new String [iTotalPoiFields];
+ 		for (int i=1;i <= iTotalPois; i++) 
  		{
+ 			PoiInformation = szPoiInfo(i);
+ 			for (int j = 0; j < iTotalPoiFields;j++)
+			{
+ 				poiInformation.put (szPoiFieldsName[j], PoiInformation[j]);
+			}
+ 			
  			pois.put(new JSONObject(poiInformation));
  		}
  		return pois;
@@ -308,7 +386,9 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	 * @param lon center longitude
  	 * @return lat/lon values in given position's vicinity
  	 */
- 	public abstract int 	iInitPlaces 			();
- 	public abstract String 	szGet_db_PoiInfo		(int IdPoi);
-
+ 	public abstract int 		iInitPlaces 			();
+ 	public abstract String[] 	szPoiInfo				(int IdPoi);
+ 	public abstract int			iSetTotalPoiFields		();
+ 	public abstract String[]	szPoiNameFields		();
+ 	
 }

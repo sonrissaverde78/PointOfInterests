@@ -4,30 +4,43 @@
 IrAndGeo = {};
 
 IrAndGeo.markerNames = ['Union Circle', 'Eastminster', 'Small Ben', 'Silver Gate', 'Uptown', 'Downtown', 'Countryside', 'Outer Circle'];
+IrAndGeo.PoiNames = [];
 IrAndGeo.stores = [];
 IrAndGeo.markerAnimations = [];
 IrAndGeo.error = false;
 IrAndGeo.receivedLocation = false;
 var imageDrawable = [];
 IrAndGeo.res = {};
-dbPoi = [];
+var dbPoi = [];
+var iTotalPois = 0;
+
+IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
+{
+    alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
+    alert("InputInfo[0].TotalPois " + InputInfo[0].Operation);
+    Operation = InputInfo[0].Operation;
+    alert("InputInfo[1].envio " + InputInfo[1].envio);
+    envio = InputInfo[1].envio;
+}
 IrAndGeo.loadPoisFromJSon = function(poiData)
 {
-    alert("loadPoisFromJSon");
-    var singlePoi 
+    alert("loadPoisFromJSon poiData.length " + poiData.length);
+    var singlePoi; 
     // loop through POI-information and create an AR.GeoObject (=Marker) per POI
     for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
         singlePoi = {
             "id": poiData[currentPlaceNr].id,
             "latitude": parseFloat(poiData[currentPlaceNr].latitude),
-            "longitude": parseFloat(poiData[currentPlaceNr].longitude),
+            "longtude": parseFloat(poiData[currentPlaceNr].longitude),
             "altitude": parseFloat(poiData[currentPlaceNr].altitude),
-            "title": poiData[currentPlaceNr].name,
+            "name": poiData[currentPlaceNr].name,
+            "Country": poiData[currentPlaceNr].Country,
+            "City": poiData[currentPlaceNr].City,
             "description": poiData[currentPlaceNr].description
         };
-        // alert("loadPoisFromJSon in side loop" + " " + singlePoi.id);
         dbPoi[currentPlaceNr] = singlePoi;
-        alert("loadPoisFromJSon in side loop asign" + " " + dbPoi[currentPlaceNr]);
+        alert("dbPoi[currentPlaceNr].name " + " " + dbPoi[currentPlaceNr].name);
+
         //World.markerList.push(new Marker(singlePoi));
     }
 }

@@ -70,18 +70,17 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 	 * urlListener handling "document.location= 'architectsdk://...' " calls in JavaScript"
 	 */
 	protected ArchitectUrlListener 			urlListener;
-	protected JSONArray poiData;
+	protected JSONArray 					poiData;
+	protected JSONArray 					InfoForJavaScript;
 	/** Called when the activity is first created. */
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate( final Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
 
+		AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
 		onWikitudeCreate ( savedInstanceState );
 		onSpeechCreate	( savedInstanceState);
-		
-
-
 	}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -174,18 +173,22 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		this.locationProvider = getLocationProvider( this.locationListener );
 	}
 	
-	public abstract String JSonFuntion();
 	
 	
-	public abstract JSONArray getPoiInformation();
+ 	// IrAndGeo.GetTotalPoisFromJSon( TotalPois=4 );
+ 	// IrAndGeo.loadPoisFromJSon( [{"id":"1","altitude":"1","description":"Lugar_description_111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 ","name":"Lugar_Name_1 ","latitude":"1","Country":"Lugar_Country_1 ","City":"Lugar_City_1 ","longtude":"1"},{"id":"2","altitude":"2","description":"Lugar_description_2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222 ","name":"Lugar_Name_2 ","latitude":"2","Country":"Lugar_Country_2 ","City":"Lugar_City_2 ","longtude":"2"},{"id":"3","altitude":"3","description":"Lugar_description_33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 ","name":"Lugar_Name_3 ","latitude":"3","Country":"Lugar_Country_3 ","City":"Lugar_City_3 ","longtude":"3"},{"id":"4","altitude":"4","description":"Lugar_description_444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444 ","name":"Lugar_Name_4 ","latitude":"4","Country":"Lugar_Country_4 ","City":"Lugar_City_4 ","longtude":"4"}] );
+	public abstract String 		JSonUploadMoreInfoFuntion();
+	public abstract JSONArray 	UploadMoreInfoFuntionToJavaScript ();
 	
-	public abstract JSONArray getPoiInformation(final Location userLocation, final int numberOfPlaces);
+	public abstract String 		JSonGetPoiInformationFuntion();
+	public abstract JSONArray 	getPoiInformation();
+	public abstract JSONArray 	getPoiInformation(final Location userLocation, final int numberOfPlaces);
  	/**
  	 * call JacaScript in architectView
  	 * @param methodName
  	 * @param arguments
  	 */
- 	private void callJavaScript(final String methodName, final String[] arguments) {
+ 	public void callJavaScript(final String methodName, final String[] arguments) {
  		final StringBuilder argumentsString = new StringBuilder("");
  		for (int i= 0; i<arguments.length; i++) {
  			argumentsString.append(arguments[i]);
@@ -200,6 +203,8 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
  			this.architectView.callJavascript(js);
  		}
  	}
+
+ 	
 	private 	String 	szLanguage;
 	private 	Locale 	Location;
 	private		float 	gfPitch;
@@ -211,7 +216,7 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 	{
 		textToSpeech = new TextToSpeech( this, this );
 	
-		gfPitch		= vSetPitch ();
+		gfPitch		 = vSetPitch ();
 		gfSpeechRate = vSetSpeechRate();
 		gLocaleA	 = vSetLocalA();
 		gLocaleB	 = vSetLocalB();
@@ -230,9 +235,8 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		
 		if ( this.architectView != null ) {
 			// AbstractArchitectCamActivity.this.poiData = this.getPoiInformation(AbstractArchitectCamActivity.this.lastKnownLocaton, 20);
-			AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
-			AbstractArchitectCamActivity.this.callJavaScript(JSonFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
-	
+			//AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
+			
 			// call mandatory live-cycle method of architectView
 			this.architectView.onPostCreate();
 			
@@ -248,6 +252,12 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+			 
+			AbstractArchitectCamActivity.this.callJavaScript(JSonGetPoiInformationFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
+			AbstractArchitectCamActivity.this.InfoForJavaScript = UploadMoreInfoFuntionToJavaScript();
+			AbstractArchitectCamActivity.this.callJavaScript(JSonUploadMoreInfoFuntion(), new String[] { AbstractArchitectCamActivity.this.InfoForJavaScript.toString() });
+
+			
 		}
 	}
 
@@ -257,10 +267,7 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		
 		// call mandatory live-cycle method of architectView
 		if ( this.architectView != null ) {
-			this.architectView.onResume();
-//			AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
-//			AbstractArchitectCamActivity.this.callJavaScript(JSonFuntion(), new String[] { AbstractArchitectCamActivity.this.poiData.toString() });
-			
+			this.architectView.onResume();			
 			// register accuracy listener in architectView, if set
 			if (this.sensorAccuracyListener!=null) {
 				this.architectView.registerSensorAccuracyChangeListener( this.sensorAccuracyListener );
