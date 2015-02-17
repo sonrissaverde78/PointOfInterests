@@ -13,7 +13,8 @@ var imageDrawable = [];
 IrAndGeo.res = {};
 var dbPoi = [];
 var iTotalPois = 0;
-
+IrAndGeo.markerList = [];
+IrAndGeo.currentMarker = null;
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
     alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
@@ -47,12 +48,21 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
 IrAndGeo.setupScene = function(lat, lon, alt) {
     // create 8 random markers with different marker names
     alert("setupScene()");
-    for (var i = 0; i < 8; i++) 
+    var ppoi;
+
+    for (var i = 0; i < 4; i++) 
     {
         var objLat = lat + ((Math.random() - 0.5) / 1000);
         var objLon = lon + ((Math.random() - 0.5) / 1000);
         //alert("setupScene() -> Store Created");
-        IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
+        // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
+        dbPoi[i].latitude = objLat;// parseFloat(objLat);
+        dbPoi[i].longtude = objLon;// parseFloat(objLon);
+alert("dbPoi[i].latitude " + dbPoi[i].latitude);   
+alert("dbPoi[i].longtude " + dbPoi[i].longtude);       
+alert("dbPoi[i].name " + dbPoi[i].name);
+alert("dbPoi[i].Country " + dbPoi[i].Country);
+        IrAndGeo.markerList.push(new Marker(dbPoi[i]));
     }
 
     // create appearing animation
@@ -72,7 +82,6 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
         scale: 0.0,
         onClick: function() {
             // alert(name);
-		//var currentMarker = World.currentMarker;
 		// var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description);
 		var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 		/*
@@ -98,6 +107,28 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
         enabled: false
     }));
 };
+    // fired when user pressed maker in cam
+IrAndGeo.onMarkerSelected = function (marker) {
+
+    // deselect previous marker
+    if (IrAndGeo.currentMarker) {
+        if (IrAndGeo.currentMarker.poiData.id == marker.poiData.id) {
+            return;
+        }
+        IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
+    }
+
+    // highlight current one
+    marker.setSelected(marker);
+    IrAndGeo.currentMarker = marker;
+};
+    // screen was clicked but no geo-object was hit
+AR.context.onScreenClick = function (marker) {
+
+        if (IrAndGeo.currentMarker) {
+            IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
+        }
+    }
 var StoresOn = 0;
 IrAndGeo.showStores = function() 
 {
@@ -262,6 +293,18 @@ AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy)
     //IrAndGeo.loadingStepDone();
 };
 
+IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+IrAndGeo.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
 // Create the image resources that are used for the marker and the buttons
 IrAndGeo.res.marker = new AR.ImageResource("assets/YourShop_Marker.png", {
     //onLoaded: IrAndGeo.loadingStepDone,

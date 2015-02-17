@@ -185,7 +185,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 		// TODO Auto-generated method stub
         if ( status == TextToSpeech.LANG_MISSING_DATA | status == TextToSpeech.LANG_NOT_SUPPORTED )
         {
-                Toast.makeText( this, "ERROR LANG_MISSING_DATA | LANG_NOT_SUPPORTED", Toast.LENGTH_SHORT ).show();
+        	Toast.makeText( this, "ERROR LANG_MISSING_DATA | LANG_NOT_SUPPORTED", Toast.LENGTH_SHORT ).show();
         }
 	}
 	
