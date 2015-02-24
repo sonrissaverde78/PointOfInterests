@@ -15,13 +15,66 @@ var dbPoi = [];
 var iTotalPois = 0;
 IrAndGeo.markerList = [];
 IrAndGeo.currentMarker = null;
+
+IrAndGeo.buttonsImagesPathAG;
+IrAndGeo.ImagesToTrackPathAG;
+IrAndGeo.ImagesToDrawPathAG;
+IrAndGeo.resourcesAG = [];
+
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
+    alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
+    /*
     alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
     alert("InputInfo[0].TotalPois " + InputInfo[0].Operation);
     Operation = InputInfo[0].Operation;
     alert("InputInfo[1].envio " + InputInfo[1].envio);
     envio = InputInfo[1].envio;
+    alert("envio " + envio);
+    */
+    i = 0;
+    bEnd = false;
+    do
+    {
+        Operation = parseInt(InputInfo[i].Operation);
+        alert("Operation: " + Operation);
+        switch(Operation) 
+        {
+            // Buttons Images path
+            case 0:
+                alert("Operation: " + Operation);
+                alert("InputInfo[i].buttonsImagesPathAG: " + InputInfo[i].buttonsImagesPathAG);
+                alert("InputInfo[i].ImagesToTrackPathAG: " + InputInfo[i].ImagesToTrackPathAG);
+                alert("InputInfo[i].ImagesToDrawPathAG: " + InputInfo[i].ImagesToDrawPathAG);
+                IrAndGeo.buttonsImagesPathAG    = InputInfo[i].buttonsImagesPathAG;
+                IrAndGeo.ImagesToTrackPathAG    = InputInfo[i].ImagesToTrackPathAG;
+                IrAndGeo.ImagesToDrawPathAG     = InputInfo[i].ImagesToDrawPathAG;
+                alert("IrAndGeo.buttonsImagesPathAG: " + IrAndGeo.buttonsImagesPathAG);
+                alert("IrAndGeo.ImagesToTrackPathAG: " + IrAndGeo.ImagesToTrackPathAG);
+                alert("1");
+                alert("IrAndGeo.ImagesToDrawPathAG: " + IrAndGeo.ImagesToDrawPathAG);
+                break;
+            // Buttons Images path
+            case 1:
+                IrAndGeo.buttonsImagesPathAG    = InputInfo[i].buttonsImagesPathAG;
+                IrAndGeo.ImagesToTrackPathAG    = InputInfo[i].ImagesToTrackPathAG;
+                IrAndGeo.ImagesToDrawPathAG     = InputInfo[i].ImagesToDrawPathAG;
+                break;
+           case 2:
+                
+                break;
+            default:
+                alert("Operation: Err" + Operation);
+                break;
+        }
+        if (parseInt(InputInfo[i].End) == 0)
+        {
+            alert("End Operations:");
+            bEnd = true;
+        }
+        i++;
+    }while (bEnd == false);
+
 }
 IrAndGeo.loadPoisFromJSon = function(poiData)
 {
@@ -31,17 +84,22 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
     for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
         singlePoi = {
             "id": poiData[currentPlaceNr].id,
-            "latitude": parseFloat(poiData[currentPlaceNr].latitude),
-            "longtude": parseFloat(poiData[currentPlaceNr].longitude),
-            "altitude": parseFloat(poiData[currentPlaceNr].altitude),
             "name": poiData[currentPlaceNr].name,
+            "latitude": parseFloat(poiData[currentPlaceNr].lat),
+            "longitude": parseFloat(poiData[currentPlaceNr].long),
+            "altitude": parseFloat(poiData[currentPlaceNr].alt),
             "Country": poiData[currentPlaceNr].Country,
             "City": poiData[currentPlaceNr].City,
-            "description": poiData[currentPlaceNr].description
+            "ImagesToTrack": poiData[currentPlaceNr].ImagesToTrack,
+            "ImagesToDraw": poiData[currentPlaceNr].ImagesToDraw,
+            "ImagesButtons": poiData[currentPlaceNr].ImagesButtons,
+            //"description": poiData[currentPlaceNr].description
         };
         dbPoi[currentPlaceNr] = singlePoi;
-        alert("dbPoi[currentPlaceNr].name " + " " + dbPoi[currentPlaceNr].name);
-
+        alert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
+        alert("dbPoi[currentPlaceNr].ImagesToTrack "    + " " + dbPoi[currentPlaceNr].ImagesToTrack);
+        alert("dbPoi[currentPlaceNr].ImagesToDraw "     + " " + dbPoi[currentPlaceNr].ImagesToDraw);
+        alert("dbPoi[currentPlaceNr].ImagesButtons "    + " " + dbPoi[currentPlaceNr].ImagesButtons);
         //World.markerList.push(new Marker(singlePoi));
     }
 }
@@ -57,23 +115,25 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
         //alert("setupScene() -> Store Created");
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
         dbPoi[i].latitude = objLat;// parseFloat(objLat);
-        dbPoi[i].longtude = objLon;// parseFloat(objLon);
+        dbPoi[i].longitude = objLon;// parseFloat(objLon);
+/*
 alert("dbPoi[i].latitude " + dbPoi[i].latitude);   
-alert("dbPoi[i].longtude " + dbPoi[i].longtude);       
+alert("dbPoi[i].longitude " + dbPoi[i].longitude);       
 alert("dbPoi[i].name " + dbPoi[i].name);
 alert("dbPoi[i].Country " + dbPoi[i].Country);
+*/
         IrAndGeo.markerList.push(new Marker(dbPoi[i]));
     }
 
     // create appearing animation
     IrAndGeo.showMarkersAnimation = new AR.AnimationGroup('parallel', IrAndGeo.markerAnimations);
-    alert("Before showStores()");
+// alert("Before showStores()");
     IrAndGeo.showStores();
 };
 
 IrAndGeo.createMarker = function(lat, lon, name, id) 
 {
-    //alert("createMarker()");
+//alert("createMarker()");
     // create an AR.GeoLocation from the latitude/longitude function parameters
     var loc = new AR.GeoLocation(lat, lon);
 
@@ -293,10 +353,26 @@ AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy)
     //IrAndGeo.loadingStepDone();
 };
 
+IrAndGeo.initResources = function (marker) 
+{
+    alert("initResources()");
+    IrAndGeo.resourcesAG [0] = new AR.ImageResource("assets/marker_idle.png", 
+    {
+        //onLoaded: IrAndGeo.loadingStepDone,
+        onError: IrAndGeo.errorLoading
+    });
+    IrAndGeo.markerDrawable_idle = IrAndGeo.resourcesAG;
+}
+//IrAndGeo.initResources();
 IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
+/*
+IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/buttons/speaker-48.png", {
+    //onLoaded: IrAndGeo.loadingStepDone, markerSpeaker
+    onError: IrAndGeo.errorLoading
+});*/
 IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading

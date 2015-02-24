@@ -4,9 +4,20 @@
 #field#:lat				=!= 1 $#
 #field#:long			=!= 1 $#
 #field#:alt				=!= 1 $#
-#field#:Country			=!= Lugar_Country_1 $#
-#field#:City			=!= Lugar_City_1 $#
-#field#:description	x	=!= Lugar_description_111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Madrid $#
+#field#:description	x	=!= Lugar_description_De todos modos, me fui. No 
+es que tuviera algún deseo especial o la perspectiva de hacer algo concreto tras
+dejar el trabajo. No me apetecía lo más mínimo volver a encerrarme en casa
+para preparar las oposiciones al cuerpo de justicia y, además, lo principal: en aquellos 
+momentos ya no quería ser abogado. Sólo que no tenía ninguna intención de seguir
+indefinidamente en aquella oficina haciendo indefinidamente el mismo trabajo, y
+sabía que si no lo dejaba entonces, ya no lo dejaría jamás. Si
+permanecía allí mucho tiempo acabaría mis días, sucediéndose monótonos uno tras
+ otro, en aquel lugar. Y es que, ante todo, yo ya había cumplido los treinta $#
+#field#:ImagesToTrack#		=!= ShopAd.wtc $#
+#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________
 #Sample#2
 #field#:id				=!= 2 $#
@@ -16,7 +27,22 @@ ______________________
 #field#:alt				=!= 2 $#
 #field#:Country			=!= Lugar_Country_2 $#
 #field#:City			=!= Lugar_City_2 $#
-#field#:description	x	=!= Lugar_description_2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222 $#
+#field#:description	x	=!= Lugar_description_Por supuesto, el descontento creció 
+entre nosotros. En aquella pequeña sociedad antes hermanada por la desgracia común,
+surgió un sentimiento de injusticia y, junto con él, el odio profundo y la 
+desconfianza. A los tipejos que servían a Boris se les daba un trabajo ligero,
+obtenían prebendas, los demás teníamos que arrostrar una vida cruel, siempre al 
+límite de la muerte. Pero no podíamos quejamos en voz alta. Una resistencia 
+abierta implicaba la muerte. Podíamos morir por congelación o por desnutrición 
+encerrados en una gélida celda de castigo. Tal vez el «grupo de asesinos» nos 
+tapara de noche la cara con una toalla mojada mientras dormíamos. Temíamos que 
+nos golpearan por la espalda, en la cabeza o nos la abrieran con un pico mientras 
+trabajábamos y que luego nos arrojaran al pozo. Nadie sabría qué había ocurrido en 
+el negro fondo de la mina. Sólo que alguien, sin que nadie se diera cuenta, había 
+desaparecido. $#
+#field#:ImagesToTrack#		=!= ShopAd.wtc $#
+#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________
 #Sample#3
 #field#:id				=!= 3 $#	
@@ -26,7 +52,17 @@ ______________________
 #field#:alt				=!= 3 $#
 #field#:Country			=!= Lugar_Country_3 $#
 #field#:City			=!= Lugar_City_3 $#
-#field#:description	x	=!= Lugar_description_33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 $#
+#field#:description	x	=!= Lugar_description_Le puse en el cobertizo un plato con 
+un trozo de sawara que había comprado en el supermercado. El gato, que parecía 
+terriblemente hambriento, se comió el pescado en un santiamén, entre jadeos, 
+atragantándose y vomitando de vez en cuando los trozos que no había podido tragar. 
+Encontré bajo el fregadero la escudilla que usábamos para darle de beber. 
+La llené de agua y el gato se la bebió casi toda. Al final recobró el aliento y 
+empezó a lavarse la cara. Poco después, como si recordara algo de repente, 
+se me acercó, se me subió a las rodillas y se quedó dormido hecho un ovillo $#
+#field#:ImagesToTrack#		=!= ShopAd.wtc $#
+#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________
 #Sample#4
 #field#:id				=!= 4 $#
@@ -34,7 +70,18 @@ ______________________
 #field#:lat				=!= 4 $#
 #field#:long			=!= 4 $#
 #field#:alt				=!= 4 $#
-#field#:Country			=!= Lugar_Country_4 $#
-#field#:City			=!= Lugar_City_4 $#
-#field#:description	x	=!= Lugar_description_444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Huelva $#
+#field#:description	x	=!= Lugar_description_Acerqué un cojín viejo y puse el gato 
+encima. Su cuerpo estaba desmadejado como la ropa recién lavada. Sobre el 
+cojín, el gato entreabrió los ojos, abrió un poco la boca, pero no maulló. 
+Al ver que, tras acomodarse sobre el cojín, bostezaba y volvía a dormirse, 
+fui a la cocina y ordené la comida que había comprado, metí en la nevera el 
+toofu, la verdura y el pescado. Por si acaso, fui a echarle una ojeada al 
+gato, que seguía durmiendo en la misma postura. Como su mirada nos recordaba 
+a la del hermano de Kumiko, lo llamábamos Noboru Wataya, pero ése no era su 
+verdadero nombre. Pasaron seis años sin que Kumiko y yo le pusiéramos uno. $#
+#field#:ImagesToTrack#		=!= ShopAd.wtc $#
+#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________

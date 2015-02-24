@@ -4,10 +4,10 @@ var kMarker_AnimationDuration_Resize = 1000;
 function Marker(poiData) {
 
     alert ("Marker (): poiData.name " + poiData.name);
-    alert ("Marker (): poiData.Country " + poiData.Country);
+//alert ("Marker (): poiData.Country " + poiData.Country);
 
-alert("Marker (): poiData.latitude " + poiData.latitude);   
-alert("Marker (): poiData.longtude " + poiData.longtude); 
+//alert("Marker (): poiData.latitude " + poiData.latitude);   
+//alert("Marker (): poiData.longitude " + poiData.longitude); 
     //this.poiData = poiData;
     this.isSelected = false;
 
@@ -18,11 +18,11 @@ alert("Marker (): poiData.longtude " + poiData.longtude);
     this.animationGroup_idle = null;
     this.animationGroup_selected = null;
 
-alert("markerLocation = new AR.GeoLocation "); 
+//alert("markerLocation = new AR.GeoLocation "); 
     // create the AR.GeoLocation from the poi data
     // var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //, poiData.altitude);
-var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longtude); //,altitude);
-alert("this.markerDrawable_idle "); 
+var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //,altitude);
+// alert("this.markerDrawable_idle "); 
     // create an AR.ImageDrawable for the marker in idle state
     this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 2.5, {
         zOrder: 0,
@@ -32,7 +32,7 @@ alert("this.markerDrawable_idle ");
         */
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
-alert("this.markerDrawable_selected "); 
+// alert("this.markerDrawable_selected "); 
     // create an AR.ImageDrawable for the marker in selected state
     this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 2.5, {
         zOrder: 0,
@@ -58,7 +58,7 @@ alert("this.markerDrawable_selected ");
             textColor: '#FFFFFF'
         }
     });
-alert("this.directionIndicatorDrawable = new AR.ImageDrawable "); 
+// alert("this.directionIndicatorDrawable = new AR.ImageDrawable "); 
     /*
         Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
     */
@@ -76,7 +76,7 @@ alert("this.directionIndicatorDrawable = new AR.ImageDrawable ");
             indicator: this.directionIndicatorDrawable
         }
     });
-alert("return this "); 
+// alert("return this "); 
     return this;
 }
 

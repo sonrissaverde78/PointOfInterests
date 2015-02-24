@@ -8,53 +8,20 @@ import android.database.sqlite.SQLiteOpenHelper;
  
 public class PoiSQLiteHelper extends SQLiteOpenHelper 
 {
-	final 	String dbFieldId 			= "id";
-	final 	String dbFieldName 			= "name";
-	final 	String dbFieldLat 			= "latitude";
-	final 	String dbFieldLong 			= "longtude";
-	final 	String dbFieldAlt 			= "altitude";
-	final 	String dbFieldCountry 		= "Country";
-	final 	String dbFieldCity 			= "City";
-	final 	String dbFieldDescription 	= "description";
-	
-	final	private		String					tableName	= "tablePoi";
-	
     //Sentencia SQL para crear la tabla de Usuarios
-	final public String sqlCreate2 = "CREATE TABLE " + tableName  + " ( " +
-			 dbFieldId + 			" INTEGER, " 	+
-			 dbFieldLat + 			" INTEGER, " 	+ 
-			 dbFieldLong + 			" INTEGER, " 	+ 
-			 dbFieldAlt + 			" INTEGER, " 	+ 
-			 dbFieldName + 			" TEXT, " 		+
-			 dbFieldCountry + 		" TEXT, " 		+ 
-			 dbFieldCity + 			" TEXT, " 		+
-			 dbFieldDescription + 	" TEXT" 		+//, " 		+
-			 // "PRIMARY KEY " + 		" ( " + dbFieldId + " ) "+
-			 ")";	
-    //Sentencia SQL para crear la tabla de Usuarios
-	final public String sqlCreate = "CREATE TABLE " + tableName  + " ( " +
-			 dbFieldId + 			" INTEGER, " 	+
-			 dbFieldLat + 			" INTEGER, " 	+ 
-			 dbFieldLong + 			" INTEGER, " 	+ 
-			 dbFieldAlt + 			" INTEGER, " 	+ 
-			 dbFieldName + 			" TEXT NOT NULL, " 		+
-			 dbFieldCountry + 		" TEXT, " 		+ 
-			 dbFieldCity + 			" TEXT, " 		+
-			 dbFieldDescription + 	" TEXT, " 		+//, " 		+
-			 "PRIMARY KEY " + 		" ( " + dbFieldId + ", " + dbFieldName + " ) "+
-			 ")";	
-	
-	//Sentencia SQL para crear la tabla de Usuarios
-	
-	String sqlCreate_ejemplo = "CREATE TABLE Usuarios (codigo INTEGER, nombre TEXT)";
+	public String sqlCreate;
     
     public PoiSQLiteHelper(	Context context, String dbName,
     						CursorFactory factory, int iVersion) 
     {
     	super(context, dbName, factory, iVersion);
-    	//sqlCreate = sqlCreateTable;
     }
- 
+    public PoiSQLiteHelper(	Context context, String dbName,
+			CursorFactory factory, int iVersion, String szSQLCreate)
+	{
+    	super(context, dbName, factory, iVersion);
+    	sqlCreate = szSQLCreate;
+	}
     @Override
     public void onCreate(SQLiteDatabase db) {
         //sql sentence for table cration.
