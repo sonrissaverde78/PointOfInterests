@@ -240,7 +240,8 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 			// call mandatory live-cycle method of architectView
 			this.architectView.onPostCreate();
 			
-			try {
+			try 
+			{
 				// load content via url in architectView, ensure '<script src="architect://architect.js"></script>' is part of this HTML file, have a look at wikitude.com's developer section for API references
 				this.architectView.load( this.getARchitectWorldPath() );
 

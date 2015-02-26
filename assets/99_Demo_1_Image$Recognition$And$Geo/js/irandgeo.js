@@ -21,6 +21,8 @@ IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
 IrAndGeo.resourcesAG = [];
 
+IrAndGeo.bTracerAlert = true;
+
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
     alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
@@ -274,7 +276,7 @@ IrAndGeo.errorLoading = function() {
 
 IrAndGeo.initIr = function() 
 {
-    alert("initIr()");
+    IrAndGeo.TracerAlert("initIr()");
     // Create the tracker to recognize the shop ad
     var trackerDataSetPath = "assets/ShopAd.wtc";
     IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
@@ -353,27 +355,29 @@ AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy)
     //IrAndGeo.loadingStepDone();
 };
 
-IrAndGeo.initResources = function (marker) 
+IrAndGeo.initResources = function () 
 {
     alert("initResources()");
-    IrAndGeo.resourcesAG [0] = new AR.ImageResource("assets/marker_idle.png", 
+    IrAndGeo.resourcesAG [0] = new AR.ImageResource("assets/buttons/speaker-48.png", 
     {
         //onLoaded: IrAndGeo.loadingStepDone,
         onError: IrAndGeo.errorLoading
     });
     IrAndGeo.markerDrawable_idle = IrAndGeo.resourcesAG;
 }
-//IrAndGeo.initResources();
-IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png", {
+IrAndGeo.TracerAlert = function (szString)
+{
+	if (IrAndGeo.bTracerAlert == true)
+	{
+		alert (szString);
+	}
+}
+IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/buttons/speaker-48.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-/*
-IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/buttons/speaker-48.png", {
-    //onLoaded: IrAndGeo.loadingStepDone, markerSpeaker
-    onError: IrAndGeo.errorLoading
-});*/
-IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png", {
+
+IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/buttons/speaker-48_selected.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
@@ -403,6 +407,7 @@ IrAndGeo.res.deal = new AR.ImageResource("assets/YourShop_Deal.png", {
     onError: IrAndGeo.errorLoading
 });
 
+//IrAndGeo.initResources();
 IrAndGeo.initIr();
 
 //IrAndGeo.loadingStepDone();
