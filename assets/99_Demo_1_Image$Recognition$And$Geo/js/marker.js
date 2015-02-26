@@ -2,8 +2,12 @@ var kMarker_AnimationDuration_ChangeDrawable = 500;
 var kMarker_AnimationDuration_Resize = 1000;
 //IrAndGeo.Marker = function(poiData) {
 function Marker(poiData) {
-
-    alert ("Marker (): poiData.name " + poiData.name);
+try {
+                    IrAndGeo.TracerAlert ("Marker (): poiData.name " + poiData.name);
+                } catch (err) {
+                    alert("el error" + err);
+                }
+    
 //alert ("Marker (): poiData.Country " + poiData.Country);
 
 //alert("Marker (): poiData.latitude " + poiData.latitude);   
@@ -99,7 +103,7 @@ Marker.prototype.getOnClickTrigger = function(marker) {
                 try {
                     IrAndGeo.onMarkerSelected(marker);
                 } catch (err) {
-                    alert(err);
+                    alert("Market.prototype.getOnClickTringer Error" + err);
                 }
 
             }

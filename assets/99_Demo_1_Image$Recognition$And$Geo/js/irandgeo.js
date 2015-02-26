@@ -21,40 +21,40 @@ IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
 IrAndGeo.resourcesAG = [];
 
-IrAndGeo.bTracerAlert = true;
+IrAndGeo.bTracerAlert = false;
 
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
-    alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
+    IrAndGeo.TracerAlert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
     /*
-    alert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
-    alert("InputInfo[0].TotalPois " + InputInfo[0].Operation);
+    IrAndGeo.TracerAlert("GetExecuteOperationFromJSon InputInfo.length = " + InputInfo.length);
+    IrAndGeo.TracerAlert("InputInfo[0].TotalPois " + InputInfo[0].Operation);
     Operation = InputInfo[0].Operation;
-    alert("InputInfo[1].envio " + InputInfo[1].envio);
+    IrAndGeo.TracerAlert("InputInfo[1].envio " + InputInfo[1].envio);
     envio = InputInfo[1].envio;
-    alert("envio " + envio);
+    IrAndGeo.TracerAlert("envio " + envio);
     */
     i = 0;
     bEnd = false;
     do
     {
         Operation = parseInt(InputInfo[i].Operation);
-        alert("Operation: " + Operation);
+        IrAndGeo.TracerAlert("Operation: " + Operation);
         switch(Operation) 
         {
             // Buttons Images path
             case 0:
-                alert("Operation: " + Operation);
-                alert("InputInfo[i].buttonsImagesPathAG: " + InputInfo[i].buttonsImagesPathAG);
-                alert("InputInfo[i].ImagesToTrackPathAG: " + InputInfo[i].ImagesToTrackPathAG);
-                alert("InputInfo[i].ImagesToDrawPathAG: " + InputInfo[i].ImagesToDrawPathAG);
+                IrAndGeo.TracerAlert("Operation: " + Operation);
+                IrAndGeo.TracerAlert("InputInfo[i].buttonsImagesPathAG: " + InputInfo[i].buttonsImagesPathAG);
+                IrAndGeo.TracerAlert("InputInfo[i].ImagesToTrackPathAG: " + InputInfo[i].ImagesToTrackPathAG);
+                IrAndGeo.TracerAlert("InputInfo[i].ImagesToDrawPathAG: " + InputInfo[i].ImagesToDrawPathAG);
                 IrAndGeo.buttonsImagesPathAG    = InputInfo[i].buttonsImagesPathAG;
                 IrAndGeo.ImagesToTrackPathAG    = InputInfo[i].ImagesToTrackPathAG;
                 IrAndGeo.ImagesToDrawPathAG     = InputInfo[i].ImagesToDrawPathAG;
-                alert("IrAndGeo.buttonsImagesPathAG: " + IrAndGeo.buttonsImagesPathAG);
-                alert("IrAndGeo.ImagesToTrackPathAG: " + IrAndGeo.ImagesToTrackPathAG);
-                alert("1");
-                alert("IrAndGeo.ImagesToDrawPathAG: " + IrAndGeo.ImagesToDrawPathAG);
+                IrAndGeo.TracerAlert("IrAndGeo.buttonsImagesPathAG: " + IrAndGeo.buttonsImagesPathAG);
+                IrAndGeo.TracerAlert("IrAndGeo.ImagesToTrackPathAG: " + IrAndGeo.ImagesToTrackPathAG);
+                IrAndGeo.TracerAlert("1");
+                IrAndGeo.TracerAlert("IrAndGeo.ImagesToDrawPathAG: " + IrAndGeo.ImagesToDrawPathAG);
                 break;
             // Buttons Images path
             case 1:
@@ -66,12 +66,12 @@ IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
                 
                 break;
             default:
-                alert("Operation: Err" + Operation);
+                IrAndGeo.TracerAlert("Operation: Err" + Operation);
                 break;
         }
         if (parseInt(InputInfo[i].End) == 0)
         {
-            alert("End Operations:");
+            IrAndGeo.TracerAlert("End Operations:");
             bEnd = true;
         }
         i++;
@@ -80,7 +80,7 @@ IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 }
 IrAndGeo.loadPoisFromJSon = function(poiData)
 {
-    alert("loadPoisFromJSon poiData.length " + poiData.length);
+    IrAndGeo.TracerAlert("loadPoisFromJSon poiData.length " + poiData.length);
     var singlePoi; 
     // loop through POI-information and create an AR.GeoObject (=Marker) per POI
     for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
@@ -98,44 +98,44 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
             //"description": poiData[currentPlaceNr].description
         };
         dbPoi[currentPlaceNr] = singlePoi;
-        alert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
-        alert("dbPoi[currentPlaceNr].ImagesToTrack "    + " " + dbPoi[currentPlaceNr].ImagesToTrack);
-        alert("dbPoi[currentPlaceNr].ImagesToDraw "     + " " + dbPoi[currentPlaceNr].ImagesToDraw);
-        alert("dbPoi[currentPlaceNr].ImagesButtons "    + " " + dbPoi[currentPlaceNr].ImagesButtons);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesToTrack "    + " " + dbPoi[currentPlaceNr].ImagesToTrack);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesToDraw "     + " " + dbPoi[currentPlaceNr].ImagesToDraw);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesButtons "    + " " + dbPoi[currentPlaceNr].ImagesButtons);
         //World.markerList.push(new Marker(singlePoi));
     }
 }
 IrAndGeo.setupScene = function(lat, lon, alt) {
     // create 8 random markers with different marker names
-    alert("setupScene()");
+    IrAndGeo.TracerAlert("setupScene()");
     var ppoi;
 
     for (var i = 0; i < 4; i++) 
     {
         var objLat = lat + ((Math.random() - 0.5) / 1000);
         var objLon = lon + ((Math.random() - 0.5) / 1000);
-        //alert("setupScene() -> Store Created");
+        //IrAndGeo.TracerAlert("setupScene() -> Store Created");
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
         dbPoi[i].latitude = objLat;// parseFloat(objLat);
         dbPoi[i].longitude = objLon;// parseFloat(objLon);
 /*
-alert("dbPoi[i].latitude " + dbPoi[i].latitude);   
-alert("dbPoi[i].longitude " + dbPoi[i].longitude);       
-alert("dbPoi[i].name " + dbPoi[i].name);
-alert("dbPoi[i].Country " + dbPoi[i].Country);
+IrAndGeo.TracerAlert("dbPoi[i].latitude " + dbPoi[i].latitude);   
+IrAndGeo.TracerAlert("dbPoi[i].longitude " + dbPoi[i].longitude);       
+IrAndGeo.TracerAlert("dbPoi[i].name " + dbPoi[i].name);
+IrAndGeo.TracerAlert("dbPoi[i].Country " + dbPoi[i].Country);
 */
         IrAndGeo.markerList.push(new Marker(dbPoi[i]));
     }
 
     // create appearing animation
     IrAndGeo.showMarkersAnimation = new AR.AnimationGroup('parallel', IrAndGeo.markerAnimations);
-// alert("Before showStores()");
+// IrAndGeo.TracerAlert("Before showStores()");
     IrAndGeo.showStores();
 };
 
 IrAndGeo.createMarker = function(lat, lon, name, id) 
 {
-//alert("createMarker()");
+//IrAndGeo.TracerAlert("createMarker()");
     // create an AR.GeoLocation from the latitude/longitude function parameters
     var loc = new AR.GeoLocation(lat, lon);
 
@@ -143,7 +143,7 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
     imageDrawable[id] = new AR.ImageDrawable(IrAndGeo.res.marker, 2, {
         scale: 0.0,
         onClick: function() {
-            // alert(name);
+            // IrAndGeo.TracerAlert(name);
 		// var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description);
 		var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 		/*
@@ -170,8 +170,9 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
     }));
 };
     // fired when user pressed maker in cam
-IrAndGeo.onMarkerSelected = function (marker) {
-
+IrAndGeo.onMarkerSelected = function (marker) 
+{
+IrAndGeo.TracerAlert ("here in onMarketSelected!");
     // deselect previous marker
     if (IrAndGeo.currentMarker) {
         if (IrAndGeo.currentMarker.poiData.id == marker.poiData.id) {
@@ -200,7 +201,7 @@ IrAndGeo.showStores = function()
         IrAndGeo.stores.forEach(function(x, idx) {
             x.enabled = true;
         });
-        alert("IrAndGeo.showStores On");
+        IrAndGeo.TracerAlert("IrAndGeo.showStores On");
         // nicely animate appearing of markers
         IrAndGeo.showMarkersAnimation.start();
 
@@ -211,7 +212,7 @@ IrAndGeo.showStores = function()
     }
     else
     {
-        alert ("Stores are already On");
+        IrAndGeo.TracerAlert ("Stores are already On");
     }
 };
 
@@ -248,11 +249,11 @@ IrAndGeo.showWeb = function() {
 
 IrAndGeo.loadingStepDone = function() 
 {
-    alert("loadingStepDone()");
+    IrAndGeo.TracerAlert("loadingStepDone()");
     /*
     if (!IrAndGeo.error && IrAndGeo.res.buttonStores.isLoaded() && IrAndGeo.res.buttonWeb.isLoaded() && IrAndGeo.res.buttonDeal.isLoaded() && IrAndGeo.res.marker.isLoaded() && IrAndGeo.receivedLocation && IrAndGeo.tracker && IrAndGeo.tracker.isLoaded()) 
     {
-        alert("inside if tocho");
+        IrAndGeo.TracerAlert("inside if tocho");
         //everything is loaded
         var cssDivLeft = " style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'";
         var cssDivRight = " style='display: table-cell;vertical-align: middle; text-align: left;'";
@@ -326,7 +327,7 @@ IrAndGeo.initIr = function()
 // this function is called as soon as we receive GPS data 
 AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy) 
 {
-    alert("onLocationChanged()" + "latitude: "+ latitude + " ,longitude: " + longitude + " altitude: " + longitude + " accuracy: "+ accuracy);
+    IrAndGeo.TracerAlert("onLocationChanged()" + "latitude: "+ latitude + " ,longitude: " + longitude + " altitude: " + longitude + " accuracy: "+ accuracy);
     // in order not to receive any further location updates the onLocationChanged trigger is set to null
     AR.context.onLocationChanged = null;
     // flag to store that a location was received
@@ -357,7 +358,7 @@ AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy)
 
 IrAndGeo.initResources = function () 
 {
-    alert("initResources()");
+    IrAndGeo.TracerAlert("initResources()");
     IrAndGeo.resourcesAG [0] = new AR.ImageResource("assets/buttons/speaker-48.png", 
     {
         //onLoaded: IrAndGeo.loadingStepDone,
