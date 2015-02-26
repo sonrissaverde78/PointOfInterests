@@ -1,32 +1,28 @@
 var kMarker_AnimationDuration_ChangeDrawable = 500;
 var kMarker_AnimationDuration_Resize = 1000;
 //IrAndGeo.Marker = function(poiData) {
-function Marker(poiData) {
-try {
-                    IrAndGeo.TracerAlert ("Marker (): poiData.name " + poiData.name);
-                } catch (err) {
-                    alert("el error" + err);
-                }
-    
-//alert ("Marker (): poiData.Country " + poiData.Country);
 
-//alert("Marker (): poiData.latitude " + poiData.latitude);   
-//alert("Marker (): poiData.longitude " + poiData.longitude); 
-    //this.poiData = poiData;
+
+function Marker(poiData) 
+{    
+	Marker.TracerAlert ("Marker (): poiData.name " + poiData.name);	
+    this.poiData = poiData;
     this.isSelected = false;
-
     /*
-        With AR.PropertyAnimations you are able to animate almost any property of ARchitect objects. This sample will animate the opacity of both background drawables so that one will fade out while the other one fades in. The scaling is animated too. The marker size changes over time so the labels need to be animated too in order to keep them relative to the background drawable. AR.AnimationGroups are used to synchronize all animations in parallel or sequentially.
+        With AR.PropertyAnimations you are able to animate almost any property of 
+		ARchitect objects. This sample will animate the opacity of both background 
+		drawables so that one will fade out while the other one fades in. 
+		The scaling is animated too. 
+		The marker size changes over time so the labels need to be animated too in 
+		order to keep them relative to the background drawable. AR.AnimationGroups 
+		are used to synchronize all animations in parallel or sequentially.
     */
-
     this.animationGroup_idle = null;
     this.animationGroup_selected = null;
-
-//alert("markerLocation = new AR.GeoLocation "); 
+	
     // create the AR.GeoLocation from the poi data
-    // var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //, poiData.altitude);
-var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //,altitude);
-// alert("this.markerDrawable_idle "); 
+	var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //,altitude);
+
     // create an AR.ImageDrawable for the marker in idle state
     this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 2.5, {
         zOrder: 0,
@@ -36,7 +32,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         */
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
-// alert("this.markerDrawable_selected "); 
+
     // create an AR.ImageDrawable for the marker in selected state
     this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 2.5, {
         zOrder: 0,
@@ -45,42 +41,44 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     });
 
     // create an AR.Label for the marker's Country 
-    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 1, {
-        zOrder: 1,
-        offsetY: 0.55,
-        style: {
-            textColor: '#FFFFFF',
-            fontStyle: AR.CONST.FONT_STYLE.BOLD
-        }
+    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 1, 
+								   {
+									zOrder: 1,
+									offsetY: 0.55,
+									style: {
+											textColor: '#FFFFFF',
+											fontStyle: AR.CONST.FONT_STYLE.BOLD
+											}
     });
 
     // create an AR.Label for the marker's description
-    this.descriptionLabel = new AR.Label(poiData.name.trunc(15), 0.8, {
-        zOrder: 1,
-        offsetY: -0.55,
-        style: {
-            textColor: '#FFFFFF'
-        }
-    });
-// alert("this.directionIndicatorDrawable = new AR.ImageDrawable "); 
+    this.descriptionLabel = new AR.Label(poiData.name.trunc(15), 0.8, 
+										{
+										zOrder: 1,
+										offsetY: -0.55,
+										style:	{ 
+												textColor: '#FFFFFF'
+												}
+										});
     /*
         Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
     */
-    this.directionIndicatorDrawable = new AR.ImageDrawable(IrAndGeo.markerDrawable_directionIndicator, 0.1, {
-        enabled: false,
-        verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
-    });
-
+    this.directionIndicatorDrawable = new AR.ImageDrawable(IrAndGeo.markerDrawable_directionIndicator, 0.1, 
+															{
+																enabled: false,
+																verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
+															});
     /*
         Create the AR.GeoObject with the drawable objects and define the AR.ImageDrawable as an indicator target on the marker AR.GeoObject. The direction indicator is displayed automatically when necessary. AR.Drawable subclasses (e.g. AR.Circle) can be used as direction indicators.
     */
-    this.markerObject = new AR.GeoObject(markerLocation, {
-        drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel, this.descriptionLabel],
-            indicator: this.directionIndicatorDrawable
-        }
-    });
-// alert("return this "); 
+    this.markerObject = new AR.GeoObject(markerLocation,
+			{
+			drawables: 	{
+							cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel, this.descriptionLabel],
+							indicator: this.directionIndicatorDrawable
+						}
+			});
+
     return this;
 }
 
@@ -93,23 +91,35 @@ Marker.prototype.getOnClickTrigger = function(marker) {
 
     return function() {
 
-        if (!Marker.prototype.isAnyAnimationRunning(marker)) {
-            if (marker.isSelected) {
-
+        //if (!Marker.prototype.isAnyAnimationRunning(marker)) {
+            if (marker.isSelected) 
+			{
                 Marker.prototype.setDeselected(marker);
-
-            } else {
-                Marker.prototype.setSelected(marker);
-                try {
+                try 
+				{
                     IrAndGeo.onMarkerSelected(marker);
-                } catch (err) {
+                } 
+				catch (err) 
+				{
+                    alert("Market.prototype.getOnClickTringer Error" + err);
+                }
+            } 
+			else 
+			{
+                Marker.prototype.setSelected(marker);
+                try 
+				{
+                    IrAndGeo.onMarkerSelected(marker);
+                } 
+				catch (err) 
+				{
                     alert("Market.prototype.getOnClickTringer Error" + err);
                 }
 
             }
-        } else {
-            AR.logger.debug('a animation is already running');
-        }
+        //} else {
+        //    AR.logger.debug('a animation is already running');
+        //}
 
 
         return true;
@@ -210,7 +220,8 @@ Marker.prototype.setDeselected = function(marker) {
     marker.animationGroup_idle.start();
 };
 
-Marker.prototype.isAnyAnimationRunning = function(marker) {
+Marker.prototype.isAnyAnimationRunning = function(marker) 
+{
 
     if (marker.animationGroup_idle === null || marker.animationGroup_selected === null) {
         return false;
@@ -222,7 +233,17 @@ Marker.prototype.isAnyAnimationRunning = function(marker) {
         }
     }
 };
-
+Marker.TracerAlert = function (szString)
+{
+	try 
+	{
+		IrAndGeo.TracerAlert (szString);
+	} 
+	catch (err) 
+	{
+		alert("el error" + err);
+	}
+}
 // will truncate all strings longer than given max-length "n". e.g. "foobar".trunc(3) -> "foo..."
 String.prototype.trunc = function(n) {
     return this.substr(0, n - 1) + (this.length > n ? '...' : '');

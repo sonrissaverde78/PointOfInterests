@@ -44,10 +44,6 @@ IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
         {
             // Buttons Images path
             case 0:
-                IrAndGeo.TracerAlert("Operation: " + Operation);
-                IrAndGeo.TracerAlert("InputInfo[i].buttonsImagesPathAG: " + InputInfo[i].buttonsImagesPathAG);
-                IrAndGeo.TracerAlert("InputInfo[i].ImagesToTrackPathAG: " + InputInfo[i].ImagesToTrackPathAG);
-                IrAndGeo.TracerAlert("InputInfo[i].ImagesToDrawPathAG: " + InputInfo[i].ImagesToDrawPathAG);
                 IrAndGeo.buttonsImagesPathAG    = InputInfo[i].buttonsImagesPathAG;
                 IrAndGeo.ImagesToTrackPathAG    = InputInfo[i].ImagesToTrackPathAG;
                 IrAndGeo.ImagesToDrawPathAG     = InputInfo[i].ImagesToDrawPathAG;
@@ -99,9 +95,6 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
         };
         dbPoi[currentPlaceNr] = singlePoi;
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
-        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesToTrack "    + " " + dbPoi[currentPlaceNr].ImagesToTrack);
-        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesToDraw "     + " " + dbPoi[currentPlaceNr].ImagesToDraw);
-        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesButtons "    + " " + dbPoi[currentPlaceNr].ImagesButtons);
         //World.markerList.push(new Marker(singlePoi));
     }
 }
@@ -118,12 +111,11 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
         dbPoi[i].latitude = objLat;// parseFloat(objLat);
         dbPoi[i].longitude = objLon;// parseFloat(objLon);
-/*
-IrAndGeo.TracerAlert("dbPoi[i].latitude " + dbPoi[i].latitude);   
-IrAndGeo.TracerAlert("dbPoi[i].longitude " + dbPoi[i].longitude);       
-IrAndGeo.TracerAlert("dbPoi[i].name " + dbPoi[i].name);
-IrAndGeo.TracerAlert("dbPoi[i].Country " + dbPoi[i].Country);
-*/
+
+IrAndGeo.TracerAlert("dbPoi[i].name " 		+ dbPoi[i].name);
+IrAndGeo.TracerAlert("dbPoi[i].latitude " 	+ dbPoi[i].latitude);   
+IrAndGeo.TracerAlert("dbPoi[i].longitude " 	+ dbPoi[i].longitude);
+
         IrAndGeo.markerList.push(new Marker(dbPoi[i]));
     }
 
@@ -132,7 +124,16 @@ IrAndGeo.TracerAlert("dbPoi[i].Country " + dbPoi[i].Country);
 // IrAndGeo.TracerAlert("Before showStores()");
     IrAndGeo.showStores();
 };
-
+IrAndGeo.sendIdFromPoi = function (id)
+{
+	var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+	document.location 	= architectSdkUrl;
+}
+IrAndGeo.stopReadPoi = function (id)
+{
+	var architectSdkUrl = "architectsdk://markerselected?stopAudio=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+	document.location 	= architectSdkUrl;
+}
 IrAndGeo.createMarker = function(lat, lon, name, id) 
 {
 //IrAndGeo.TracerAlert("createMarker()");
@@ -170,20 +171,34 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
     }));
 };
     // fired when user pressed maker in cam
-IrAndGeo.onMarkerSelected = function (marker) 
-{
-IrAndGeo.TracerAlert ("here in onMarketSelected!");
-    // deselect previous marker
-    if (IrAndGeo.currentMarker) {
-        if (IrAndGeo.currentMarker.poiData.id == marker.poiData.id) {
-            return;
-        }
-        IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
-    }
 
-    // highlight current one
-    marker.setSelected(marker);
-    IrAndGeo.currentMarker = marker;
+IrAndGeo.onMarkerSelected = function (marker);
+{
+    if (IrAndGeo.currentMarker) 
+	{
+        if (IrAndGeo.currentMarker.poiData.id == marker.poiData.id) 
+		{
+			// deselect marker
+			IrAndGeo.stopReadPoi(marker.poiData.id);
+            IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
+			IrAndGeo.currentMarker = null;
+			
+			return;
+        }
+		else
+		{
+			alert ("onMarkerSelected: Unselect before...");
+			return;
+		}
+    }
+	else
+	{
+		// highlight current one
+		marker.setSelected(marker);
+		IrAndGeo.currentMarker = marker;	
+		IrAndGeo.sendIdFromPoi(marker.poiData.id);
+		return;
+	}
 };
     // screen was clicked but no geo-object was hit
 AR.context.onScreenClick = function (marker) {
