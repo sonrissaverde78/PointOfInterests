@@ -16,9 +16,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Environment;
+
+import android.widget.Toast;
+
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
@@ -94,14 +96,22 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 				
 				Uri invokedUri = Uri.parse(uriString);
 				String szIdPoiSelected;
-				szIdPoiSelected = invokedUri.getQueryParameter("id");
-				int i = Integer.parseInt(szIdPoiSelected);
-				String pp [] = szPoiInfo (i);
-				int iField = 0;
-				vReadText (pp[iField]);
-				
-				vReadText (pp + "¿Tiene alguna pregunta?");
-				startVoiceRecognitionActivity();
+				szIdPoiSelected = invokedUri.getQueryParameter ("stopAudio");
+				if (szIdPoiSelected == null)
+				{
+					szIdPoiSelected = invokedUri.getQueryParameter("id");
+					int i = Integer.parseInt(szIdPoiSelected);
+					String pp [] = szPoiInfo (i);
+					int iField = 7;
+					vReadText (pp[iField] + "¿Tiene alguna pregunta?");
+					// startVoiceRecognitionActivity();
+				}
+				else
+				{
+					if (textToSpeech.isSpeaking() == true)
+						textToSpeech.stop();
+				}
+
 				
 				return true;
 				// pressed "More" button on POI-detail panel
@@ -223,10 +233,10 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	  // Definici�n del intent para realizar en an�lisis del mensaje
 	  Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 	  // Indicamos el modelo de lenguaje para el intent
-	  intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-	   RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+	  intent.putExtra(	RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+						RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 	  // Definimos el mensaje que aparecer� 
-	  intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Diga, Llamar a ...");
+	  intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Relice Consulta ...");
 	  // Lanzamos la actividad esperando resultados
 	  startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
   	}

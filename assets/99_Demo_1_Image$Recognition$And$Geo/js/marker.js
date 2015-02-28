@@ -8,11 +8,11 @@ try {
                     alert("el error" + err);
                 }
     
-//alert ("Marker (): poiData.Country " + poiData.Country);
+alert ("Marker pp (): poiData.Country " + poiData.Country);
 
 //alert("Marker (): poiData.latitude " + poiData.latitude);   
 //alert("Marker (): poiData.longitude " + poiData.longitude); 
-    //this.poiData = poiData;
+    this.poiData = poiData;
     this.isSelected = false;
 
     /*
@@ -93,23 +93,35 @@ Marker.prototype.getOnClickTrigger = function(marker) {
 
     return function() {
 
-        if (!Marker.prototype.isAnyAnimationRunning(marker)) {
+        //if (!Marker.prototype.isAnyAnimationRunning(marker)) {
             if (marker.isSelected) {
 
                 Marker.prototype.setDeselected(marker);
-
-            } else {
-                Marker.prototype.setSelected(marker);
-                try {
+                try 
+				{
                     IrAndGeo.onMarkerSelected(marker);
-                } catch (err) {
+                } 
+				catch (err) 
+				{
+                    alert("Market.prototype.getOnClickTringer Error" + err);
+                }
+            } 
+			else 
+			{
+                Marker.prototype.setSelected(marker);
+                try 
+				{
+                    IrAndGeo.onMarkerSelected(marker);
+                } 
+				catch (err) 
+				{
                     alert("Market.prototype.getOnClickTringer Error" + err);
                 }
 
             }
-        } else {
-            AR.logger.debug('a animation is already running');
-        }
+        //} else {
+        //    AR.logger.debug('a animation is already running');
+        //}
 
 
         return true;
