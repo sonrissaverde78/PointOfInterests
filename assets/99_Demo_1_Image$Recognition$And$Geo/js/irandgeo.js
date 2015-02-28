@@ -21,7 +21,7 @@ IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
 IrAndGeo.resourcesAG = [];
 
-IrAndGeo.bTracerAlert = false;
+IrAndGeo.bTracerAlert = true;
 
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
@@ -292,9 +292,11 @@ IrAndGeo.errorLoading = function() {
 
 IrAndGeo.initIr = function() 
 {
+	alert ("pp");
     IrAndGeo.TracerAlert("initIr()");
     // Create the tracker to recognize the shop ad
     var trackerDataSetPath = "assets/ShopAd.wtc";
+    //var trackerDataSetPath = "assets/ImagesToTrack/targetcollections.wtc";
     IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
                                                         {
                                                             //onLoaded: IrAndGeo.loadingStepDone,
@@ -388,7 +390,7 @@ IrAndGeo.TracerAlert = function (szString)
 		alert (szString);
 	}
 }
-IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/buttons/speaker-48.png", {
+/*IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/buttons/speaker-48.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
@@ -421,7 +423,7 @@ IrAndGeo.res.buttonDeal = new AR.ImageResource("assets/YourShop_GetADeal.png", {
 IrAndGeo.res.deal = new AR.ImageResource("assets/YourShop_Deal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
-});
+});*/
 
 //IrAndGeo.initResources();
 IrAndGeo.initIr();
