@@ -3,16 +3,18 @@ package com.pfc.pointofinterests;
 import java.io.IOException;
 import java.util.Locale;
 
+import org.json.JSONArray;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.location.Location;
 import android.location.LocationListener;
-
+import android.media.AudioManager;
 import android.opengl.GLES20;
 import android.os.Build;
 import android.os.Bundle;
-
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -20,10 +22,8 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 
-import org.json.JSONArray;
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectConfig;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
@@ -228,8 +228,6 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		textToSpeech.setPitch( gfPitch );
 		
 		textToSpeech.setSpeechRate( gfSpeechRate );
-		textToSpeech.stop();
-		
 	}
 	@Override
 	protected void onPostCreate( final Bundle savedInstanceState ) {

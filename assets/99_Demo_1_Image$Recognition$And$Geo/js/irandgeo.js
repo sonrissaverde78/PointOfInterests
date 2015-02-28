@@ -21,7 +21,7 @@ IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
 IrAndGeo.resourcesAG = [];
 
-IrAndGeo.bTracerAlert = true;
+IrAndGeo.bTracerAlert = false;
 
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
@@ -44,6 +44,10 @@ IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
         {
             // Buttons Images path
             case 0:
+                IrAndGeo.TracerAlert("Operation: " + Operation);
+                IrAndGeo.TracerAlert("InputInfo[i].buttonsImagesPathAG: " + InputInfo[i].buttonsImagesPathAG);
+                IrAndGeo.TracerAlert("InputInfo[i].ImagesToTrackPathAG: " + InputInfo[i].ImagesToTrackPathAG);
+                IrAndGeo.TracerAlert("InputInfo[i].ImagesToDrawPathAG: " + InputInfo[i].ImagesToDrawPathAG);
                 IrAndGeo.buttonsImagesPathAG    = InputInfo[i].buttonsImagesPathAG;
                 IrAndGeo.ImagesToTrackPathAG    = InputInfo[i].ImagesToTrackPathAG;
                 IrAndGeo.ImagesToDrawPathAG     = InputInfo[i].ImagesToDrawPathAG;
@@ -95,6 +99,9 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
         };
         dbPoi[currentPlaceNr] = singlePoi;
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesToTrack "    + " " + dbPoi[currentPlaceNr].ImagesToTrack);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesToDraw "     + " " + dbPoi[currentPlaceNr].ImagesToDraw);
+        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].ImagesButtons "    + " " + dbPoi[currentPlaceNr].ImagesButtons);
         //World.markerList.push(new Marker(singlePoi));
     }
 }
@@ -111,11 +118,12 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
         dbPoi[i].latitude = objLat;// parseFloat(objLat);
         dbPoi[i].longitude = objLon;// parseFloat(objLon);
-
-IrAndGeo.TracerAlert("dbPoi[i].name " 		+ dbPoi[i].name);
-IrAndGeo.TracerAlert("dbPoi[i].latitude " 	+ dbPoi[i].latitude);   
-IrAndGeo.TracerAlert("dbPoi[i].longitude " 	+ dbPoi[i].longitude);
-
+/*
+IrAndGeo.TracerAlert("dbPoi[i].latitude " + dbPoi[i].latitude);   
+IrAndGeo.TracerAlert("dbPoi[i].longitude " + dbPoi[i].longitude);       
+IrAndGeo.TracerAlert("dbPoi[i].name " + dbPoi[i].name);
+IrAndGeo.TracerAlert("dbPoi[i].Country " + dbPoi[i].Country);
+*/
         IrAndGeo.markerList.push(new Marker(dbPoi[i]));
     }
 
@@ -124,16 +132,7 @@ IrAndGeo.TracerAlert("dbPoi[i].longitude " 	+ dbPoi[i].longitude);
 // IrAndGeo.TracerAlert("Before showStores()");
     IrAndGeo.showStores();
 };
-IrAndGeo.sendIdFromPoi = function (id)
-{
-	var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
-	document.location 	= architectSdkUrl;
-}
-IrAndGeo.stopReadPoi = function (id)
-{
-	var architectSdkUrl = "architectsdk://markerselected?stopAudio=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
-	document.location 	= architectSdkUrl;
-}
+
 IrAndGeo.createMarker = function(lat, lon, name, id) 
 {
 //IrAndGeo.TracerAlert("createMarker()");
@@ -171,34 +170,20 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
     }));
 };
     // fired when user pressed maker in cam
-
-IrAndGeo.onMarkerSelected = function (marker);
+IrAndGeo.onMarkerSelected = function (marker) 
 {
-    if (IrAndGeo.currentMarker) 
-	{
-        if (IrAndGeo.currentMarker.poiData.id == marker.poiData.id) 
-		{
-			// deselect marker
-			IrAndGeo.stopReadPoi(marker.poiData.id);
-            IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
-			IrAndGeo.currentMarker = null;
-			
-			return;
+IrAndGeo.TracerAlert ("here in onMarketSelected!");
+    // deselect previous marker
+    if (IrAndGeo.currentMarker) {
+        if (IrAndGeo.currentMarker.poiData.id == marker.poiData.id) {
+            return;
         }
-		else
-		{
-			alert ("onMarkerSelected: Unselect before...");
-			return;
-		}
+        IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
     }
-	else
-	{
-		// highlight current one
-		marker.setSelected(marker);
-		IrAndGeo.currentMarker = marker;	
-		IrAndGeo.sendIdFromPoi(marker.poiData.id);
-		return;
-	}
+
+    // highlight current one
+    marker.setSelected(marker);
+    IrAndGeo.currentMarker = marker;
 };
     // screen was clicked but no geo-object was hit
 AR.context.onScreenClick = function (marker) {
@@ -292,11 +277,9 @@ IrAndGeo.errorLoading = function() {
 
 IrAndGeo.initIr = function() 
 {
-	alert ("pp");
     IrAndGeo.TracerAlert("initIr()");
     // Create the tracker to recognize the shop ad
     var trackerDataSetPath = "assets/ShopAd.wtc";
-    //var trackerDataSetPath = "assets/ImagesToTrack/targetcollections.wtc";
     IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
                                                         {
                                                             //onLoaded: IrAndGeo.loadingStepDone,
@@ -390,7 +373,7 @@ IrAndGeo.TracerAlert = function (szString)
 		alert (szString);
 	}
 }
-/*IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/buttons/speaker-48.png", {
+IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/buttons/speaker-48.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
@@ -423,7 +406,7 @@ IrAndGeo.res.buttonDeal = new AR.ImageResource("assets/YourShop_GetADeal.png", {
 IrAndGeo.res.deal = new AR.ImageResource("assets/YourShop_Deal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
-});*/
+});
 
 //IrAndGeo.initResources();
 IrAndGeo.initIr();
