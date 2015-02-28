@@ -171,7 +171,8 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
     }));
 };
     // fired when user pressed maker in cam
-IrAndGeo.onMarkerSelected = function (marker) 
+
+IrAndGeo.onMarkerSelected = function (marker);
 {
     if (IrAndGeo.currentMarker) 
 	{
