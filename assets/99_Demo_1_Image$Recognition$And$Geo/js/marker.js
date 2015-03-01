@@ -54,9 +54,19 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         */
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
+	this.ImageToShow = new AR.ImageDrawable(IrAndGeo.res.ImageToShow, 3.0, {
+	zOrder: 3,
+	opacity: 0.0,
+	offsetY: 2.55,
+	offsetX: 2.55,
+	/*
+		To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
+	*/
+	//onClick: Marker.prototype.getOnClickTrigger(this)
+    });
     
 	// create an AR.Label for the marker's Country 
-    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 1, {
+    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 0.5, {
         zOrder: 2,
         offsetY: 0.55,
 		onClick: Marker.prototype.getOnClickTrigger(this),
@@ -68,7 +78,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     });
 
     // create an AR.Label for the marker's description
-    this.descriptionLabel = new AR.Label(poiData.name.trunc(15), 0.8, {
+    this.descriptionLabel = new AR.Label(poiData.name.trunc(15), 0.4, {
         zOrder: 2,
         offsetY: -0.55,
         style: {
@@ -87,9 +97,9 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     /*
         Create the AR.GeoObject with the drawable objects and define the AR.ImageDrawable as an indicator target on the marker AR.GeoObject. The direction indicator is displayed automatically when necessary. AR.Drawable subclasses (e.g. AR.Circle) can be used as direction indicators.
     */
-    this.markerObject = new AR.GeoObject(markerLocation, {
+    this.markerObject = new AR.GeoObject( markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_speaker, this.titleLabel, this.descriptionLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_speaker, this.ImageToShow, this.titleLabel, this.descriptionLabel],
             indicator: this.directionIndicatorDrawable
         }
     });
@@ -179,7 +189,7 @@ Marker.prototype.setSelected = function(marker) {
         */
         marker.animationGroup_selected = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [hideIdleDrawableAnimation, showSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation, descriptionLabelResizeAnimation]);
     }
-
+	marker.ImageToShow.opacity = 1;//IRR
     // removes function that is set on the onClick trigger of the idle-state marker
     marker.markerDrawable_idle.onClick = null;
     // sets the click trigger function for the selected state marker
@@ -223,7 +233,7 @@ Marker.prototype.setDeselected = function(marker) {
         */
         marker.animationGroup_idle = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [showIdleDrawableAnimation, hideSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation, descriptionLabelResizeAnimation]);
     }
-
+	marker.ImageToShow.opacity = 0;//IRR
     // sets the click trigger function for the idle state marker
     marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickTrigger(marker);
     // removes function that is set on the onClick trigger of the selected-state marker

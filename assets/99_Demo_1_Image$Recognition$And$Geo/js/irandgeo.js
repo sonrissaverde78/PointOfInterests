@@ -422,6 +422,10 @@ IrAndGeo.res.buttonDeal = new AR.ImageResource("assets/YourShop_GetADeal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
+IrAndGeo.res.ImageToShow = new AR.ImageResource("assets/ImagesToDraw/Escultura-Cibeles-Madrid.jpg", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
 IrAndGeo.res.deal = new AR.ImageResource("assets/YourShop_Deal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
