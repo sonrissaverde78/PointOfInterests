@@ -388,12 +388,16 @@ IrAndGeo.TracerAlert = function (szString)
 		alert (szString);
 	}
 }
-IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/buttons/speaker-48.png", {
+IrAndGeo.markerDrawable_speaker = new AR.ImageResource("assets/buttons/speaker-48.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
 
-IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/buttons/speaker-48_selected.png", {
+IrAndGeo.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });

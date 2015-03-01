@@ -2,13 +2,13 @@ var kMarker_AnimationDuration_ChangeDrawable = 500;
 var kMarker_AnimationDuration_Resize = 1000;
 //IrAndGeo.Marker = function(poiData) {
 function Marker(poiData) {
-try {
-                    IrAndGeo.TracerAlert ("Marker (): poiData.name " + poiData.name);
-                } catch (err) {
-                    alert("el error" + err);
-                }
-    
-alert ("Marker pp (): poiData.Country " + poiData.Country);
+	// try {
+	//		IrAndGeo.TracerAlert ("Marker (): poiData.name " + poiData.name);
+		//} catch (err) {
+		//	alert("el error" + err);
+		//}
+
+	alert ("Marker pp (): poiData.Country " + poiData.Country);
 
 //alert("Marker (): poiData.latitude " + poiData.latitude);   
 //alert("Marker (): poiData.longitude " + poiData.longitude); 
@@ -28,7 +28,7 @@ alert ("Marker pp (): poiData.Country " + poiData.Country);
 var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //,altitude);
 // alert("this.markerDrawable_idle "); 
     // create an AR.ImageDrawable for the marker in idle state
-    this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 2.5, {
+    this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 1.5, {
         zOrder: 0,
         opacity: 1.0,
         /*
@@ -36,27 +36,40 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         */
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
+	
+
 // alert("this.markerDrawable_selected "); 
     // create an AR.ImageDrawable for the marker in selected state
-    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 2.5, {
+    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 1.5, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null
     });
-
-    // create an AR.Label for the marker's Country 
-    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 1, {
+	
+	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.5, {
         zOrder: 1,
+        opacity: 1.0,
+        /*
+            To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
+        */
+        onClick: Marker.prototype.getOnClickTrigger(this)
+    });
+    
+	// create an AR.Label for the marker's Country 
+    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 1, {
+        zOrder: 2,
         offsetY: 0.55,
+		onClick: Marker.prototype.getOnClickTrigger(this),
         style: {
             textColor: '#FFFFFF',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
         }
+		
     });
 
     // create an AR.Label for the marker's description
     this.descriptionLabel = new AR.Label(poiData.name.trunc(15), 0.8, {
-        zOrder: 1,
+        zOrder: 2,
         offsetY: -0.55,
         style: {
             textColor: '#FFFFFF'
@@ -76,7 +89,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     */
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel, this.descriptionLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_speaker, this.titleLabel, this.descriptionLabel],
             indicator: this.directionIndicatorDrawable
         }
     });
