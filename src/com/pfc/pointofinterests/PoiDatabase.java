@@ -13,7 +13,7 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 {
 	// Dabase handler and parameters.
 	private 	SQLiteDatabase 			db;						// Database handle.
- 	private 	String 					gdbName 		= "dbPoi.18";	// Database Name.
+ 	private 	String 					gdbName 		= "dbPoi.20";	// Database Name.
  	private 	PoiSQLiteHelper 		dbhPoi;					// DB Object.
 	private		int 					giVersionDB 	= 1;		// Database version.
 	private		String					tableName		= "tablePoi";	// Database main table of pois.
@@ -535,4 +535,5 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
  	{
  		return ImagesToTrack;
  	}
+
 }

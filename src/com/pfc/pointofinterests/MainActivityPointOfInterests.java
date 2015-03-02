@@ -50,7 +50,7 @@ public class MainActivityPointOfInterests extends ActionBarActivity {
 	    	switch (id)
 	    	{
 	    		case R.id.ImageRecognitionAndGeo_99_1:
-	    			activityUrl 			= "99_Demo_1_Image$Recognition$And$Geo"; //this.getArchitectWorldUrls()[position]
+	    			activityUrl 			= "IrAndGeo"; //this.getArchitectWorldUrls()[position]
 	    			activityTitle 			= (String) getResources().getText(R.string.ImageRecognitionAndGeo);
 	    			classNameCamActivity 	= "com.pfc.pointofinterests.PoiDatabase";
 	    			intent = new Intent( this, PoiDatabase.class );

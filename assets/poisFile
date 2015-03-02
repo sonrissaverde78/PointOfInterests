@@ -1,8 +1,8 @@
 #Sample#1
 #field#:id				=!= 1 $#
-#field#:name			=!= Lugar_Name_1 $#
-#field#:lat				=!= 1 $#
-#field#:long			=!= 1 $#
+#field#:name			=!= Fuente de Cibeles $#
+#field#:lat				=!= 40D25M9.71SN $#
+#field#:long			=!= 3D41M35.10SOs $#
 #field#:alt				=!= 1 $#
 #field#:Country			=!= España $#
 #field#:City			=!= Madrid $#
@@ -16,17 +16,17 @@ sabía que si no lo dejaba entonces, ya no lo dejaría jamás. Si
 permanecía allí mucho tiempo acabaría mis días, sucediéndose monótonos uno tras
  otro, en aquel lugar. Y es que, ante todo, yo ya había cumplido los treinta $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesToDraw#		=!= Esc-Cibeles-Madrid.jpg $#
 #field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________
 #Sample#2
 #field#:id				=!= 2 $#
-#field#:name			=!= Lugar_Name_2 $#
-#field#:lat				=!= 2 $#
-#field#:long			=!= 2 $#
+#field#:name			=!= Fuente de Neptuno$#
+#field#:lat				=!= 40D24M54.96SN $#
+#field#:long			=!= 3D41M39.00SO $#
 #field#:alt				=!= 2 $#
-#field#:Country			=!= Lugar_Country_2 $#
-#field#:City			=!= Lugar_City_2 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Madrid $#
 #field#:description	x	=!= Lugar_description_Por supuesto, el descontento creció 
 entre nosotros. En aquella pequeña sociedad antes hermanada por la desgracia común,
 surgió un sentimiento de injusticia y, junto con él, el odio profundo y la 
@@ -41,17 +41,17 @@ trabajábamos y que luego nos arrojaran al pozo. Nadie sabría qué había o
 el negro fondo de la mina. Sólo que alguien, sin que nadie se diera cuenta, había 
 desaparecido. $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesToDraw#		=!= Esc-Neptuno-Madrid.jpg $#
 #field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________
 #Sample#3
 #field#:id				=!= 3 $#	
-#field#:name			=!= Lugar_Name_3 $#
-#field#:lat				=!= 3 $#
-#field#:long			=!= 3 $#
+#field#:name			=!= Puerta de Alcala $#
+#field#:lat				=!= 40D25M11.85SN $#
+#field#:long			=!= 3D41M19.45SO $#
 #field#:alt				=!= 3 $#
-#field#:Country			=!= Lugar_Country_3 $#
-#field#:City			=!= Lugar_City_3 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Madrid $#
 #field#:description	x	=!= Lugar_description_Le puse en el cobertizo un plato con 
 un trozo de sawara que había comprado en el supermercado. El gato, que parecía 
 terriblemente hambriento, se comió el pescado en un santiamén, entre jadeos, 
@@ -61,17 +61,17 @@ La llené de agua y el gato se la bebió casi toda. Al final recobró el alie
 empezó a lavarse la cara. Poco después, como si recordara algo de repente, 
 se me acercó, se me subió a las rodillas y se quedó dormido hecho un ovillo $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesToDraw#		=!= puerta-alcala-Madrid.jpg $#
 #field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________
 #Sample#4
 #field#:id				=!= 4 $#
 #field#:name			=!= Lugar_Name_4 $#
-#field#:lat				=!= 4 $#
-#field#:long			=!= 4 $#
+#field#:lat				=!= 40D25M1.22SN4 $#
+#field#:long			=!= 3D42M12.78SO $#
 #field#:alt				=!= 4 $#
 #field#:Country			=!= España $#
-#field#:City			=!= Huelva $#
+#field#:City			=!= Madrid $#
 #field#:description	x	=!= Lugar_description_Acerqué un cojín viejo y puse el gato 
 encima. Su cuerpo estaba desmadejado como la ropa recién lavada. Sobre el 
 cojín, el gato entreabrió los ojos, abrió un poco la boca, pero no maulló. 
@@ -82,6 +82,6 @@ gato, que seguía durmiendo en la misma postura. Como su mirada nos recordaba
 a la del hermano de Kumiko, lo llamábamos Noboru Wataya, pero ése no era su 
 verdadero nombre. Pasaron seis años sin que Kumiko y yo le pusiéramos uno. $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= marker_idle.png $#
+#field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg $#
 #field#:ImagesButtons#		=!= speaker-48.png $#
 ______________________

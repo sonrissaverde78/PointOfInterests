@@ -347,9 +347,15 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 */			
  			poiInformation.put (szPoiFieldsName[0], PoiInformation[0]); // id
  			poiInformation.put (szPoiFieldsName[1], PoiInformation[1]); // name
- 			poiInformation.put (szPoiFieldsName[2], PoiInformation[2]); // lat
- 			poiInformation.put (szPoiFieldsName[3], PoiInformation[3]); // long
+ 			
+ 			double latitude = CovertToDegrees(PoiInformation[2]);
+ 			poiInformation.put (szPoiFieldsName[2], latitude + ""); // lat
+ 			
+ 			double longitude = CovertToDegrees(PoiInformation[3]);
+ 			poiInformation.put (szPoiFieldsName[3], "" + longitude); // long
+ 			
  			poiInformation.put (szPoiFieldsName[4], PoiInformation[4]); // alt
+ 			
  			poiInformation.put (szPoiFieldsName[5], PoiInformation[5]); // Country
  			poiInformation.put (szPoiFieldsName[6], PoiInformation[6]); // City
  			// poiInformation.put (szPoiFieldsName[7], PoiInformation[7]); // Description
@@ -424,5 +430,29 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	public abstract String		szPathForButtons		();
  	public abstract String		szPathForImagesToTrack	();
  	public abstract String		szPathForImagesToDraw	();
- 	
+ 	public double CovertToDegrees (String Coodinate)
+ 	{
+ 		int iEndValueOfFieldPos 	= Coodinate.indexOf ("D", 0);
+		String  szStringDegrees 	= Coodinate.substring(0, iEndValueOfFieldPos);
+		
+		int iStartOffString = iEndValueOfFieldPos; 
+ 		iEndValueOfFieldPos 	= Coodinate.indexOf ("M", iEndValueOfFieldPos);
+		String  szStringMinutes 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
+
+		iStartOffString 			= iEndValueOfFieldPos; 
+ 		iEndValueOfFieldPos 		= Coodinate.indexOf ("S", iEndValueOfFieldPos);
+		String  szStringSeconds 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
+
+		// String Seconds to int seconds
+		double iSeconds = Double.parseDouble(szStringSeconds);
+		
+		double iMinutes = Double.parseDouble(szStringMinutes);
+		
+		double iDegrees = Double.parseDouble(szStringDegrees);
+		
+		iMinutes = iMinutes + (iSeconds/60);
+		iDegrees = iDegrees + (iMinutes/60);
+ 		return iDegrees;
+ 	}
 }
+
