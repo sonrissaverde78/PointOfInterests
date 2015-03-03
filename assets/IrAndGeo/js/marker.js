@@ -55,8 +55,8 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
 	
-	this.markerDrawable_MainImage = new AR.ImageDrawable(IrAndGeo.markerDrawable_MainImage, 1.5, {
-	zOrder: 3,
+	this.markerDrawable_MainImage = new AR.ImageDrawable(poiData.markerDrawable_MainImage, 1.5, {
+	zOrder: 0,
 	opacity: 1.0,
 	offsetY: 0.0,
 	offsetX: 0.0,
@@ -67,7 +67,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     });
 	this.ImageToShow = new AR.ImageDrawable(IrAndGeo.res.ImageToShow, 3.0, {
 	zOrder: 3,
-	opacity: 0.0,
+	opacity: 1.0,
 	offsetY: 2.55,
 	offsetX: 2.55,
 	/*

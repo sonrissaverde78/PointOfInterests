@@ -16,8 +16,8 @@ sabía que si no lo dejaba entonces, ya no lo dejaría jamás. Si
 permanecía allí mucho tiempo acabaría mis días, sucediéndose monótonos uno tras
  otro, en aquel lugar. Y es que, ante todo, yo ya había cumplido los treinta $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= Esc-Cibeles-Madrid.jpg $#
-#field#:ImagesButtons#		=!= speaker-48.png $#
+#field#:ImagesToDraw#		=!= Esc-Cibeles-Madrid.jpg$# 
+#field#:ImagesButtons#		=!= speaker-48.png$#
 ______________________
 #Sample#2
 #field#:id				=!= 2 $#
@@ -40,9 +40,9 @@ nos golpearan por la espalda, en la cabeza o nos la abrieran con un pico mientra
 trabajábamos y que luego nos arrojaran al pozo. Nadie sabría qué había ocurrido en 
 el negro fondo de la mina. Sólo que alguien, sin que nadie se diera cuenta, había 
 desaparecido. $#
-#field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= Esc-Neptuno-Madrid.jpg $#
-#field#:ImagesButtons#		=!= speaker-48.png $#
+#field#:ImagesToTrack#		=!= ShopAd.wtc$#
+#field#:ImagesToDraw#		=!= Esc-Neptuno-Madrid.jpg$#
+#field#:ImagesButtons#		=!= speaker-48.png$#
 ______________________
 #Sample#3
 #field#:id				=!= 3 $#	
@@ -60,13 +60,13 @@ Encontré bajo el fregadero la escudilla que usábamos para darle de beber.
 La llené de agua y el gato se la bebió casi toda. Al final recobró el aliento y 
 empezó a lavarse la cara. Poco después, como si recordara algo de repente, 
 se me acercó, se me subió a las rodillas y se quedó dormido hecho un ovillo $#
-#field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= puerta-alcala-Madrid.jpg $#
-#field#:ImagesButtons#		=!= speaker-48.png $#
+#field#:ImagesToTrack#		=!= ShopAd.wtc$#
+#field#:ImagesToDraw#		=!= puerta-alcala-Madrid.jpg$#  
+#field#:ImagesButtons#		=!= speaker-48.png$#
 ______________________
 #Sample#4
 #field#:id				=!= 4 $#
-#field#:name			=!= Lugar_Name_4 $#
+#field#:name			=!= Puerta del Sol $#
 #field#:lat				=!= 40D25M1.22SN4 $#
 #field#:long			=!= 3D42M12.78SO $#
 #field#:alt				=!= 4 $#
@@ -82,6 +82,6 @@ gato, que seguía durmiendo en la misma postura. Como su mirada nos recordaba
 a la del hermano de Kumiko, lo llamábamos Noboru Wataya, pero ése no era su 
 verdadero nombre. Pasaron seis años sin que Kumiko y yo le pusiéramos uno. $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg $#
-#field#:ImagesButtons#		=!= speaker-48.png $#
+#field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg$#  
+#field#:ImagesButtons#		=!= speaker-48.png$#
 ______________________

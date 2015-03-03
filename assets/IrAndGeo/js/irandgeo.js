@@ -20,8 +20,8 @@ IrAndGeo.buttonsImagesPathAG;
 IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
 IrAndGeo.resourcesAG = [];
-
-IrAndGeo.bTracerAlert = true;
+IrAndGeo.markerDrawable_MainImage_2 = [];
+IrAndGeo.bTracerAlert = false;
 
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
@@ -76,7 +76,7 @@ IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 }
 IrAndGeo.loadPoisFromJSon = function(poiData)
 {
-    alert("loadPoisFromJSon poiData.length " + poiData.length);
+    IrAndGeo.TracerAlert("loadPoisFromJSon poiData.length " + poiData.length);
     var singlePoi; 
     // loop through POI-information and create an AR.GeoObject (=Marker) per POI
     for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
@@ -94,14 +94,22 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
             //"description": poiData[currentPlaceNr].description
         };
         dbPoi[currentPlaceNr] = singlePoi;
-		IrAndGeo.markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/Escultura-Cibeles-Madrid.jpg", {
-			//onLoaded: IrAndGeo.loadingStepDone,
-			onError: IrAndGeo.errorLoading
-			});
+		alert("poiData[currentPlaceNr].ImagesToDraw x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw);
+		dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
+		//dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/YourShop_FindShops.png", {
+		//onLoaded: IrAndGeo.loadingStepDone,
+		onError: IrAndGeo.errorLoading
+		});
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
         //World.markerList.push(new Marker(singlePoi));
     }
 }
+
+//IrAndGeo.markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
+//IrAndGeo.markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/Esc-Cibeles-Madrid.jpg", {
+////onLoaded: IrAndGeo.loadingStepDone,
+//onError: IrAndGeo.errorLoading
+//});
 
 IrAndGeo.setupScene = function(lat, lon, alt) {
     // create 8 random markers with different marker names
@@ -427,7 +435,7 @@ IrAndGeo.res.buttonDeal = new AR.ImageResource("assets/YourShop_GetADeal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-IrAndGeo.res.ImageToShow = new AR.ImageResource("assets/ImagesToDraw/Escultura-Cibeles-Madrid.jpg", {
+IrAndGeo.res.ImageToShow = new AR.ImageResource("assets/ImagesToDraw/puerta-alcala-Madrid.jpg", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
