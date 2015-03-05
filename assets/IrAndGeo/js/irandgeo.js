@@ -122,15 +122,20 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
         var objLon = lon + ((Math.random() - 0.5) / 1000);
         //IrAndGeo.TracerAlert("setupScene() -> Store Created");
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
-        dbPoi[i].latitude = objLat;// parseFloat(objLat);
-        dbPoi[i].longitude = objLon;// parseFloat(objLon);
-/*
-IrAndGeo.TracerAlert("dbPoi[i].latitude " + dbPoi[i].latitude);   
-IrAndGeo.TracerAlert("dbPoi[i].longitude " + dbPoi[i].longitude);       
-IrAndGeo.TracerAlert("dbPoi[i].name " + dbPoi[i].name);
-IrAndGeo.TracerAlert("dbPoi[i].Country " + dbPoi[i].Country);
-*/
-        IrAndGeo.markerList.push(new Marker(dbPoi[i]));
+		dbPoi[i].longitude = (dbPoi[i].longitude * (-1));
+		alert("dbPoi[i].name " 		+ dbPoi[i].name);
+		alert("dbPoi[i].latitude<" 	+ dbPoi[i].latitude + ">");   
+		alert("dbPoi[i].longitude<" + dbPoi[i].longitude + ">");       
+
+
+		alert("otra 2 vez dbPoi[i].name " + dbPoi[i].name);
+		//dbPoi[i].latitude = objLat;// parseFloat(objLat);
+        //dbPoi[i].longitude = objLon;// parseFloat(objLon);
+        alert("dbPoi[i].latitude<" 	+ objLat + ">");   
+		alert("dbPoi[i].longitude<" + objLon+ ">");       
+		
+
+		IrAndGeo.markerList.push(new Marker(dbPoi[i]));
     }
 
     // create appearing animation

@@ -23,6 +23,38 @@ public class MainActivityPointOfInterests extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity_point_of_interests);
+        
+		String activityTitle;
+		String activityUrl;
+		String classNameCamActivity = "com.pfc.pointofinterests.SampleCamActivity";
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        activityUrl 	= "";
+        activityTitle 	= "";
+        final Intent intent;
+		activityUrl 			= "IrAndGeo"; //this.getArchitectWorldUrls()[position]
+		activityTitle 			= (String) getResources().getText(R.string.ImageRecognitionAndGeo);
+		classNameCamActivity 	= "com.pfc.pointofinterests.PoiDatabase";
+		intent = new Intent( this, PoiDatabase.class );
+
+	
+	    	activityUrl += File.separator + "index.html";			
+			/* launch activity */
+			intent.putExtra(EXTRAS_KEY_ACTIVITY_TITLE_STRING,
+							activityTitle);
+			intent.putExtra(EXTRAS_KEY_ACTIVITY_ARCHITECT_WORLD_URL, // "samples" +
+							activityUrl);
+			/*
+			 * intent.putExtra(EXTRAS_KEY_ACTIVITY_ARCHITECT_WORLD_URL, "samples"
+					+ File.separator + this.getArchitectWorldUrls()[position]
+					+ File.separator + "index.html");
+			 */
+
+			/*  launch activity */
+			MainActivityPointOfInterests.this.startActivity(intent);
+        
+        
     }
 
 
