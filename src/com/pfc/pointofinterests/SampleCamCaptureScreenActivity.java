@@ -337,8 +337,15 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 			
    			for (int j = 0; j < PoiInformation.length;j++)
 			{
- 				poiInformation.put (PoiInformation[j][0], PoiInformation[j][1]);
+   				if (j == 2 || j==3)
+   				{
+   					double coordinate = CovertToDegrees(PoiInformation[j][1]);
+   					poiInformation.put (PoiInformation[j][0], "" + coordinate); // long
+   				}
+   				else
+   					poiInformation.put (PoiInformation[j][0], PoiInformation[j][1] + "");
 			}
+ 
  			pois.put(new JSONObject(poiInformation));
  		}
  		return pois;
@@ -391,6 +398,31 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	private static double[] getRandomLatLonNearby(final double lat, final double lon) {
 		return new double[] { lat + Math.random()/5-0.1 , lon + Math.random()/5-0.1};
 	}
+ 	private double CovertToDegrees (String Coodinate)
+ 	{
+ 		int iEndValueOfFieldPos 	= Coodinate.indexOf ("D", 0);
+		String  szStringDegrees 	= Coodinate.substring(0, iEndValueOfFieldPos);
+		
+		int iStartOffString = iEndValueOfFieldPos; 
+ 		iEndValueOfFieldPos 	= Coodinate.indexOf ("M", iEndValueOfFieldPos);
+		String  szStringMinutes 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
+
+		iStartOffString 			= iEndValueOfFieldPos; 
+ 		iEndValueOfFieldPos 		= Coodinate.indexOf ("S", iEndValueOfFieldPos);
+		String  szStringSeconds 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
+
+		// String Seconds to int seconds
+		double iSeconds = Double.parseDouble(szStringSeconds);
+		
+		double iMinutes = Double.parseDouble(szStringMinutes);
+		
+		double iDegrees = Double.parseDouble(szStringDegrees);
+		
+		iMinutes = iMinutes + (iSeconds/60);
+		iDegrees = iDegrees + (iMinutes/60);
+ 		return iDegrees;
+ 	}
+
  	/**
  	 * vInit must return the number of items to track
  	 * Inside you can do anything for example create a database and

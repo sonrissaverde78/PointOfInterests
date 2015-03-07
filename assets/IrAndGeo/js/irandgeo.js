@@ -86,7 +86,6 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
             "latitude": parseFloat(poiData[currentPlaceNr].lat),
             "longitude": parseFloat(poiData[currentPlaceNr].long),
             "altitude": parseFloat(poiData[currentPlaceNr].alt),
-            "Country": poiData[currentPlaceNr].Country,
             "City": poiData[currentPlaceNr].City,
             "ImagesToTrack": poiData[currentPlaceNr].ImagesToTrack,
             "ImagesToDraw": poiData[currentPlaceNr].ImagesToDraw,

@@ -8,7 +8,7 @@ function Marker(poiData) {
 		//	alert("el error" + err);
 		//}
 
-	alert ("Marker pp (): poiData.Country " + poiData.Country);
+	alert ("Marker pp (): poiData.name " + poiData.name);
 
 //alert("Marker (): poiData.latitude " + poiData.latitude);   
 //alert("Marker (): poiData.longitude " + poiData.longitude); 
@@ -77,7 +77,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     });
     
 	// create an AR.Label for the marker's Country 
-    this.titleLabel = new AR.Label(poiData.Country.trunc(10), 0.5, {
+    this.titleLabel = new AR.Label(poiData.City.trunc(10), 0.5, {
         zOrder: 2,
         offsetY: 0.55,
 		onClick: Marker.prototype.getOnClickTrigger(this),
