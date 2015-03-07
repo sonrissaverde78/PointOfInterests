@@ -411,6 +411,32 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  		iEndValueOfFieldPos 		= Coodinate.indexOf ("S", iEndValueOfFieldPos);
 		String  szStringSeconds 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
 
+		// check if is South or Sur, West or Oeste...
+		boolean bSouth = false;
+		boolean bWest = false;
+		iStartOffString 			= iEndValueOfFieldPos + 1; 
+ 		iEndValueOfFieldPos 		= Coodinate.indexOf ("S", iStartOffString);
+ 		if (iEndValueOfFieldPos == -1)
+ 		{
+ 			iEndValueOfFieldPos 		= Coodinate.indexOf ("O", iStartOffString);	
+ 			if (iEndValueOfFieldPos == -1)
+ 	 		{
+ 				iEndValueOfFieldPos 		= Coodinate.indexOf ("W", iStartOffString);
+ 	 			if (iEndValueOfFieldPos == -1)
+ 	 	 		{
+ 	 				bWest=false;
+ 	 	 		}
+ 	 			else
+ 	 				bWest=true;
+ 	 		}
+ 			else
+ 				bWest=true;
+ 		}
+ 		else
+ 			bSouth=true;
+		
+		
+		
 		// String Seconds to int seconds
 		double iSeconds = Double.parseDouble(szStringSeconds);
 		
@@ -420,6 +446,8 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 		
 		iMinutes = iMinutes + (iSeconds/60);
 		iDegrees = iDegrees + (iMinutes/60);
+		if (bSouth==true || bWest==true)
+			iDegrees = (-1) * iDegrees;
  		return iDegrees;
  	}
 

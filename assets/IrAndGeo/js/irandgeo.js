@@ -121,7 +121,7 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
         var objLon = lon + ((Math.random() - 0.5) / 1000);
         //IrAndGeo.TracerAlert("setupScene() -> Store Created");
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
-		dbPoi[i].longitude = (dbPoi[i].longitude * (-1));
+		
 		alert("dbPoi[i].name " 		+ dbPoi[i].name);
 		alert("dbPoi[i].latitude<" 	+ dbPoi[i].latitude + ">");   
 		alert("dbPoi[i].longitude<" + dbPoi[i].longitude + ">");       
