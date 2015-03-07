@@ -99,6 +99,10 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
 		//onLoaded: IrAndGeo.loadingStepDone,
 		onError: IrAndGeo.errorLoading
 		});
+		dbPoi[currentPlaceNr].markerDrawable_ImageToShow = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
+			//onLoaded: IrAndGeo.loadingStepDone,
+			onError: IrAndGeo.errorLoading
+		});
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
         //World.markerList.push(new Marker(singlePoi));
     }
@@ -439,10 +443,7 @@ IrAndGeo.res.buttonDeal = new AR.ImageResource("assets/YourShop_GetADeal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-IrAndGeo.res.ImageToShow = new AR.ImageResource("assets/ImagesToDraw/puerta-alcala-Madrid.jpg", {
-    //onLoaded: IrAndGeo.loadingStepDone,
-    onError: IrAndGeo.errorLoading
-});
+
 IrAndGeo.res.deal = new AR.ImageResource("assets/YourShop_Deal.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
