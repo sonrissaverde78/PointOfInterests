@@ -90,11 +90,11 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
             "ImagesToTrack": poiData[currentPlaceNr].ImagesToTrack,
             "ImagesToDraw": poiData[currentPlaceNr].ImagesToDraw,
             "ImagesButtons": poiData[currentPlaceNr].ImagesButtons,
-            //"description": poiData[currentPlaceNr].description
+            "MainImage": poiData[currentPlaceNr].MainImage,
         };
         dbPoi[currentPlaceNr] = singlePoi;
-		alert("poiData[currentPlaceNr].ImagesToDraw x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw);
-		dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
+		alert("poiData[currentPlaceNr].ImagesToDraw x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage);
+		dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage, {
 		//dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/YourShop_FindShops.png", {
 		//onLoaded: IrAndGeo.loadingStepDone,
 		onError: IrAndGeo.errorLoading
@@ -128,8 +128,8 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
 
 
 		alert("otra 2 vez dbPoi[i].name " + dbPoi[i].name);
-		//dbPoi[i].latitude = objLat;// parseFloat(objLat);
-        //dbPoi[i].longitude = objLon;// parseFloat(objLon);
+		dbPoi[i].latitude = objLat;// parseFloat(objLat);
+        dbPoi[i].longitude = objLon;// parseFloat(objLon);
         alert("dbPoi[i].latitude<" 	+ objLat + ">");   
 		alert("dbPoi[i].longitude<" + objLon+ ">");       
 		
