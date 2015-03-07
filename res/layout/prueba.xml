@@ -5,28 +5,16 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical" >
-    <EditText
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/to" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/subject" />
-<!-- 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:gravity="left"
-        android:hint="@string/message" />
- -->
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/SpeechToText"
-        android:onClick="onClickTextToSpeech" />
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:id="@+id/mygallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            />
+    </HorizontalScrollView>
 
 	<com.wikitude.architect.ArchitectView
 	    android:id="@+id/architectView"

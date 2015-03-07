@@ -395,6 +395,7 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		int iTotalPois = 0;
 		try
 		{
+			
 			input = assetManager.open("poisFile");
 			int size = input.available();
 			byte[] buffer = new byte [size];	

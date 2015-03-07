@@ -68,7 +68,10 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	public int getArchitectViewId() {
 		return R.id.architectView;
 	}
-	
+	@Override
+	public int getScrollViewForPhotos() {
+		return R.id.mygallery;
+	}	
 	@Override
 	public String getWikitudeSDKLicenseKey() {
 		return WikitudeSDKConstants.WIKITUDE_SDK_KEY;
