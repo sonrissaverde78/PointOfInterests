@@ -140,7 +140,7 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
 
     // create appearing animation
     IrAndGeo.showMarkersAnimation = new AR.AnimationGroup('parallel', IrAndGeo.markerAnimations);
-// IrAndGeo.TracerAlert("Before showStores()");
+	// IrAndGeo.TracerAlert("Before showStores()");
     IrAndGeo.showStores();
 };
 IrAndGeo.sendIdFromPoi = function (id)

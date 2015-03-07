@@ -18,6 +18,7 @@ permanecía allí mucho tiempo acabaría mis días, sucediéndose monóton
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
 #field#:ImagesToDraw#		=!= Esc-Cibeles-Madrid.jpg$# 
 #field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= Esc-Cibeles-Madrid.jpg$#
 ______________________
 #Sample#2
 #field#:id				=!= 2 $#
@@ -43,6 +44,7 @@ desaparecido. $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc$#
 #field#:ImagesToDraw#		=!= Esc-Neptuno-Madrid.jpg$#
 #field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= Esc-Neptuno-Madrid.jpg$#
 ______________________
 #Sample#3
 #field#:id				=!= 3 $#	
@@ -63,6 +65,7 @@ se me acercó, se me subió a las rodillas y se quedó dormido hecho un ovill
 #field#:ImagesToTrack#		=!= ShopAd.wtc$#
 #field#:ImagesToDraw#		=!= puerta-alcala-Madrid.jpg$#  
 #field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= puerta-alcala-Madrid.jpg$#
 ______________________
 #Sample#4
 #field#:id				=!= 4 $#
@@ -82,6 +85,7 @@ gato, que seguía durmiendo en la misma postura. Como su mirada nos recordaba
 a la del hermano de Kumiko, lo llamábamos Noboru Wataya, pero ése no era su 
 verdadero nombre. Pasaron seis años sin que Kumiko y yo le pusiéramos uno. $#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
-#field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg$#  
+#field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg$#
 #field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= Esc-Oso_y_Madrono_Madrid.jpg$#
 ______________________

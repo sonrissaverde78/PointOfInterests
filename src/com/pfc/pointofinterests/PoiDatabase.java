@@ -13,24 +13,25 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 {
 	// Dabase handler and parameters.
 	private 	SQLiteDatabase 			db;						// Database handle.
- 	private 	String 					gdbName 		= "dbPoi.24";	// Database Name.
+ 	private 	String 					gdbName 		= "dbPoi.27";	// Database Name.
  	private 	PoiSQLiteHelper 		dbhPoi;					// DB Object.
 	private		int 					giVersionDB 	= 1;		// Database version.
 	private		String					tableName		= "tablePoi";	// Database main table of pois.
 
-	final 	String [][] dbFields			= {
-				{"id", 					"INTEGER"},
-				{"name", 				"TEXT"},
-				{"lat", 				"TEXT"},
-				{"long", 				"TEXT"},	 
-				{"alt", 				"TEXT"},
-				{"Country", 			"TEXT"},
-				{"City", 				"TEXT"},
-				{"description", 		"TEXT"},
-				{"ImagesToTrack", 		"TEXT"},
-				{"ImagesToDraw", 		"TEXT"},
-				{"ImagesButtons", 		"TEXT"}
-			};
+	final 	String [][] dbFields = 	{
+									{"id", 					"INTEGER", "1"},
+									{"name", 				"TEXT", "1"},
+									{"lat", 				"TEXT", "1"},
+									{"long", 				"TEXT", "1"},
+									{"alt", 				"TEXT", "1"},
+									{"Country", 			"TEXT", "0"},
+									{"City", 				"TEXT", "1"},
+									{"description", 		"TEXT", "0"},
+									{"ImagesToTrack", 		"TEXT", "1"},
+									{"ImagesToDraw", 		"TEXT", "1"},
+									{"ImagesButtons", 		"TEXT", "1"},
+									{"MainImage", 			"TEXT", "1"},
+									};
 
 	final 	int 	[] dbPrimaryKyes = {0,1};
 
@@ -55,14 +56,14 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
  	String	ImagesToTrack	= "assets/ImagesToTrack/";
  	String	ImagesButtons	= "assets/buttons/";
  	
-	public void vCreateDatabase ()
+ 	private void vCreateDatabase ()
 	{
 		String TableStructure = SQLMakeCreateTable (tableName, dbFields, dbPrimaryKyes, iTotalFields);
 		//public String sqlCreate2 = "CREATE TABLE " + tableName  + " " + TableStructure;
 		dbhPoi = 
  	            new PoiSQLiteHelper(this, gdbName, null, giVersionDB, TableStructure); // RW Opened. 
 	}
-	public void vInitDataBase ()
+	private void vInitDataBase ()
 	{
     	String szTableName = "";
     	String szExc = "";
@@ -97,13 +98,13 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
     	} 
 	}
 	// iSetColsDatabase ().
-	public int iGetColsDatabase ()
+	private int iGetColsDatabase ()
 	{		
 		int iFields;
 		iFields = dbFields.length;
 		return iFields;
 	}
-	public int iGetRegDatabase ()
+	private int iGetRegDatabase ()
 	{
 		int count = 0;
 		String s;
@@ -126,40 +127,8 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 	    return count;
 
 	}
-	@Override
-	// vInitPlaces () create and open a database in write mode to 
-	// allow the insertion of registers.
- 	public int iInitPlaces ()
-	{
-		iTotalFields = iGetColsDatabase ();
- 		// iTotalFields = iGetTotalFieldsDB()
- 		vCreateDatabase ();
- 		iTotalPois = iGetRegDatabase();
-		// Database  is opened with W mode.
-        db = dbhPoi.getWritableDatabase();    
-        //If db was properly opened
-        if(db != null)
-        {
-        	iTotalPois = iInsertPoisFromFile();
-            // Database is closed.
-            db.close();
-        }
-        iGetRegDatabase();
-        vSelecAllSamplesDB ();
-        return iTotalPois;
-	}
-	
-	public String [][]  vGetAllDataFromDB ()
-	{
-		String [][] szPoisArray = new String [iTotalPois][iTotalFields];
-        for (int i = 0; i < iTotalFields; i++)
-        {
-        	szPoisArray [i] = readPoiInformation (i + 1);
-        }
-        return szPoisArray;
-	}
 
-	public String [][]  vSelecAllSamplesDB ()
+	private String [][]  vSelecAllSamplesDB ()
 	{
 		String Select = "SELECT *" + " FROM " +  tableName;
 		
@@ -211,16 +180,6 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		return PoiInf;	
 	}
 	
-	public String [] szPoiInfo		(int IdPoi)
- 	{
-		return readPoiInformation(IdPoi);
- 	}
-	
-	@Override
-	public int iSetTotalPoiFields()
-	{
-		return iTotalFields;
-	}
 	private int iGetTotalFieldsDB ()
 	{
 		Cursor c = null;
@@ -380,14 +339,14 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		return szSQLMakeString;
 
 	}
-	private String[] readPoiInformation (int id)
+	private String[][] readPoiInformation (int id)
 	{
 		
 		String[] cols = getCols();
 		String szFieldsDB = SQLMakeString(cols, iTotalFields, false, false);
 		String Select = "SELECT " + szFieldsDB + " FROM " +  tableName + " WHERE " + dbFields[0][0] + " = " + id;
 		
-		String[] PoiInf = new String[iTotalFields];
+		String[][] PoiInf = new String[iTotalFields][2];
 		Cursor c = null;
 		String s = "";
 		try
@@ -406,13 +365,13 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 			int iField = 0;
 			if (c.moveToFirst()) 
 			{
-			     //Recorremos el cursor hasta que no haya más registros
+			     //Until the end of samples
 				try
 				{
 				     do 
 				     {
-				          // String codigo= c.getString(0);
-				    	 PoiInf[iField] = c.getString(iField);
+				    	 PoiInf[iField][0] 	= cols[iField];
+				    	 PoiInf[iField][1] 	= c.getString(iField);
 				    	 iField++;
 				     } while(iField < iTotalFields);
 				}
@@ -427,29 +386,6 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		db.close();
 		return PoiInf;	
 	}
-
-	public HashMap<String, String> JSonPoiInformation (int i)
-	{ 		
- 		final HashMap<String, String> poiInformation = new HashMap<String, String>();
-			
-		//= getInfoPlace (i);
-		String pp[] = readPoiInformation (i);
-		int iField = 4;
-		poiInformation.put(dbFields[0][0], pp[iField]);
-		poiInformation.put(dbFields[1][0], "POI#" + pp[iField]);
-		poiInformation.put(dbFields[5][0], "This is the description of POI#" + pp[iField]);
-		//double[] poiLocationLatLon = getRandomLatLonNearby(lastKnownLocaton.getLatitude(), lastKnownLocaton.getLongitude());
-		// poiInformation.put(fieldLat, String.valueOf(poiLocationLatLon[0]));
-		poiInformation.put(dbFields[6][0], dbFields[4][0] + pp[iField]);
-		// poiInformation.put(fieldLong, String.valueOf(poiLocationLatLon[1]));
-		poiInformation.put(dbFields[2][0], "fieldLong"  + pp[iField]);
-		final float UNKNOWN_ALTITUDE = -32768f;  // equals "AR.CONST.UNKNOWN_ALTITUDE" in JavaScript (compare AR.GeoLocation specification)
-		// Use "AR.CONST.UNKNOWN_ALTITUDE" to tell ARchitect that altitude of places should be on user level. Be aware to handle altitude properly in locationManager in case you use valid POI altitude value (e.g. pass altitude only if GPS accuracy is <7m).
-		poiInformation.put(dbFields[4][0], String.valueOf(UNKNOWN_ALTITUDE) + pp[iField]);
- 		
-		return poiInformation;
-	}
-
 	
 	private int iInsertPoisFromFile ()
 	{
@@ -488,7 +424,7 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		return i - 1;
 	}
 
-	public int AddSampleToDBFromFile (String szFile, int iRegister)
+	private int AddSampleToDBFromFile (String szFile, int iRegister)
 	{
 		int iSamplePos 			= szFile.indexOf("#Sample#" + iRegister );
 		if (iSamplePos >= 0)
@@ -504,7 +440,7 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		return iSamplePos;
 
 	}
-	public String readFieldFromFileCampo (String szSample, int iSample, String tockenIdfield)
+	private String readFieldFromFileCampo (String szSample, int iSample, String tockenIdfield)
 	{
 		int iFieldPos 				= szSample.indexOf (tockenField + 		tockenIdfield, iSample);
 		int iStartValueOfFieldPos 	= szSample.indexOf (tockenStartfield, 	iFieldPos);
@@ -514,7 +450,71 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		String  szStringValue = szSample.substring(iStartValueOfFieldPos, iEndValueOfFieldPos);
 		return szStringValue;
 	}
+	///////////////////////////////////////////////////////////////////////////
+	// SampleCamCaptureScreenActivity.java abstract functions.
+	///////////////////////////////////////////////////////////////////////////
 	@Override
+	// vInitPlaces () create and open a database in write mode to 
+	// allow the insertion of registers.
+ 	public int iInitPlaces ()
+	{
+		iTotalFields = iGetColsDatabase ();
+ 		// iTotalFields = iGetTotalFieldsDB()
+ 		vCreateDatabase ();
+ 		iTotalPois = iGetRegDatabase();
+		// Database  is opened with W mode.
+        db = dbhPoi.getWritableDatabase();    
+        //If db was properly opened
+        if(db != null)
+        {
+        	iTotalPois = iInsertPoisFromFile();
+            // Database is closed.
+            db.close();
+        }
+        iGetRegDatabase();
+        vSelecAllSamplesDB ();
+        return iTotalPois;
+	}
+	public String [] szPoiInfo		(int IdPoi)
+ 	{
+		String [] PoiInfo = new String [iTotalFields];
+		String [] [] TotalPoiInfo = new String [iTotalFields][2];
+		TotalPoiInfo = readPoiInformation (IdPoi);
+		for (int i=0; i< iTotalFields;i++)
+		{
+			PoiInfo[i] = TotalPoiInfo[i][1];
+		}
+		return PoiInfo;
+ 	}
+	public String [][] szPoiInfoInGeoAR		(int IdPoi)
+ 	{
+		
+		String [][] POI_Info = readPoiInformation(IdPoi);
+		int iTotalFieldsInGeoAR = 0;
+		for (int i=0; i < iTotalFields;i++)
+		{
+			if (dbFields[i][2] == "1")
+			{
+				iTotalFieldsInGeoAR++;
+			}
+		}
+		String [][] POI_GeoAr = new String [iTotalFieldsInGeoAR][2];
+		int j=0;
+		for (int i=0; i< iTotalFields;i++)
+		{
+			if (dbFields[i][2] == "1")
+			{
+				POI_GeoAr [j] = POI_Info[i];
+				j++;
+			}
+		}
+		return POI_GeoAr;
+ 	}
+	
+	public int iSetTotalPoiFields()
+	{
+		return iTotalFields;
+	}
 	public String[] szPoiNameFields()
 	{
 		// TODO Auto-generated method stub

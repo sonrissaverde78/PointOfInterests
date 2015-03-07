@@ -183,11 +183,6 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 		// you need to adjust this in case your POIs are more than 50km away from user here while loading or in JS code (compare 'AR.context.scene.cullingDistance')
 		return ArchitectViewHolderInterface.CULLING_DISTANCE_DEFAULT_METERS;
 	}
-	
-	public void onClickTextToSpeech()
-	{
-		vReadText ("pp");
-	}
 
 	@Override
 	public void onInit(int status)
@@ -230,14 +225,14 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1;
   	private void startVoiceRecognitionActivity() 
   	{
-	  // Definici�n del intent para realizar en an�lisis del mensaje
+	  // Intent definition. After it is used for message analysis.
 	  Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-	  // Indicamos el modelo de lenguaje para el intent
+	  // Lenguage is Set.
 	  intent.putExtra(	RecognizerIntent.EXTRA_LANGUAGE_MODEL,
 						RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-	  // Definimos el mensaje que aparecer� 
+	  // Message/title for the dialog. 
 	  intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Relice Consulta ...");
-	  // Lanzamos la actividad esperando resultados
+	  // Activity is launched.
 	  startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
   	}
 
@@ -335,33 +330,15 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	 	iTotalPoiFields	= iSetTotalPoiFields ();
  	 	szPoiFieldsName = szPoiNameFields();
  		final JSONArray pois = new JSONArray();
- 		String [] PoiInformation = new String [iTotalPoiFields];
- 		for (int i=1;i <= iTotalPois; i++) 
+ 		String [][] PoiInformation = new String [iTotalPoiFields][iTotalPoiFields];
+ 		for (int i=1;i <= iTotalPois; i++)
  		{
- 			PoiInformation = szPoiInfo(i);
- /*			
-   			for (int j = 0; j < iTotalPoiFields;j++)
+ 			PoiInformation = szPoiInfoInGeoAR(i);
+			
+   			for (int j = 0; j < PoiInformation.length;j++)
 			{
- 				poiInformation.put (szPoiFieldsName[j], PoiInformation[j]);
+ 				poiInformation.put (PoiInformation[j][0], PoiInformation[j][1]);
 			}
-*/			
- 			poiInformation.put (szPoiFieldsName[0], PoiInformation[0]); // id
- 			poiInformation.put (szPoiFieldsName[1], PoiInformation[1]); // name
- 			
- 			double latitude = CovertToDegrees(PoiInformation[2]);
- 			poiInformation.put (szPoiFieldsName[2], latitude + ""); // lat
- 			
- 			double longitude = CovertToDegrees(PoiInformation[3]);
- 			poiInformation.put (szPoiFieldsName[3], "" + longitude); // long
- 			
- 			poiInformation.put (szPoiFieldsName[4], PoiInformation[4]); // alt
- 			
- 			poiInformation.put (szPoiFieldsName[5], PoiInformation[5]); // Country
- 			poiInformation.put (szPoiFieldsName[6], PoiInformation[6]); // City
- 			// poiInformation.put (szPoiFieldsName[7], PoiInformation[7]); // Description
- 			poiInformation.put (szPoiFieldsName[8], PoiInformation[8]); // ImagesToTrack
- 			poiInformation.put (szPoiFieldsName[9], PoiInformation[9]); // ImagesToDraw
- 			poiInformation.put (szPoiFieldsName[10],PoiInformation[10]); // ImagesButtons
  			pois.put(new JSONObject(poiInformation));
  		}
  		return pois;
@@ -423,36 +400,14 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	 * @return lat/lon values in given position's vicinity
  	 */
  	public abstract int 		iInitPlaces 			();
- 	public abstract String[] 	szPoiInfo				(int IdPoi);
+ 	public abstract String [] 	szPoiInfo				(int IdPoi);
+ 	public abstract String [][]	szPoiInfoInGeoAR		(int IdPoi);
  	public abstract int			iSetTotalPoiFields		();
- 	public abstract String[]	szPoiNameFields			();
+ 	public abstract String []	szPoiNameFields			();
 
  	public abstract String		szPathForButtons		();
  	public abstract String		szPathForImagesToTrack	();
  	public abstract String		szPathForImagesToDraw	();
- 	public double CovertToDegrees (String Coodinate)
- 	{
- 		int iEndValueOfFieldPos 	= Coodinate.indexOf ("D", 0);
-		String  szStringDegrees 	= Coodinate.substring(0, iEndValueOfFieldPos);
-		
-		int iStartOffString = iEndValueOfFieldPos; 
- 		iEndValueOfFieldPos 	= Coodinate.indexOf ("M", iEndValueOfFieldPos);
-		String  szStringMinutes 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
-
-		iStartOffString 			= iEndValueOfFieldPos; 
- 		iEndValueOfFieldPos 		= Coodinate.indexOf ("S", iEndValueOfFieldPos);
-		String  szStringSeconds 	= Coodinate.substring(iStartOffString + 1, iEndValueOfFieldPos);
-
-		// String Seconds to int seconds
-		double iSeconds = Double.parseDouble(szStringSeconds);
-		
-		double iMinutes = Double.parseDouble(szStringMinutes);
-		
-		double iDegrees = Double.parseDouble(szStringDegrees);
-		
-		iMinutes = iMinutes + (iSeconds/60);
-		iDegrees = iDegrees + (iMinutes/60);
- 		return iDegrees;
- 	}
+ 	
 }
 
