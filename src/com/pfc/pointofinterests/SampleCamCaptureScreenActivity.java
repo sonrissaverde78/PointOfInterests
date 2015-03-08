@@ -64,7 +64,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 			View insertPhoto = insertPhoto(i);
 	        myGallery.addView(insertPhoto);
 		}	
-		myGallery.removeAllViews();
+		
 	}
 	
 	@Override
