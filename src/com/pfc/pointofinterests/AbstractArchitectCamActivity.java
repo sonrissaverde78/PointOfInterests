@@ -92,155 +92,29 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		super.onCreate( savedInstanceState );
 		/* set samples content view */
 		this.setContentView	( this.getContentViewId() );
-		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
+		initGalery ();
 		//this.setContentView
 		
 		AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
 		
-		for (int i=0; i< 8;i++){
-	         myGallery.addView(insertPhoto(i));
-		}
 		onWikitudeCreate ( savedInstanceState );
 		onSpeechCreate	( savedInstanceState);
 	}
-   public Bitmap decodeSampledBitmapFromUri(String path, int reqWidth, int reqHeight) {
-	     Bitmap bm = null;
-	     
-	     // First decode with inJustDecodeBounds=true to check dimensions
-	     final BitmapFactory.Options options = new BitmapFactory.Options();
-	     options.inJustDecodeBounds = true;
-	     
-	     ////////////////////////////////////////////////////////////////////////
-	     ////////////////////////////////////////////////////////////////////////
-	     Rect outPadding = null;
-	     // outPadding
-	     //  BitmapFactory.decodeFile(path, options);
-	     
-	     // Calculate inSampleSize
-	    AssetManager assetManager = getAssets();
-	    
-	    InputStream istr = null;
-	    Bitmap bitmap = null;
-	    try {
-	        istr = assetManager.open(path);
-	        //bitmap = BitmapFactory.decodeStream(istr);
-	        bitmap = BitmapFactory.decodeStream(istr, outPadding, options);
-	    } catch (IOException e) {
-	        // handle exception
-	    }
-	    ////////////////////////////////////////////////////////////////////////
-	    ////////////////////////////////////////////////////////////////////////
-	     options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-	     
-	     // Decode bitmap with inSampleSize set
-	     options.inJustDecodeBounds = false;
-		    try {
-		    	istr.close();
-		        istr = assetManager.open(path);
-		        //bitmap = BitmapFactory.decodeStream(istr);
-		        bitmap = BitmapFactory.decodeStream(istr, outPadding, options);
-		    } catch (IOException e) {
-		        // handle exception
-		    }
-	     //bm = BitmapFactory.decodeFile(path, options); 
-	     bm = bitmap;
-	     return bm;  
-	
-   }
-   public static Bitmap getBitmapFromAsset(Context context, String filePath) {
-	    AssetManager assetManager = context.getAssets();
-
-	    InputStream istr;
-	    Bitmap bitmap = null;
-	    try {
-	        istr = assetManager.open(filePath);
-	        bitmap = BitmapFactory.decodeStream(istr);
-	    } catch (IOException e) {
-	        // handle exception
-	    }
-
-	    return bitmap;
+	private void initGalery ()
+	{
+		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
+		for (int i=0; i < TotalInitialImages();i++)
+		{
+			View insertPhoto = insertPhoto(i);
+	        myGallery.addView(insertPhoto);
+		}	
+		myGallery.removeAllViews();
 	}
-   View insertPhoto(int iPoi){
-   	
-	   String path = "IrAndGeo/assets/ImagesToDraw/";
-	   switch(iPoi)
-	   {
-	   		case 0:
-	   			path = path + "Esc-Cibeles-Madrid.jpg";
-	   			break;
-	   		case 1:
-	   			path = path + "Esc-Neptuno-Madrid.jpg";
-	   			break;
-	   		case 2:
-	   			path = path + "Esc-Oso_y_Madrono_Madrid.jpg";
-	   			break;
-	   		case 3:
-	   			path = path + "puerta-alcala-Madrid.jpg";
-	   			break;
-	   		case 4:
-	   			path = path + "ShopAdSmall.png";
-	   			break;
-	   		case 5:
-	   			path = path + "YourShop_color.png";
-	   			break;
-	   		case 6:
-	   			path = path + "YourShop_Deal.png";
-	   			break;
-	   		case 7:
-	   			path = path + "YourShop_FindShops.png";
-	   			break;
-	   }
-	   
-       Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
-       
-       LinearLayout layout = new LinearLayout(getApplicationContext());
-       layout.setLayoutParams(new LayoutParams(250, 250));
-       layout.setGravity(Gravity.CENTER);
-       
-       ImageView imageView = new ImageView(getApplicationContext());
-       imageView.setLayoutParams(new LayoutParams(220, 220));
-       imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-       imageView.setImageBitmap(bm);
-       
-       layout.addView(imageView);
-       return layout;
-      }
-    View insertPhoto(String path){
-    	
-    	
-        Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
-        
-        LinearLayout layout = new LinearLayout(getApplicationContext());
-        layout.setLayoutParams(new LayoutParams(250, 250));
-        layout.setGravity(Gravity.CENTER);
-        
-        ImageView imageView = new ImageView(getApplicationContext());
-        imageView.setLayoutParams(new LayoutParams(220, 220));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageBitmap(bm);
-        
-        layout.addView(imageView);
-        return layout;
-       }
-    public int calculateInSampleSize(
-    	      
-    	     BitmapFactory.Options options, int reqWidth, int reqHeight) {
-    	     // Raw height and width of image
-    	     final int height = options.outHeight;
-    	     final int width = options.outWidth;
-    	     int inSampleSize = 1;
-    	        
-    	     if (height > reqHeight || width > reqWidth) {
-    	      if (width > height) {
-    	       inSampleSize = Math.round((float)height / (float)reqHeight);   
-    	      } else {
-    	       inSampleSize = Math.round((float)width / (float)reqWidth);   
-    	      }   
-    	     }
-    	     
-    	     return inSampleSize;   
-    	    }
+	
+	public abstract int TotalInitialImages();
+	public abstract View  insertPhoto (int i);
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
