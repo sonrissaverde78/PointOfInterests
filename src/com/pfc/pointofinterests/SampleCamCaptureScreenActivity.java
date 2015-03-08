@@ -55,6 +55,17 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	int	iTotalPoiFields	= 0;
  	String [] szPoiFieldsName;
 	
+	LinearLayout myGallery;
+	public void initLayout ()
+	{
+		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
+		for (int i=0; i < TotalInitialImages();i++)
+		{
+			View insertPhoto = insertPhoto(i);
+	        myGallery.addView(insertPhoto);
+		}	
+		myGallery.removeAllViews();
+	}
 	
 	@Override
 	public String getARchitectWorldPath() {
@@ -530,7 +541,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	    return bitmap;
 	}
   String [] list;
-  @Override
+  
   public View insertPhoto(int iPoi){
   	
 	   String path = "IrAndGeo/assets/ImagesToDraw/";
@@ -570,7 +581,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
    	     return inSampleSize;   
    	    }
    
-   @Override
+   
    public int TotalInitialImages()
    {
 	   String path = "IrAndGeo/assets/ImagesToDraw"; 

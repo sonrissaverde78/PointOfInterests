@@ -84,7 +84,7 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 	protected JSONArray 					poiData;
 	protected JSONArray 					InfoForJavaScript;
 	
-	LinearLayout myGallery;
+
 	/** Called when the activity is first created. */
 	@SuppressLint("NewApi")
 	@Override
@@ -92,7 +92,7 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		super.onCreate( savedInstanceState );
 		/* set samples content view */
 		this.setContentView	( this.getContentViewId() );
-		initGalery ();
+		initLayout ();
 		//this.setContentView
 		
 		AbstractArchitectCamActivity.this.poiData = this.getPoiInformation();
@@ -100,20 +100,8 @@ implements ArchitectViewHolderInterface, TextToSpeech.OnInitListener
 		onWikitudeCreate ( savedInstanceState );
 		onSpeechCreate	( savedInstanceState);
 	}
-	private void initGalery ()
-	{
-		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
-		for (int i=0; i < TotalInitialImages();i++)
-		{
-			View insertPhoto = insertPhoto(i);
-	        myGallery.addView(insertPhoto);
-		}	
-		myGallery.removeAllViews();
-	}
-	
-	public abstract int TotalInitialImages();
-	public abstract View  insertPhoto (int i);
 
+	public abstract void 	initLayout ();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
