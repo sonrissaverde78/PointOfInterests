@@ -59,7 +59,8 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	public void initLayout ()
 	{
 		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
-		for (int i=0; i < TotalInitialImages();i++)
+		int iTotalImg = TotalInitialImages();
+		for (int i=0; i < iTotalImg;i++)
 		{
 			View insertPhoto = insertPhoto(i);
 	        myGallery.addView(insertPhoto);
@@ -544,7 +545,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
   
   public View insertPhoto(int iPoi){
   	
-	   String path = "IrAndGeo/assets/ImagesToDraw/";
+	   String path = "ImagesOfPois/";
 	   path = path + list[iPoi];
 	   
       Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
@@ -584,7 +585,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
    
    public int TotalInitialImages()
    {
-	   String path = "IrAndGeo/assets/ImagesToDraw"; 
+	   String path = "ImagesOfPois"; 
 
 	    try {
 	        list = getAssets().list(path);
