@@ -69,7 +69,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 	//*/
 	////onClick: Marker.prototype.getOnClickTrigger(this)
     //});
-	this.ImageToShow = new AR.ImageDrawable(poiData.markerDrawable_ImageToShow, 3.0, {
+	this.ImageToShow = new AR.ImageDrawable(IrAndGeo.markerDrawable_ImageToShow, 3.0, {
 	zOrder: 3,
 	opacity: 0.0,
 	offsetY: 2.55,

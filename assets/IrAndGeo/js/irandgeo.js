@@ -88,21 +88,18 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
             "altitude": parseFloat(poiData[currentPlaceNr].alt),
             "City": poiData[currentPlaceNr].City,
             "ImagesToTrack": poiData[currentPlaceNr].ImagesToTrack,
-            "ImagesToDraw": poiData[currentPlaceNr].ImagesToDraw,
+            //"ImagesToDraw": poiData[currentPlaceNr].ImagesToDraw,
             "ImagesButtons": poiData[currentPlaceNr].ImagesButtons,
             "MainImage": poiData[currentPlaceNr].MainImage,
         };
         dbPoi[currentPlaceNr] = singlePoi;
-		alert("poiData[currentPlaceNr].ImagesToDraw x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage);
+		IrAndGeo.TracerAlert("poiData[currentPlaceNr].MainImage x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage);
 		dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage, {
 		//dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/YourShop_FindShops.png", {
 		//onLoaded: IrAndGeo.loadingStepDone,
 		onError: IrAndGeo.errorLoading
 		});
-		dbPoi[currentPlaceNr].markerDrawable_ImageToShow = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
-			//onLoaded: IrAndGeo.loadingStepDone,
-			onError: IrAndGeo.errorLoading
-		});
+
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
         //World.markerList.push(new Marker(singlePoi));
     }
@@ -126,16 +123,16 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
         //IrAndGeo.TracerAlert("setupScene() -> Store Created");
         // IrAndGeo.createMarker(objLat, objLon, IrAndGeo.markerNames[i], i);
 		
-		alert("dbPoi[i].name " 		+ dbPoi[i].name);
-		alert("dbPoi[i].latitude<" 	+ dbPoi[i].latitude + ">");   
-		alert("dbPoi[i].longitude<" + dbPoi[i].longitude + ">");       
+		IrAndGeo.TracerAlert("dbPoi[i].name " 		+ dbPoi[i].name);
+		IrAndGeo.TracerAlert("dbPoi[i].latitude<" 	+ dbPoi[i].latitude + ">");   
+		IrAndGeo.TracerAlert("dbPoi[i].longitude<" + dbPoi[i].longitude + ">");       
 
 
-		alert("otra 2 vez dbPoi[i].name " + dbPoi[i].name);
+		IrAndGeo.TracerAlert("otra 2 vez dbPoi[i].name " + dbPoi[i].name);
 		dbPoi[i].latitude = objLat;// parseFloat(objLat);
         dbPoi[i].longitude = objLon;// parseFloat(objLon);
-        alert("dbPoi[i].latitude<" 	+ objLat + ">");   
-		alert("dbPoi[i].longitude<" + objLon+ ">");       
+        IrAndGeo.TracerAlert("dbPoi[i].latitude<" 	+ objLat + ">");   
+		IrAndGeo.TracerAlert("dbPoi[i].longitude<" + objLon+ ">");       
 		
 
 		IrAndGeo.markerList.push(new Marker(dbPoi[i]));
@@ -412,6 +409,11 @@ IrAndGeo.TracerAlert = function (szString)
 IrAndGeo.markerDrawable_speaker = new AR.ImageResource("assets/buttons/speaker-48.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
+});
+//dbPoi[currentPlaceNr].markerDrawable_ImageToShow = new AR.ImageResource("assets/marker_idle.png", {
+IrAndGeo.markerDrawable_ImageToShow = new AR.ImageResource("assets/marker_idle.png", {
+	//onLoaded: IrAndGeo.loadingStepDone,
+	onError: IrAndGeo.errorLoading
 });
 IrAndGeo.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png", {
     //onLoaded: IrAndGeo.loadingStepDone,

@@ -28,7 +28,7 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 									{"City", 				"TEXT", "1"},
 									{"description", 		"TEXT", "0"},
 									{"ImagesToTrack", 		"TEXT", "1"},
-									{"ImagesToDraw", 		"TEXT", "1"},
+									{"ImagesToDraw", 		"TEXT", "0"},
 									{"ImagesButtons", 		"TEXT", "1"},
 									{"MainImage", 			"TEXT", "1"},
 									};
