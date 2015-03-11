@@ -77,33 +77,16 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	{
 		if (iTotalImages <= 2)
 			return;
-		if (iTotalImages > 2)
-			myGallery.removeViews(0, iTotalImages - 2);
+		myGallery.removeViews(0, iTotalImages - 1);
 		String ImageName[] = getListOfImages(PoiId);
-		iTotalImages = 2 + ImageName.length;
-		for (int i=0; i < ImageName.length;i++)
+		iTotalImages = ImageName.length;
+		for (int i=0; i < iTotalImages; i++)
 		{
 			ImagesScrollview[i] = insertPhoto2(ImageName[i]);
 	        myGallery.addView(ImagesScrollview[i]);
 		}
 		
-		//ImagesScrollview = vLoadImages( PoiId);
-		//myGallery.removeAllViews();
-		// int lengthOld = ImagesScrollview.length;
-/*		int lengthNew = ImagesScrollview.length;
-		int i=0;
-		if (iTotalImages > 2)
-			myGallery.removeViews(0, iTotalImages - 2);
-
-		for (i=0; i < 2; i++)
-		{
-			// ImagesScrollview [i] = Images[i];
-	        myGallery.addView(ImagesScrollview[i]);
-		}
-		iTotalImages = lengthNew + 2;
-		// ImagesScrollview = Images;
-		iTotalImages = 4;
-		*/
+		myGallery.removeViewAt(0);
 	}
 	
 

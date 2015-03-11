@@ -698,13 +698,6 @@ public String [] getListOfImages(int iPoi)
 {
 	String szImagesNameOfPoi 	= SelectImagesFromPoi(iPoi);
 	String arrayImagesNameOfPoi[] = szImagesNameOfPoi.split(",");
-	// String arrayImagesNameOfPoi[] = new String [6]; //szImagesNameOfPoi.split(",");
-	// arrayImagesNameOfPoi[0] = "Cibeles-01.jpg";
-	// arrayImagesNameOfPoi[1] = "Cibeles-02.jpg";
-	// arrayImagesNameOfPoi[2] = "Cibeles-03.jpg";
-	// arrayImagesNameOfPoi[3] = "Cibeles-04.jpg";
-	// arrayImagesNameOfPoi[4] = "Cibeles-05.jpg";
-	// arrayImagesNameOfPoi[5] = "Cibeles-06.jpg";
 	return arrayImagesNameOfPoi;
 }
 @Override
