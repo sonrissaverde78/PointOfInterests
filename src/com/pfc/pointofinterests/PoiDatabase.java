@@ -3,17 +3,27 @@ package com.pfc.pointofinterests;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.pfc.pointofinterests.PoiSQLiteHelper;
 public class PoiDatabase extends SampleCamCaptureScreenActivity 
 {
 	// Dabase handler and parameters.
 	private 	SQLiteDatabase 			db;						// Database handle.
- 	private 	String 					gdbName 		= "dbPoi.27";	// Database Name.
+ 	private 	String 					gdbName 		= "dbPoi.28";	// Database Name.
  	private 	PoiSQLiteHelper 		dbhPoi;					// DB Object.
 	private		int 					giVersionDB 	= 1;		// Database version.
 	private		String					tableName		= "tablePoi";	// Database main table of pois.
@@ -339,6 +349,47 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 		return szSQLMakeString;
 
 	}
+	private String SelectImagesFromPoi(int PoiId)
+	{
+		
+		String Select = "SELECT " + "ImagesToDraw" + " FROM " +  tableName + " WHERE " + dbFields[0][0] + " = " + PoiId;
+		
+		String PoiInfImagesToDraw;
+		Cursor c = null;
+		String s = "";
+		try
+		{
+			db = dbhPoi.getReadableDatabase();
+			// sql select is sent
+			c = db.rawQuery( Select, null);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			s = e.toString();
+		}
+		PoiInfImagesToDraw = "";
+		if (c != null)
+		{
+			int iField = 0;
+			if (c.moveToFirst()) 
+			{
+			     //Until the end of samples
+				try
+				{
+					PoiInfImagesToDraw 	= c.getString(0);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+					s = e.toString();	
+				}
+			}
+		}
+		
+		db.close();
+		return PoiInfImagesToDraw;			
+	}
 	private String[][] readPoiInformation (int id)
 	{
 		
@@ -536,5 +587,158 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
  	{
  		return ImagesToTrack;
  	}
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////	
+ 	///////////////////////////////////////////////////////////////////////////
 
+
+    public Bitmap decodeSampledBitmapFromUri(String path, int reqWidth, int reqHeight) {
+	     Bitmap bm = null;
+	     
+	     // First decode with inJustDecodeBounds=true to check dimensions
+	     final BitmapFactory.Options options = new BitmapFactory.Options();
+	     options.inJustDecodeBounds = true;
+	     
+	     ////////////////////////////////////////////////////////////////////////
+	     ////////////////////////////////////////////////////////////////////////
+	     Rect outPadding = null;
+	     // outPadding
+	     //  BitmapFactory.decodeFile(path, options);
+	     
+	     // Calculate inSampleSize
+	    AssetManager assetManager = getAssets();
+	    
+	    InputStream istr = null;
+	    Bitmap bitmap = null;
+	    try {
+	        istr = assetManager.open(path);
+	        //bitmap = BitmapFactory.decodeStream(istr);
+	        bitmap = BitmapFactory.decodeStream(istr, outPadding, options);
+	    } catch (IOException e) {
+	        // handle exception
+	    }
+	    ////////////////////////////////////////////////////////////////////////
+	    ////////////////////////////////////////////////////////////////////////
+	     options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+	     
+	     // Decode bitmap with inSampleSize set
+	     options.inJustDecodeBounds = false;
+		    try {
+		    	istr.close();
+		        istr = assetManager.open(path);
+		        //bitmap = BitmapFactory.decodeStream(istr);
+		        bitmap = BitmapFactory.decodeStream(istr, outPadding, options);
+		    } catch (IOException e) {
+		        // handle exception
+		    }
+	     //bm = BitmapFactory.decodeFile(path, options); 
+	     bm = bitmap;
+	     return bm;  
+	
+  }
+  public static Bitmap getBitmapFromAsset(Context context, String filePath) {
+    AssetManager assetManager = context.getAssets();
+
+    InputStream istr;
+    Bitmap bitmap = null;
+    try {
+        istr = assetManager.open(filePath);
+        bitmap = BitmapFactory.decodeStream(istr);
+    } catch (IOException e) 
+    {
+        // handle exception
+    }
+
+    return bitmap;
+}
+  String [] list;
+  
+public View insertPhoto(int iPoi)
+{
+	String path = "ImagesOfPois/";
+	path = path + list[iPoi];
+	
+	Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
+	  
+	LinearLayout layout = new LinearLayout(getApplicationContext());
+	layout.setLayoutParams(new LayoutParams(250, 250));
+	layout.setGravity(Gravity.CENTER);
+	  
+	ImageView imageView = new ImageView(getApplicationContext());
+	imageView.setLayoutParams(new LayoutParams(220, 220));
+	imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	imageView.setImageBitmap(bm);
+	  
+	layout.addView(imageView);
+	return layout;
+}
+@Override
+public View[] vLoadImages (int PoiId)
+{
+	String szImagesNameOfPoi 	= SelectImagesFromPoi(PoiId);
+	View viewImagesToDraw[] 	= new View [iTotalImages];
+	String arrayImagesNameOfPoi[] = szImagesNameOfPoi.split(",");
+	for (int i = 0; i < arrayImagesNameOfPoi.length; i++)
+	{
+		viewImagesToDraw [i] = insertPhoto(arrayImagesNameOfPoi[i]);
+	}
+	return viewImagesToDraw;
+}
+public View insertPhoto(String szPoi)
+{
+	
+	String path = "ImagesOfPois/";
+	path = path + szPoi;
+
+	Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
+	  
+	LinearLayout layout = new LinearLayout(getApplicationContext());
+	layout.setLayoutParams(new LayoutParams(250, 250));
+	layout.setGravity(Gravity.CENTER);
+	  
+	ImageView imageView = new ImageView(getApplicationContext());
+	imageView.setLayoutParams(new LayoutParams(220, 220));
+	imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	imageView.setImageBitmap(bm);
+	  
+	layout.addView(imageView);
+	return layout;
+}
+ 
+   public int calculateInSampleSize(
+   	      
+   	     BitmapFactory.Options options, int reqWidth, int reqHeight) {
+   	     // Raw height and width of image
+   	     final int height = options.outHeight;
+   	     final int width = options.outWidth;
+   	     int inSampleSize = 1;
+   	        
+   	     if (height > reqHeight || width > reqWidth) {
+   	      if (width > height) {
+   	       inSampleSize = Math.round((float)height / (float)reqHeight);   
+   	      } else {
+   	       inSampleSize = Math.round((float)width / (float)reqWidth);   
+   	      }   
+   	     }
+   	     
+   	     return inSampleSize;   
+   	    }
+   
+   
+   public int TotalInitialImages()
+   {
+	   String path = "ImagesOfPois"; 
+
+	    try {
+	        list = getAssets().list(path);
+	       return list.length;
+	    } catch (IOException e) {
+	        return 0;
+	    }
+   }
+
+
+   
+   //////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////
 }

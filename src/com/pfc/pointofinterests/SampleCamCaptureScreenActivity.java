@@ -54,19 +54,58 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 	int iTotalPois 		= 0;
  	int	iTotalPoiFields	= 0;
  	String [] szPoiFieldsName;
-	
-	LinearLayout myGallery;
+ 	
+ 	public abstract View insertPhoto(int iPoi);
+ 	public abstract int TotalInitialImages();
 	public void initLayout ()
 	{
 		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
-		int iTotalImg = TotalInitialImages();
-		for (int i=0; i < iTotalImg;i++)
+		iTotalImages = TotalInitialImages();
+		ImagesScrollview = new View[iTotalImages];
+		for (int i=0; i < iTotalImages;i++)
 		{
-			View insertPhoto = insertPhoto(i);
-	        myGallery.addView(insertPhoto);
-		}	
-		
+			ImagesScrollview[i] = insertPhoto(i);
+	        myGallery.addView(ImagesScrollview[i]);
+		}
 	}
+	// View [] Images;
+	int ScrollViewLength = 0;
+	public abstract View[] vLoadImages (int PoiId);
+	public void updateLayoutScrollView(int PoiId)
+	{
+		if (iTotalImages <= 2)
+			return;
+		if (iTotalImages > 2)
+			myGallery.removeViews(0, iTotalImages - 2);
+		for (int i=0; i < iTotalImages;i++)
+		{
+			ImagesScrollview[i] = insertPhoto(i);
+	        myGallery.addView(ImagesScrollview[i]);
+		}
+		//ImagesScrollview = vLoadImages( PoiId);
+		//myGallery.removeAllViews();
+		// int lengthOld = ImagesScrollview.length;
+/*		int lengthNew = ImagesScrollview.length;
+		int i=0;
+		if (iTotalImages > 2)
+			myGallery.removeViews(0, iTotalImages - 2);
+
+		for (i=0; i < 2; i++)
+		{
+			// ImagesScrollview [i] = Images[i];
+	        myGallery.addView(ImagesScrollview[i]);
+		}
+		iTotalImages = lengthNew + 2;
+		// ImagesScrollview = Images;
+		iTotalImages = 4;
+		*/
+	}
+	
+
+	
+	LinearLayout myGallery;
+	int iTotalImages = 0;
+	View ImagesScrollview[];
 	
 	@Override
 	public String getARchitectWorldPath() {
@@ -127,9 +166,11 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 				{
 					szIdPoiSelected = invokedUri.getQueryParameter("id");
 					int i = Integer.parseInt(szIdPoiSelected);
+					
 					String pp [] = szPoiInfo (i);
 					int iField = 7;
-					vReadText (pp[iField] + "¿Tiene alguna pregunta?");
+					//wvReadText (pp[iField] + "¿Tiene alguna pregunta?");
+					updateLayoutScrollView(i);
 					// startVoiceRecognitionActivity();
 				}
 				else
@@ -480,122 +521,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	
  	
  	
-    //////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////	
- 	///////////////////////////////////////////////////////////////////////////
-    public Bitmap decodeSampledBitmapFromUri(String path, int reqWidth, int reqHeight) {
-	     Bitmap bm = null;
-	     
-	     // First decode with inJustDecodeBounds=true to check dimensions
-	     final BitmapFactory.Options options = new BitmapFactory.Options();
-	     options.inJustDecodeBounds = true;
-	     
-	     ////////////////////////////////////////////////////////////////////////
-	     ////////////////////////////////////////////////////////////////////////
-	     Rect outPadding = null;
-	     // outPadding
-	     //  BitmapFactory.decodeFile(path, options);
-	     
-	     // Calculate inSampleSize
-	    AssetManager assetManager = getAssets();
-	    
-	    InputStream istr = null;
-	    Bitmap bitmap = null;
-	    try {
-	        istr = assetManager.open(path);
-	        //bitmap = BitmapFactory.decodeStream(istr);
-	        bitmap = BitmapFactory.decodeStream(istr, outPadding, options);
-	    } catch (IOException e) {
-	        // handle exception
-	    }
-	    ////////////////////////////////////////////////////////////////////////
-	    ////////////////////////////////////////////////////////////////////////
-	     options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-	     
-	     // Decode bitmap with inSampleSize set
-	     options.inJustDecodeBounds = false;
-		    try {
-		    	istr.close();
-		        istr = assetManager.open(path);
-		        //bitmap = BitmapFactory.decodeStream(istr);
-		        bitmap = BitmapFactory.decodeStream(istr, outPadding, options);
-		    } catch (IOException e) {
-		        // handle exception
-		    }
-	     //bm = BitmapFactory.decodeFile(path, options); 
-	     bm = bitmap;
-	     return bm;  
-	
-  }
-  public static Bitmap getBitmapFromAsset(Context context, String filePath) {
-	    AssetManager assetManager = context.getAssets();
-
-	    InputStream istr;
-	    Bitmap bitmap = null;
-	    try {
-	        istr = assetManager.open(filePath);
-	        bitmap = BitmapFactory.decodeStream(istr);
-	    } catch (IOException e) {
-	        // handle exception
-	    }
-
-	    return bitmap;
-	}
-  String [] list;
-  
-  public View insertPhoto(int iPoi){
-  	
-	   String path = "ImagesOfPois/";
-	   path = path + list[iPoi];
-	   
-      Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
-      
-      LinearLayout layout = new LinearLayout(getApplicationContext());
-      layout.setLayoutParams(new LayoutParams(250, 250));
-      layout.setGravity(Gravity.CENTER);
-      
-      ImageView imageView = new ImageView(getApplicationContext());
-      imageView.setLayoutParams(new LayoutParams(220, 220));
-      imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      imageView.setImageBitmap(bm);
-      
-      layout.addView(imageView);
-      return layout;
-     }
  
-   public int calculateInSampleSize(
-   	      
-   	     BitmapFactory.Options options, int reqWidth, int reqHeight) {
-   	     // Raw height and width of image
-   	     final int height = options.outHeight;
-   	     final int width = options.outWidth;
-   	     int inSampleSize = 1;
-   	        
-   	     if (height > reqHeight || width > reqWidth) {
-   	      if (width > height) {
-   	       inSampleSize = Math.round((float)height / (float)reqHeight);   
-   	      } else {
-   	       inSampleSize = Math.round((float)width / (float)reqWidth);   
-   	      }   
-   	     }
-   	     
-   	     return inSampleSize;   
-   	    }
-   
-   
-   public int TotalInitialImages()
-   {
-	   String path = "ImagesOfPois"; 
-
-	    try {
-	        list = getAssets().list(path);
-	       return list.length;
-	    } catch (IOException e) {
-	        return 0;
-	    }
-   }
-   //////////////////////////////////////////////////////////////////////////
-   //////////////////////////////////////////////////////////////////////////
  	/**
  	 * vInit must return the number of items to track
  	 * Inside you can do anything for example create a database and
@@ -613,6 +539,5 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	public abstract String		szPathForButtons		();
  	public abstract String		szPathForImagesToTrack	();
  	public abstract String		szPathForImagesToDraw	();
- 	
 }
 
