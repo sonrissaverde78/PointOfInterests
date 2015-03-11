@@ -56,7 +56,9 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
  	String [] szPoiFieldsName;
  	
  	public abstract View insertPhoto(int iPoi);
+ 	public abstract View insertPhoto2(String szPoi);
  	public abstract int TotalInitialImages();
+ 	public abstract String[] getListOfImages(int iPoi);
 	public void initLayout ()
 	{
 		myGallery = (LinearLayout)this.findViewById(R.id.mygallery);
@@ -77,11 +79,14 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 			return;
 		if (iTotalImages > 2)
 			myGallery.removeViews(0, iTotalImages - 2);
-		for (int i=0; i < iTotalImages;i++)
+		String ImageName[] = getListOfImages(PoiId);
+		iTotalImages = 2 + ImageName.length;
+		for (int i=0; i < ImageName.length;i++)
 		{
-			ImagesScrollview[i] = insertPhoto(i);
+			ImagesScrollview[i] = insertPhoto2(ImageName[i]);
 	        myGallery.addView(ImagesScrollview[i]);
 		}
+		
 		//ImagesScrollview = vLoadImages( PoiId);
 		//myGallery.removeAllViews();
 		// int lengthOld = ImagesScrollview.length;

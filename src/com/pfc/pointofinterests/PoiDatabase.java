@@ -673,6 +673,41 @@ public View insertPhoto(int iPoi)
 	return layout;
 }
 @Override
+public View insertPhoto2(String szPoi)
+{
+	String path = "ImagesOfPois/";
+	path = path + szPoi;
+	
+	Bitmap bm = decodeSampledBitmapFromUri(path, 220, 220);
+	  
+	LinearLayout layout = new LinearLayout(getApplicationContext());
+	layout.setLayoutParams(new LayoutParams(250, 250));
+	layout.setGravity(Gravity.CENTER);
+	  
+	ImageView imageView = new ImageView(getApplicationContext());
+	imageView.setLayoutParams(new LayoutParams(220, 220));
+	imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	imageView.setImageBitmap(bm);
+	  
+	layout.addView(imageView);
+	return layout;
+}
+
+@Override
+public String [] getListOfImages(int iPoi)
+{
+	String szImagesNameOfPoi 	= SelectImagesFromPoi(iPoi);
+	String arrayImagesNameOfPoi[] = szImagesNameOfPoi.split(",");
+	// String arrayImagesNameOfPoi[] = new String [6]; //szImagesNameOfPoi.split(",");
+	// arrayImagesNameOfPoi[0] = "Cibeles-01.jpg";
+	// arrayImagesNameOfPoi[1] = "Cibeles-02.jpg";
+	// arrayImagesNameOfPoi[2] = "Cibeles-03.jpg";
+	// arrayImagesNameOfPoi[3] = "Cibeles-04.jpg";
+	// arrayImagesNameOfPoi[4] = "Cibeles-05.jpg";
+	// arrayImagesNameOfPoi[5] = "Cibeles-06.jpg";
+	return arrayImagesNameOfPoi;
+}
+@Override
 public View[] vLoadImages (int PoiId)
 {
 	String szImagesNameOfPoi 	= SelectImagesFromPoi(PoiId);
@@ -736,6 +771,7 @@ public View insertPhoto(String szPoi)
 	        return 0;
 	    }
    }
+
 
 
    
