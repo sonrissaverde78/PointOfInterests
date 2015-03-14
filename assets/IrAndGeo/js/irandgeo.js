@@ -410,7 +410,16 @@ IrAndGeo.markerDrawable_speaker = new AR.ImageResource("assets/buttons/speaker-4
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-//dbPoi[currentPlaceNr].markerDrawable_ImageToShow = new AR.ImageResource("assets/marker_idle.png", {
+// Create the image resources that are used for the marker and the buttons
+IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/YourShop_Marker.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+IrAndGeo.markerDrawable_WebInternet = new AR.ImageResource("assets/buttons/WebInternet.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+
 IrAndGeo.markerDrawable_ImageToShow = new AR.ImageResource("assets/marker_idle.png", {
 	//onLoaded: IrAndGeo.loadingStepDone,
 	onError: IrAndGeo.errorLoading
@@ -428,11 +437,7 @@ IrAndGeo.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.p
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-// Create the image resources that are used for the marker and the buttons
-IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/YourShop_Marker.png", {
-    //onLoaded: IrAndGeo.loadingStepDone,
-    onError: IrAndGeo.errorLoading
-});
+
 IrAndGeo.res.buttonWeb = new AR.ImageResource("assets/YourShop_OpenWebsite.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading

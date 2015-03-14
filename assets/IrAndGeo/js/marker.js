@@ -48,6 +48,13 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 		offsetX: -1.0,
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
+	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.5, {
+        zOrder: 1,
+        opacity: 1.0,
+		offsetY: 1.0,
+		offsetX: 1.0,
+        onClick: Marker.prototype.getOnClickTrigger(this)
+    });
     
 	// create an AR.Label for the marker's Country 
     this.titleLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
@@ -75,7 +82,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     */
     this.markerObject = new AR.GeoObject( markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_speaker, this.titleLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_speaker, this.titleLabel],
             indicator: this.directionIndicatorDrawable
         }
     });
