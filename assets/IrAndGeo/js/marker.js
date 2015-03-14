@@ -29,7 +29,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 // alert("this.markerDrawable_idle "); 
     // create an AR.ImageDrawable for the marker in idle state
     // this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 1.5, {
-    this.markerDrawable_idle = new AR.ImageDrawable(poiData.markerDrawable_MainImage, 1.5, {
+    this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.res.marker, 1.5, {
         zOrder: 0,
         opacity: 1.0,
         /*
@@ -42,7 +42,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 // alert("this.markerDrawable_selected "); 
     // create an AR.ImageDrawable for the marker in selected state
     //this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 1.5, {
-    this.markerDrawable_selected = new AR.ImageDrawable(poiData.markerDrawable_MainImage, 1.5, {
+    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.res.marker, 1.5, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null

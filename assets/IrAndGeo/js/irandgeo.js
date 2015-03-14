@@ -429,7 +429,7 @@ IrAndGeo.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.p
     onError: IrAndGeo.errorLoading
 });
 // Create the image resources that are used for the marker and the buttons
-IrAndGeo.res.marker = new AR.ImageResource("assets/YourShop_Marker.png", {
+IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/YourShop_Marker.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
