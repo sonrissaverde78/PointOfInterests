@@ -7,7 +7,7 @@ function Marker(poiData) {
 
     this.poiData = poiData;
     this.isSelected = false;
-
+	this.isSpeakerSelected = false;
     /*
         With AR.PropertyAnimations you are able to animate almost any property of ARchitect objects. This sample will animate the opacity of both background drawables so that one will fade out while the other one fades in. The scaling is animated too. The marker size changes over time so the labels need to be animated too in order to keep them relative to the background drawable. AR.AnimationGroups are used to synchronize all animations in parallel or sequentially.
     */
@@ -28,7 +28,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         /*
             To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
         */
-        onClick: Marker.prototype.getOnClickTrigger(this)
+        onClick: Marker.prototype.getOnClickPoi(this)
     });
 	
 
@@ -60,7 +60,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     this.titleLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
         zOrder: 0,
         offsetY: -1.0,
-		//onClick: Marker.prototype.getOnClickTrigger(this),
+		//onClick: Marker.prototype.getOnClickPoi(this),
         style: {
             textColor: '#FFFFFF',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
@@ -92,8 +92,15 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 Marker.prototype.getOnClickSpeacker = function(marker) {
 	return function() 
 	{
-		alert ("Speacker selected?");
-        return true;
+		try 
+		{
+			IrAndGeo.onSpeakerSelected(marker);
+		} 
+		catch (err) 
+		{
+			alert("Market.prototype.getOnClickTringer Error" + err);
+		}
+		return true;
     };
 };
 Marker.prototype.getOnClickWebInternet = function(marker) {
@@ -103,7 +110,7 @@ Marker.prototype.getOnClickWebInternet = function(marker) {
         return true;
     };
 };
-Marker.prototype.getOnClickTrigger = function(marker) {
+Marker.prototype.getOnClickPoi = function(marker) {
 
     /*
         The setSelected and setDeselected functions are prototype Marker functions. 
@@ -111,7 +118,7 @@ Marker.prototype.getOnClickTrigger = function(marker) {
     */
 
     return function() {
-
+		alert ("getOnClickPoi?");
         //if (!Marker.prototype.isAnyAnimationRunning(marker)) {
             if (marker.isSelected) {
 
@@ -194,7 +201,7 @@ Marker.prototype.setSelected = function(marker) {
     // removes function that is set on the onClick trigger of the idle-state marker
     marker.markerDrawable_idle.onClick = null;
     // sets the click trigger function for the selected state marker
-    marker.markerDrawable_selected.onClick = Marker.prototype.getOnClickTrigger(marker);
+    marker.markerDrawable_selected.onClick = Marker.prototype.getOnClickPoi(marker);
 
     // enables the direction indicator drawable for the current marker
     marker.directionIndicatorDrawable.enabled = true;
@@ -237,7 +244,7 @@ Marker.prototype.setDeselected = function(marker) {
 	marker.markerDrawable_WebInternet.opacity = 0;
 	marker.markerDrawable_speaker.opacity = 0;
     // sets the click trigger function for the idle state marker
-    marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickTrigger(marker);
+    marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickPoi(marker);
     // removes function that is set on the onClick trigger of the selected-state marker
     marker.markerDrawable_selected.onClick = null;
 	marker.markerDrawable_speaker.onClick = null;

@@ -189,7 +189,18 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
         enabled: false
     }));
 };
-    // fired when user pressed maker in cam
+IrAndGeo.onSpeakerSelected = function (marker)
+{
+		if (marker == IrAndGeo.currentMarker) 
+		{
+			alert ("onSpeackerSelected A");
+		}
+		else
+		{
+			alert ("onSpeackerSelected B");
+		}
+}
+// fired when user pressed maker in cam
 IrAndGeo.onMarkerSelected = function (marker) 
 {
     if (IrAndGeo.currentMarker) 
@@ -200,7 +211,6 @@ IrAndGeo.onMarkerSelected = function (marker)
 			IrAndGeo.stopReadPoi(marker.poiData.id);
             IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
 			IrAndGeo.currentMarker = null;
-			
 			return;
         }
 		else
@@ -219,12 +229,16 @@ IrAndGeo.onMarkerSelected = function (marker)
 	}
 };
     // screen was clicked but no geo-object was hit
-AR.context.onScreenClick = function (marker) {
-
-        if (IrAndGeo.currentMarker) {
-            IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
-        }
-    }
+AR.context.onScreenClick = function (marker) 
+{
+	alert ("onScreenClick");
+	if (IrAndGeo.currentMarker) 
+	{
+		alert ("AR.context.onScreenClick() setDeselected");
+		IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
+		IrAndGeo.currentMarker=null;
+	}
+};
 var StoresOn = 0;
 IrAndGeo.showStores = function() 
 {
