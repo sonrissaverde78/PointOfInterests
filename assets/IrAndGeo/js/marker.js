@@ -2,16 +2,9 @@ var kMarker_AnimationDuration_ChangeDrawable = 500;
 var kMarker_AnimationDuration_Resize = 1000;
 //IrAndGeo.Marker = function(poiData) {
 function Marker(poiData) {
-	// try {
-	//		IrAndGeo.TracerAlert ("Marker (): poiData.name " + poiData.name);
-		//} catch (err) {
-		//	alert("el error" + err);
-		//}
 
 	alert ("Marker pp (): poiData.name " + poiData.name);
 
-//alert("Marker (): poiData.latitude " + poiData.latitude);   
-//alert("Marker (): poiData.longitude " + poiData.longitude); 
     this.poiData = poiData;
     this.isSelected = false;
 
@@ -53,35 +46,11 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         opacity: 1.0,
 		offsetY: -1.0,
 		offsetX: -1.0,
-        /*
-            To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
-        */
         onClick: Marker.prototype.getOnClickTrigger(this)
-    });
-	
-	//this.markerDrawable_MainImage = new AR.ImageDrawable(poiData.markerDrawable_MainImage, 1.5, {
-	//zOrder: 0,
-	//opacity: 1.0,
-	//offsetY: 0.0,
-	//offsetX: 0.0,
-	///*
-	//	To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
-	//*/
-	////onClick: Marker.prototype.getOnClickTrigger(this)
-    //});
-	this.ImageToShow = new AR.ImageDrawable(IrAndGeo.markerDrawable_ImageToShow, 3.0, {
-	zOrder: 3,
-	opacity: 0.0,
-	offsetY: 2.55,
-	offsetX: 2.55,
-	/*
-		To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
-	*/
-	//onClick: Marker.prototype.getOnClickTrigger(this)
     });
     
 	// create an AR.Label for the marker's Country 
-    this.titleLabel = new AR.Label(poiData.City.trunc(10), 0.5, {
+    this.titleLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
         zOrder: 2,
         offsetY: 0.55,
 		onClick: Marker.prototype.getOnClickTrigger(this),
@@ -92,14 +61,6 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 		
     });
 
-    // create an AR.Label for the marker's description
-    this.descriptionLabel = new AR.Label(poiData.name.trunc(15), 0.4, {
-        zOrder: 2,
-        offsetY: -0.55,
-        style: {
-            textColor: '#FFFFFF'
-        }
-    });
 // alert("this.directionIndicatorDrawable = new AR.ImageDrawable "); 
     /*
         Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
@@ -114,7 +75,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     */
     this.markerObject = new AR.GeoObject( markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_speaker, this.ImageToShow, this.titleLabel, this.descriptionLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_speaker, this.titleLabel],
             indicator: this.directionIndicatorDrawable
         }
     });
@@ -195,16 +156,15 @@ Marker.prototype.setSelected = function(marker) {
             amplitude: 2.0
         }));
         // create AR.PropertyAnimation that animates the scaling of the description label to 1.2
-        var descriptionLabelResizeAnimation = new AR.PropertyAnimation(marker.descriptionLabel, 'scaling', null, 1.2, kMarker_AnimationDuration_Resize, new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
-            amplitude: 2.0
-        }));
+        //var descriptionLabelResizeAnimation = new AR.PropertyAnimation(marker.descriptionLabel, 'scaling', null, 1.2, kMarker_AnimationDuration_Resize, new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
+        //    amplitude: 2.0
+        //}));
 
         /*
             There are two types of AR.AnimationGroups. Parallel animations are running at the same time, sequentials are played one after another. This example uses a parallel AR.AnimationGroup.
         */
-        marker.animationGroup_selected = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [hideIdleDrawableAnimation, showSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation, descriptionLabelResizeAnimation]);
+        marker.animationGroup_selected = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [hideIdleDrawableAnimation, showSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation]);
     }
-	marker.ImageToShow.opacity = 1;//IRR
     // removes function that is set on the onClick trigger of the idle-state marker
     marker.markerDrawable_idle.onClick = null;
     // sets the click trigger function for the selected state marker
@@ -239,16 +199,15 @@ Marker.prototype.setDeselected = function(marker) {
             amplitude: 2.0
         }));
         // create AR.PropertyAnimation that animates the scaling of the description label to 1.0
-        var descriptionLabelResizeAnimation = new AR.PropertyAnimation(marker.descriptionLabel, 'scaling', null, 1.0, kMarker_AnimationDuration_Resize, new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
-            amplitude: 2.0
-        }));
+        // var descriptionLabelResizeAnimation = new AR.PropertyAnimation(marker.descriptionLabel, 'scaling', null, 1.0, kMarker_AnimationDuration_Resize, new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
+        //    amplitude: 2.0
+        //}));
 
         /*
             There are two types of AR.AnimationGroups. Parallel animations are running at the same time, sequentials are played one after another. This example uses a parallel AR.AnimationGroup.
         */
-        marker.animationGroup_idle = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [showIdleDrawableAnimation, hideSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation, descriptionLabelResizeAnimation]);
+        marker.animationGroup_idle = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [showIdleDrawableAnimation, hideSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation]);
     }
-	marker.ImageToShow.opacity = 0;//IRR
     // sets the click trigger function for the idle state marker
     marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickTrigger(marker);
     // removes function that is set on the onClick trigger of the selected-state marker
