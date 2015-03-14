@@ -41,26 +41,26 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         onClick: null
     });
 
-	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 2.5, {
+	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 1.5, {
         zOrder: 1,
         opacity: 0.0,
 		offsetY: -1.0,
 		offsetX: -1.0,
         onClick: null
     });
-	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.5, {
-        zOrder: 1,
+	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 1.5, {
+        zOrder: 2,
         opacity: 0.0,
 		offsetY: 1.0,
 		offsetX: 1.0,
-        onClick: null
+        onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
     
 	// create an AR.Label for the marker's Country 
     this.titleLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
-        zOrder: 2,
-        offsetY: 0.55,
-		onClick: Marker.prototype.getOnClickTrigger(this),
+        zOrder: 0,
+        offsetY: -1.0,
+		//onClick: Marker.prototype.getOnClickTrigger(this),
         style: {
             textColor: '#FFFFFF',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
@@ -95,7 +95,14 @@ Marker.prototype.getOnClickSpeacker = function(marker) {
 		alert ("Speacker selected?");
         return true;
     };
-}
+};
+Marker.prototype.getOnClickWebInternet = function(marker) {
+	return function() 
+	{
+		alert ("WebInternet selected?");
+        return true;
+    };
+};
 Marker.prototype.getOnClickTrigger = function(marker) {
 
     /*
@@ -178,11 +185,12 @@ Marker.prototype.setSelected = function(marker) {
         */
         marker.animationGroup_selected = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [hideIdleDrawableAnimation, showSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation]);
     }
+	marker.markerDrawable_speaker.opacity 		= 1;
+	marker.markerDrawable_WebInternet.opacity 	= 1;
 	
-	marker.markerDrawable_speaker.onClick = Marker.prototype.getOnClickSpeacker(marker);
-	marker.markerDrawable_WebInternet.opacity = 1;
-	marker.markerDrawable_speaker.opacity = 1;
-	
+	marker.markerDrawable_speaker.onClick 		= Marker.prototype.getOnClickSpeacker(marker);
+	marker.markerDrawable_WebInternet.onClick 	= Marker.prototype.getOnClickWebInternet(marker);
+
     // removes function that is set on the onClick trigger of the idle-state marker
     marker.markerDrawable_idle.onClick = null;
     // sets the click trigger function for the selected state marker
@@ -226,13 +234,14 @@ Marker.prototype.setDeselected = function(marker) {
         */
         marker.animationGroup_idle = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [showIdleDrawableAnimation, hideSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation]);
     }
-	marker.markerDrawable_speaker.onClick = null;
 	marker.markerDrawable_WebInternet.opacity = 0;
 	marker.markerDrawable_speaker.opacity = 0;
     // sets the click trigger function for the idle state marker
     marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickTrigger(marker);
     // removes function that is set on the onClick trigger of the selected-state marker
     marker.markerDrawable_selected.onClick = null;
+	marker.markerDrawable_speaker.onClick = null;
+	marker.markerDrawable_WebInternet.onCLick = null;
 
     // disables the direction indicator drawable for the current marker
     marker.directionIndicatorDrawable.enabled = false;
