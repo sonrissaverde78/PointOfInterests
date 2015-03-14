@@ -118,6 +118,16 @@ Marker.prototype.getOnClickWebInternet = function(marker) {
 	return function() 
 	{
 		alert ("WebInternet selected?");
+		
+		try 
+		{
+			IrAndGeo.onWebInternetSelected(marker);
+		} 
+		catch (err) 
+		{
+			alert("Market.prototype.getOnClickTringer Error" + err);
+		}
+	
         return true;
     };
 };

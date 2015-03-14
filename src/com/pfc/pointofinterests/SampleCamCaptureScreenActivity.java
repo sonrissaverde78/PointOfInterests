@@ -174,6 +174,17 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 							if (textToSpeech.isSpeaking() == true)
 								textToSpeech.stop();
 						}
+						else
+						{
+							szIdPoiSelected = invokedUri.getQueryParameter ("GoToWiki");
+							if (szIdPoiSelected != null)
+							{
+								String url = "http://www.wikipedia.com";
+								Intent i = new Intent(Intent.ACTION_VIEW);
+								i.setData(Uri.parse(url));
+								startActivity(i);
+							}
+						}
 					}
 				}				
 				return true;

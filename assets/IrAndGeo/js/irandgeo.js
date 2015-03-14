@@ -158,7 +158,12 @@ IrAndGeo.startReadPoi = function (id)
 	var architectSdkUrl = "architectsdk://markerselected?startAudio=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 	document.location 	= architectSdkUrl;
 }
-IrAndGeo.createMarker = function(lat, lon, name, id) 
+IrAndGeo.GoToWiKi = function (id)
+{
+	var architectSdkUrl = "architectsdk://markerselected?GoToWiki=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+	document.location 	= architectSdkUrl;
+}
+IrAndGeo.createMarker = function(lat, lon, name, id)
 {
 //IrAndGeo.TracerAlert("createMarker()");
     // create an AR.GeoLocation from the latitude/longitude function parameters
@@ -194,6 +199,14 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
         enabled: false
     }));
 };
+IrAndGeo.onWebInternetSelected = function (marker)
+{ 
+	if (marker == IrAndGeo.currentMarker) 
+	{
+			IrAndGeo.GoToWiKi(IrAndGeo.currentMarker.poiData.id)
+			
+	}
+};
 IrAndGeo.onSpeakerSelected = function (marker)
 {
 	if (marker == IrAndGeo.currentMarker) 
@@ -217,7 +230,7 @@ IrAndGeo.onSpeakerSelected = function (marker)
 	{
 		alert ("onSpeackerSelected Fails");
 	}
-}
+};
 // fired when user pressed maker in cam
 IrAndGeo.onMarkerSelected = function (marker) 
 {
