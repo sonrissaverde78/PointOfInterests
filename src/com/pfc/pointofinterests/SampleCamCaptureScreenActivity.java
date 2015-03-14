@@ -149,25 +149,33 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 				
 				Uri invokedUri = Uri.parse(uriString);
 				String szIdPoiSelected;
-				szIdPoiSelected = invokedUri.getQueryParameter ("stopAudio");
-				if (szIdPoiSelected == null)
+				szIdPoiSelected = invokedUri.getQueryParameter("id");			
+				if (szIdPoiSelected != null)
 				{
-					szIdPoiSelected = invokedUri.getQueryParameter("id");
 					int i = Integer.parseInt(szIdPoiSelected);
-					
-					String pp [] = szPoiInfo (i);
-					int iField = 7;
-					//wvReadText (pp[iField] + "¿Tiene alguna pregunta?");
 					updateLayoutScrollView(i);
 					// startVoiceRecognitionActivity();
 				}
 				else
 				{
-					if (textToSpeech.isSpeaking() == true)
-						textToSpeech.stop();
-				}
-
-				
+					szIdPoiSelected = invokedUri.getQueryParameter ("startAudio");
+					if (szIdPoiSelected != null)
+					{
+						int i = Integer.parseInt(szIdPoiSelected);
+						String pp [] = szPoiInfo (i);
+						int iField = 7;
+						vReadText (pp[iField] + "¿Tiene alguna pregunta?");
+					}
+					else
+					{
+						szIdPoiSelected = invokedUri.getQueryParameter ("stopAudio");
+						if (szIdPoiSelected != null)
+						{
+							if (textToSpeech.isSpeaking() == true)
+								textToSpeech.stop();
+						}
+					}
+				}				
 				return true;
 				// pressed "More" button on POI-detail panel
 				/*

@@ -153,6 +153,11 @@ IrAndGeo.stopReadPoi = function (id)
 	var architectSdkUrl = "architectsdk://markerselected?stopAudio=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 	document.location 	= architectSdkUrl;
 }
+IrAndGeo.startReadPoi = function (id)
+{
+	var architectSdkUrl = "architectsdk://markerselected?startAudio=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+	document.location 	= architectSdkUrl;
+}
 IrAndGeo.createMarker = function(lat, lon, name, id) 
 {
 //IrAndGeo.TracerAlert("createMarker()");
@@ -191,14 +196,27 @@ IrAndGeo.createMarker = function(lat, lon, name, id)
 };
 IrAndGeo.onSpeakerSelected = function (marker)
 {
-		if (marker == IrAndGeo.currentMarker) 
+	if (marker == IrAndGeo.currentMarker) 
+	{
+		
+		if (IrAndGeo.currentMarker.isSpeakerSelected == false)
 		{
-			alert ("onSpeackerSelected A");
+			alert ("onSpeackerSelected activated");
+			IrAndGeo.currentMarker.isSpeakerSelected = true;
+			IrAndGeo.startReadPoi(marker.poiData.id);
 		}
 		else
 		{
-			alert ("onSpeackerSelected B");
+			alert ("onSpeackerSelected deactivated");
+			IrAndGeo.stopReadPoi(marker.poiData.id);
+			IrAndGeo.currentMarker.isSpeakerSelected = false;
 		}
+	}
+
+	else
+	{
+		alert ("onSpeackerSelected Fails");
+	}
 }
 // fired when user pressed maker in cam
 IrAndGeo.onMarkerSelected = function (marker) 
@@ -223,8 +241,7 @@ IrAndGeo.onMarkerSelected = function (marker)
 	{
 		// highlight current one
 		marker.setSelected(marker);
-		IrAndGeo.currentMarker = marker;	
-		IrAndGeo.sendIdFromPoi(marker.poiData.id);
+		IrAndGeo.currentMarker = marker;
 		return;
 	}
 };
@@ -236,6 +253,8 @@ AR.context.onScreenClick = function (marker)
 	{
 		alert ("AR.context.onScreenClick() setDeselected");
 		IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
+		IrAndGeo.currentMarker.isSpeakerSelected = false;
+		IrAndGeo.stopReadPoi(IrAndGeo.currentMarker.poiData.id);
 		IrAndGeo.currentMarker=null;
 	}
 };
