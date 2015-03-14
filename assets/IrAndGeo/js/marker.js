@@ -35,24 +35,24 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 // alert("this.markerDrawable_selected "); 
     // create an AR.ImageDrawable for the marker in selected state
     //this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 1.5, {
-    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.res.marker, 1.5, {
+    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.res.marker, 0.4, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null
     });
 
-	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 1.5, {
+	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 1.8, {
         zOrder: 1,
         opacity: 0.0,
-		offsetY: -1.0,
-		offsetX: -1.0,
+		offsetY: -1.5,
+		offsetX: -1.5,
         onClick: null
     });
-	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 1.5, {
+	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 1.8, {
         zOrder: 2,
         opacity: 0.0,
-		offsetY: 1.0,
-		offsetX: 1.0,
+		offsetY: 1.5,
+		offsetX: 1.5,
         onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
     
@@ -60,6 +60,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     this.titleLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
         zOrder: 0,
         offsetY: -1.0,
+		opacity: 1.0,
 		//onClick: Marker.prototype.getOnClickPoi(this),
         style: {
             textColor: '#FFFFFF',
@@ -67,7 +68,17 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         }
 		
     });
-
+    this.titleLabelSelected = new AR.Label(poiData.name.trunc(10), 1.5, {
+        zOrder: 0,
+        offsetY: -1.0,
+		opacity: 0.0,
+		//onClick: Marker.prototype.getOnClickPoi(this),
+        style: {
+            textColor: '#FFFFFF',
+            fontStyle: AR.CONST.FONT_STYLE.BOLD
+        }
+		
+    });
 // alert("this.directionIndicatorDrawable = new AR.ImageDrawable "); 
     /*
         Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
@@ -82,7 +93,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     */
     this.markerObject = new AR.GeoObject( markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_speaker, this.titleLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_speaker, this.titleLabel, this.titleLabelSelected],
             indicator: this.directionIndicatorDrawable
         }
     });
@@ -194,6 +205,8 @@ Marker.prototype.setSelected = function(marker) {
     }
 	marker.markerDrawable_speaker.opacity 		= 1;
 	marker.markerDrawable_WebInternet.opacity 	= 1;
+	marker.titleLabelSelected.opacity  	= 1;
+	marker.titleLabel.opacity	= 0;
 	
 	marker.markerDrawable_speaker.onClick 		= Marker.prototype.getOnClickSpeacker(marker);
 	marker.markerDrawable_WebInternet.onClick 	= Marker.prototype.getOnClickWebInternet(marker);
@@ -243,6 +256,8 @@ Marker.prototype.setDeselected = function(marker) {
     }
 	marker.markerDrawable_WebInternet.opacity = 0;
 	marker.markerDrawable_speaker.opacity = 0;
+	marker.titleLabelSelected.opacity  	= 0;
+	marker.titleLabel.opacity	= 1;
     // sets the click trigger function for the idle state marker
     marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickPoi(marker);
     // removes function that is set on the onClick trigger of the selected-state marker
