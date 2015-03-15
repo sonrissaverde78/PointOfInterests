@@ -179,68 +179,36 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 							szIdPoiSelected = invokedUri.getQueryParameter ("GoToWiki");
 							if (szIdPoiSelected != null)
 							{
-								String url = "http://www.wikipedia.com";
-								Intent i = new Intent(Intent.ACTION_VIEW);
-								i.setData(Uri.parse(url));
-								startActivity(i);
+								int i = Integer.parseInt(szIdPoiSelected);
+								String pp [] = szPoiInfo (i);
+								int iField = 1;
+
+								String url = "http://www.wikipedia.com" + pp[iField];
+								Intent intent = new Intent(Intent.ACTION_VIEW);
+								intent.setData(Uri.parse(url));
+								startActivity(intent);
 							}
+							else
+							{
+								szIdPoiSelected = invokedUri.getQueryParameter ("FindInternet");
+								if (szIdPoiSelected != null)
+								{
+									int i = Integer.parseInt(szIdPoiSelected);
+									String pp [] = szPoiInfo (i);
+									int iField = 1;
+									
+									String url = "http://www.google.com/#q=" + pp[iField];
+									
+									Intent intent = new Intent(Intent.ACTION_VIEW);
+									intent.setData(Uri.parse(url));
+									startActivity(intent);
+								}
+							}
+							
 						}
 					}
 				}				
 				return true;
-				// pressed "More" button on POI-detail panel
-				/*
-				if ("markerselected".equalsIgnoreCase(invokedUri.getHost())) {
-					final Intent poiDetailIntent = new Intent(SampleCamCaptureScreenActivity.this, SamplePoiDetailActivity.class);
-					poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_ID, String.valueOf(invokedUri.getQueryParameter("id")) );
-					poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_TITILE, String.valueOf(invokedUri.getQueryParameter("title")) );
-					poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_DESCR, String.valueOf(invokedUri.getQueryParameter("description")) );
-					SampleCamCaptureScreenActivity.this.startActivity(poiDetailIntent);
-					return true;
-				}
-				
-				// pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
-				else if ("button".equalsIgnoreCase(invokedUri.getHost())) {
-					vReadText ("button");
-					
-					SampleCamCaptureScreenActivity.this.architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new CaptureScreenCallback() {
-						
-						@Override
-						public void onScreenCaptured(final Bitmap screenCapture) {
-							// store screenCapture into external cache directory
-							final File screenCaptureFile = new File(Environment.getExternalStorageDirectory().toString(), "screenCapture_" + System.currentTimeMillis() + ".jpg");
-							
-							// 1. Save bitmap to file & compress to jpeg. You may use PNG too
-							try {
-								final FileOutputStream out = new FileOutputStream(screenCaptureFile);
-								screenCapture.compress(Bitmap.CompressFormat.JPEG, 90, out);
-								out.flush();
-								out.close();
-							
-								// 2. create send intent
-								final Intent share = new Intent(Intent.ACTION_SEND);
-								share.setType("image/jpg");
-								share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(screenCaptureFile));
-		
-								// 3. launch intent-chooser
-								final String chooserTitle = "Share Snaphot";
-								SampleCamCaptureScreenActivity.this.startActivity(Intent.createChooser(share, chooserTitle));
-							
-							} catch (final Exception e) {
-								// should not occur when all permissions are set
-								SampleCamCaptureScreenActivity.this.runOnUiThread(new Runnable() {
-									
-									@Override
-									public void run() {
-										// show toast message in case something went wrong
-										Toast.makeText(SampleCamCaptureScreenActivity.this, "Unexpected error, " + e, Toast.LENGTH_LONG).show();	
-									}
-								});
-							}
-						}
-					});
-				}
-				return true;*/
 			}
 				
 		};

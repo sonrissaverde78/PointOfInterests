@@ -41,17 +41,24 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         onClick: null
     });
 
-	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 1.8, {
+	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 1.4, {
         zOrder: 1,
         opacity: 0.0,
 		offsetY: -1.5,
 		offsetX: -1.5,
         onClick: null
     });
-	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 1.8, {
+	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 1.4, {
         zOrder: 2,
         opacity: 0.0,
 		offsetY: 1.5,
+		offsetX: 1.5,
+        onClick: null// Marker.prototype.getOnClickWebInternet(this)
+    });
+ 	this.markerDrawable_FindInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 1.4, {
+        zOrder: 2,
+        opacity: 0.0,
+		offsetY: 0,
 		offsetX: 1.5,
         onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
@@ -93,7 +100,7 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
     */
     this.markerObject = new AR.GeoObject( markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_speaker, this.titleLabel, this.titleLabelSelected],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_FindInternet, this.markerDrawable_speaker, this.titleLabel, this.titleLabelSelected],
             indicator: this.directionIndicatorDrawable
         }
     });
@@ -112,6 +119,23 @@ Marker.prototype.getOnClickSpeacker = function(marker) {
 			alert("Market.prototype.getOnClickTringer Error" + err);
 		}
 		return true;
+    };
+};
+Marker.prototype.getOnClickFindInternet = function(marker) {
+	return function() 
+	{
+		alert ("FindInternet selected?");
+		
+		try 
+		{
+			IrAndGeo.onFindInternetSelected(marker);
+		} 
+		catch (err) 
+		{
+			alert("Market.prototype.getOnClickTringer Error" + err);
+		}
+	
+        return true;
     };
 };
 Marker.prototype.getOnClickWebInternet = function(marker) {
@@ -215,11 +239,13 @@ Marker.prototype.setSelected = function(marker) {
     }
 	marker.markerDrawable_speaker.opacity 		= 1;
 	marker.markerDrawable_WebInternet.opacity 	= 1;
+	marker.markerDrawable_FindInternet.opacity 	= 1;
 	marker.titleLabelSelected.opacity  	= 1;
 	marker.titleLabel.opacity	= 0;
 	
 	marker.markerDrawable_speaker.onClick 		= Marker.prototype.getOnClickSpeacker(marker);
 	marker.markerDrawable_WebInternet.onClick 	= Marker.prototype.getOnClickWebInternet(marker);
+	marker.markerDrawable_FindInternet.onClick 	= Marker.prototype.getOnClickFindInternet(marker);
 
     // removes function that is set on the onClick trigger of the idle-state marker
     marker.markerDrawable_idle.onClick = null;
@@ -265,6 +291,7 @@ Marker.prototype.setDeselected = function(marker) {
         marker.animationGroup_idle = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [showIdleDrawableAnimation, hideSelectedDrawableAnimation, idleDrawableResizeAnimation, selectedDrawableResizeAnimation, titleLabelResizeAnimation]);
     }
 	marker.markerDrawable_WebInternet.opacity = 0;
+	marker.markerDrawable_FindInternet.opacity = 0;
 	marker.markerDrawable_speaker.opacity = 0;
 	marker.titleLabelSelected.opacity  	= 0;
 	marker.titleLabel.opacity	= 1;
@@ -274,6 +301,7 @@ Marker.prototype.setDeselected = function(marker) {
     marker.markerDrawable_selected.onClick = null;
 	marker.markerDrawable_speaker.onClick = null;
 	marker.markerDrawable_WebInternet.onCLick = null;
+	marker.markerDrawable_FindInternet.onCLick = null;
 
     // disables the direction indicator drawable for the current marker
     marker.directionIndicatorDrawable.enabled = false;

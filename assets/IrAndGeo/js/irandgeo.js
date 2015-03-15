@@ -95,8 +95,6 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
         dbPoi[currentPlaceNr] = singlePoi;
 		IrAndGeo.TracerAlert("poiData[currentPlaceNr].MainImage x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage);
 		dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage, {
-		//dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/YourShop_FindShops.png", {
-		//onLoaded: IrAndGeo.loadingStepDone,
 		onError: IrAndGeo.errorLoading
 		});
 
@@ -158,6 +156,11 @@ IrAndGeo.startReadPoi = function (id)
 	var architectSdkUrl = "architectsdk://markerselected?startAudio=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 	document.location 	= architectSdkUrl;
 }
+IrAndGeo.FindInternet = function (id)
+{
+	var architectSdkUrl = "architectsdk://markerselected?FindInternet=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+	document.location 	= architectSdkUrl;
+}
 IrAndGeo.GoToWiKi = function (id)
 {
 	var architectSdkUrl = "architectsdk://markerselected?GoToWiki=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
@@ -204,6 +207,14 @@ IrAndGeo.onWebInternetSelected = function (marker)
 	if (marker == IrAndGeo.currentMarker) 
 	{
 			IrAndGeo.GoToWiKi(IrAndGeo.currentMarker.poiData.id)
+			
+	}
+};
+IrAndGeo.onFindInternetSelected = function (marker)
+{ 
+	if (marker == IrAndGeo.currentMarker) 
+	{
+			IrAndGeo.FindInternet(IrAndGeo.currentMarker.poiData.id)
 			
 	}
 };
@@ -255,6 +266,7 @@ IrAndGeo.onMarkerSelected = function (marker)
 		// highlight current one
 		marker.setSelected(marker);
 		IrAndGeo.currentMarker = marker;
+		IrAndGeo.sendIdFromPoi(marker.poiData.id);
 		return;
 	}
 };
@@ -461,7 +473,11 @@ IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/YourShop_Marker.png",
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-IrAndGeo.markerDrawable_WebInternet = new AR.ImageResource("assets/buttons/WebInternet.png", {
+IrAndGeo.markerDrawable_WebInternet = new AR.ImageResource("assets/buttons/Wikipedia.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+IrAndGeo.markerDrawable_FindInternet = new AR.ImageResource("assets/buttons/FindInternet.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
