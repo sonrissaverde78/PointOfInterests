@@ -6,19 +6,17 @@
 #field#:alt				=!= 1 $#
 #field#:Country			=!= España $#
 #field#:City			=!= Madrid $#
-#field#:description	x	=!= Lugar_description_De todos modos, me fui. No 
-es que tuviera algún deseo especial o la perspectiva de hacer algo concreto tras
-dejar el trabajo. No me apetecía lo más mínimo volver a encerrarme en casa
-para preparar las oposiciones al cuerpo de justicia y, además, lo principal: en aquellos 
-momentos ya no quería ser abogado. Sólo que no tenía ninguna intención de seguir
-indefinidamente en aquella oficina haciendo indefinidamente el mismo trabajo, y
-sabía que si no lo dejaba entonces, ya no lo dejaría jamás. Si
-permanecía allí mucho tiempo acabaría mis días, sucediéndose monótonos uno tras
- otro, en aquel lugar. Y es que, ante todo, yo ya había cumplido los treinta $#
-#field#:ImagesToTrack#		=!= ShopAd.wtc $#
+#field#:description	x	=!= Originalmente una diosa frigia, Cibeles (en griego antiguo Κυβέλη Kybélê, nombre al que a veces se da la etimología de «la del pelo» si se considera griego en lugar de frigio) era la diosa de la Madre Tierra que fue adorada en Anatolia desde el neolítico. Como la Gea o su equivalente minoica Rea, Cibeles era la personificación de la fértil tierra, una diosa de las cavernas y las montañas, murallas y fortalezas, de la Naturaleza y los animales (especialmente leones y abejas). Su equivalente romana era Magna Mater, la Gran Madre o Idæa mater («Madre del Ida»). Su título «Señora de los Animales», que también ostentaba la Diosa Madre minoica, revela sus arcaicas raíces paleolíticas. Es una deidad de vida, muerte y resurrección. Su consorte, cuyo culto fue introducido más tarde, era Atis. Se trata de una de las principales diosas de las antiguas culturas del Oriente Próximo. En la mitología griega también es conocida como Δαμία (Damia).
+Se la representa con vestimentas frigias y una corona con forma de muralla. Porta las llaves que dan acceso a todas las riquezas de la tierra. Monta un carro que simboliza la superioridad de la madre Naturaleza, a la que incluso se subordinan los poderosos leones que tiran del mismo. En otras representaciones se sienta en un trono custodiado por las mismas bestias. La leyenda, relatada por Ovidio en Las Metamorfosis (X, vss. 570- 704), las relaciona con una singular pareja mitológica, Hipómenes (Melanión, en otras versiones) y Atalanta, que compitieron en una carrera de velocidad. La astucia de Hipómenes -inspirado por la diosa del amor, ya que el premio era la mano de Atalanta- hizo caer al suelo unas manzanas de oro que atrajeron la atención de Atalanta y la distrajeron de la carrera, que perdió. El mito concluye con la unión impía de los amantes dentro de un recinto sagrado dedicado a la diosa Cibeles, la cual se enfurece y como castigo los metamorfosea en leones, condenados a tirar de su carro eternamente.
+En los panteones griego y romano, Cibeles es identificada con Rea, esposa de Crono (Saturno) y madre de los principales dioses: Hestia (Vesta), Demeter (Ceres), Hera (Juno), Hades (Plutón), Poseidón (Neptuno) y Zeus (Júpiter). De acuerdo con la mitología griega, Cibeles inicia a Dionisio en su culto misterioso.
+Esta Diosa Madre fue honrada en todo el mundo antiguo. El centro de su culto estaba en la Monte Dindymon en Pesinunte («Pessinus»), donde cayó el Betilo cúbico y negro denominado Kubele que da origen de su nombre.
+En 204 a.C., durante la Segunda Guerra Púnica, los romanos, obedeciendo a una profecía de los libros sibilinos, y del Oráculo de Delfos, enviaron embajadores a Pessinus con la difícil misión de llevar a Roma la piedra sagrada. La llevaron escoltada por cinco quinquerremes que fueron recibidos por Claudia Quinta.2 Inicialmente se colocó en el templo de La Victoria en el suroeste del Monte Palatino dentro del Pomoerium, a la espera de la finalización de su propio templo, que le fue consagrado el 9 de abril de 191 a.C.3
+El culto fue objeto de un fiel seguimiento hasta el final del período republicano. Los ciudadanos romanos no tenían derecho a participar en el sacerdocio y sus rituales, pero sí participaban en el festival de la diosa, el Megalesia). La diosa estaba representada por una escultura en el templo y sus servicios los proporcionaban sacerdotes castrados orientas y/o eslavos, a los que denominaban galli. La autocastración a la que se sometían estos sacerdotes extranjeros en el día de la sangre homenajeaba a Atis, amado de Cibeles, que tras engañarla con la ninfa Sagaritis, fue enloquecido por la diosa celosa, se castró y se suicidó. En las celebraciones, los sacerdotes sacaban a la diosa en procesión. Se sacrificaban toros (taurobolio) y bebían su sangre. Las restricciones fueron levantadas por el emperador Claudio.
+Se asocia a Cibeles principalmente con la fertilidad. También encarna la naturaleza salvaje, simbolizada por los leones que la acompañan. Se le atribuyó la curación de enfermedades y la protección de su pueblo durante la guerra.$#
 #field#:ImagesToDraw#		=!= Esc-Cibeles-Madrid.jpg,Cibeles-01.jpg,Cibeles-02.jpg,Cibeles-03.jpg,Cibeles-04.jpg,Cibeles-05.jpg,Cibeles-06.jpg,Cibeles-07.jpg,Cibeles-08.jpg,Cibeles-09.jpg,Cibeles-10.jpg$# 
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= Esc-Cibeles-Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Cibeles$# 
 ______________________
 #Sample#2
 #field#:id				=!= 2 $#
@@ -28,23 +26,16 @@ ______________________
 #field#:alt				=!= 2 $#
 #field#:Country			=!= España $#
 #field#:City			=!= Madrid $#
-#field#:description	x	=!= Lugar_description_Por supuesto, el descontento creció 
-entre nosotros. En aquella pequeña sociedad antes hermanada por la desgracia común,
-surgió un sentimiento de injusticia y, junto con él, el odio profundo y la 
-desconfianza. A los tipejos que servían a Boris se les daba un trabajo ligero,
-obtenían prebendas, los demás teníamos que arrostrar una vida cruel, siempre al 
-límite de la muerte. Pero no podíamos quejamos en voz alta. Una resistencia 
-abierta implicaba la muerte. Podíamos morir por congelación o por desnutrición 
-encerrados en una gélida celda de castigo. Tal vez el «grupo de asesinos» nos 
-tapara de noche la cara con una toalla mojada mientras dormíamos. Temíamos que 
-nos golpearan por la espalda, en la cabeza o nos la abrieran con un pico mientras 
-trabajábamos y que luego nos arrojaran al pozo. Nadie sabría qué había ocurrido en 
-el negro fondo de la mina. Sólo que alguien, sin que nadie se diera cuenta, había 
-desaparecido. $#
+#field#:description	x	=!= La fuente consiste en un gran pilón circular en cuyo centro se encuentra la figura de Neptuno, dios de los mares, con una culebra enroscada en la mano derecha y el tridente en la izquierda, erguida sobre un carro formado por una concha tirada por dos caballos marinos con cola de pez (hipocampos). Alrededor del carro se ven focas y delfines que arrojan agua a gran altura. El dios de las aguas aludiría a la Marina que Carlos III reformó para hacerla más competitiva y reforzar el nexo con las colonias.
+La fuente, que en un principio estuvo situada en el extremo del Prado de Apolo, mirando a la fuente de Cibeles, fue trasladada al centro de la plaza de Cánovas del Castillo en 1898, lugar en donde sigue actualmente. Forma parte, junto con la Cibeles, y la Fuente de Apolo o de las Cuatro Estaciones de los tres grandes grupos escultóricos diseñados por Ventura Rodríguez para el Salón del Prado.
+Neptuno, con apariencia de viejo, barbudo y con largos cabellos, se suele representar en el acto de empuñar el tridente, arrastrado por caballos y delfines sobre el carro. Neptuno, dios del mar, una de las doce divinidades del Olimpo, es hijo de Saturno y Rea, y hermano de Júpiter. Además tiene la facultad de desencadenar violentas tempestades y también de aplacarlas. Los marineros invocan su protección para asegurarse una navegación tranquila y privada de peligros. La tradición atribuye al Dios numerosos amores de los que nacen frecuentemente divinidades maléficas. En algunos relatos míticos, por ejemplo, Medusa se une a Neptuno generando el famoso caballo alado Pegaso y el gigante Crisaor. La consorte oficial del dios es Anfitrite, la nereida que en un primer momento huye, pero luego se convierte en su esposa. Al dios del mar se le suele representar con larga barba y cabellos abundantes, empuñando el tridente, con puntas a veces ganchudas. Su carro es arrastrado por delfines y caballos de mar o hipocampos. A veces se le representa a lomos de un delfín. Frecuentemente su imagen se asocia a la de Anfitrite en el llamado Triunfo de Neptuno; Anfitrite, junto al dios, cabalga sobre un delfín o se sienta sobre una concha arrastrada por animales marinos, mientras el dios del mar yace en su carro. Generalmente Neptuno y Anfitrite están acompañados de un cortejo de divinidades marinas, los tritones y las nereidas.
+Durante la Guerra Civil, la capital fue asolada por una hambruna. A la figura de Neptuno le fue colocado un cartel colgando de su cuello que decía Dadme de comer o quitadme el tenedor.3 En 2012, durante una manifestación sindical, las aguas de la fuente fueron teñidas de rojo.4
+El club de fútbol Atlético de Madrid junto con su hinchada rojiblanca va a esta fuente para celebrar sus títulos.$#
 #field#:ImagesToTrack#		=!= ShopAd.wtc$#
 #field#:ImagesToDraw#		=!= Esc-Neptuno-Madrid.jpg,Neptuno-01.jpg,Neptuno-02.jpg,Neptuno-03.jpg,Neptuno-04.jpg,Neptuno-05.jpg,Neptuno-06.jpg,Neptuno-07.jpg,Neptuno-08.jpg,Neptuno-09.jpg,Neptuno-10.jpg,Neptuno-11.jpg$#
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= Esc-Neptuno-Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Fuente_de_Neptuno_%28Madrid%29$# 
 ______________________
 #Sample#3
 #field#:id				=!= 3 $#	
@@ -54,18 +45,17 @@ ______________________
 #field#:alt				=!= 3 $#
 #field#:Country			=!= España $#
 #field#:City			=!= Madrid $#
-#field#:description	x	=!= Lugar_description_Le puse en el cobertizo un plato con 
-un trozo de sawara que había comprado en el supermercado. El gato, que parecía 
-terriblemente hambriento, se comió el pescado en un santiamén, entre jadeos, 
-atragantándose y vomitando de vez en cuando los trozos que no había podido tragar. 
-Encontré bajo el fregadero la escudilla que usábamos para darle de beber. 
-La llené de agua y el gato se la bebió casi toda. Al final recobró el aliento y 
-empezó a lavarse la cara. Poco después, como si recordara algo de repente, 
-se me acercó, se me subió a las rodillas y se quedó dormido hecho un ovillo $#
+#field#:description	x	=!= La Puerta de Alcalá es una de las cinco antiguas puertas reales que daban acceso a la ciudad de Madrid (España).
+Se encuentra situada en el centro de la rotonda de la Plaza de la Independencia, diseñada por el urbanista Ángel Fernández de los Ríos en el año 1778. En el cruce de las calles de Alcalá, Alfonso XII, Serrano y Salustiano Olózaga, junto a las puertas del Retiro: Puerta de España, Puerta de la Independencia (entrada principal a los jardines del Retiro) y Puerta de Hernani.
+La puerta daba acceso a aquellos viajeros que entraban antiguamente a la población desde Francia, Aragón o Cataluña.4 En la actualidad es una puerta monumental que se encuentra ubicada junto a la Fuente de Cibeles y el Parque del Retiro. Fue construida por mandato de Carlos III en sustitución de otra puerta anterior que existía ya desde el siglo XVI.5 El diseño y obra pertenece al arquitecto italiano Francesco Sabatini. Compitieron con Sabatini otros proyectos por parte de arquitectos españoles: Ventura Rodríguez y de José de Hermosilla, siendo finalmente elegido personalmente por el Rey el diseño de Sabatini.
+Se trata de una puerta de estilo neoclásico y aspecto monumental similar a los Arcos de Triunfos romanos, se erigió mirando su exterior a oriente en el año 1778. La puerta ha sido posteriormente restaurada en cinco ocasiones en más de dos siglos de existencia, siendo la última a finales del siglo XX. La originalidad de su fábrica consiste en ser el primer arco de triunfo construido en Europa tras la caída del Imperio romano, siendo precursor de otros como el Arco de Triunfo de París y la Puerta de Brandeburgo en Berlín.
+Ha sufrido desde sus comienzos diversas transformaciones urbanísticas en su entorno. Pasando de ser la frontera exterior de Madrid, a un centro turístico de obligado paso que aparece insertada casi en el medio de la misma ciudad. Este cambio se ha debido al ensanche del siglo XIX a lo largo del barrio de Serrano y la prolongación de la calle de Alcalá. Finalmente es desde 1976 considerado por el Estado Español como un Monumento Histórico-Artístico, extendiendo su categoría a la misma Plaza de la Independencia.
+La puerta ya desde su ubicación final fue adquiriendo desde finales del siglo XVIII relevancia en el pueblo madrileño, y a finales del siglo XIX era ya uno de sus iconos más característicos que aparece en numerosas ilustraciones de la ciudad. Al ser uno de los monumentos más representativos, en su doble condición de mirada hacia el interior de la ciudad y al exterior de la misma. la Puerta de Alcalá ha servido como soporte para todo tipo de manifestaciones políticas y artísticas y en sus inmediaciones se han producido numerosos hechos históricos.$#
 #field#:ImagesToTrack#		=!= ShopAd.wtc$#
 #field#:ImagesToDraw#		=!= puerta-alcala-Madrid.jpg,PuertaAlcala-01.jpg,PuertaAlcala-02.jpg,PuertaAlcala-03.jpg,PuertaAlcala-04.jpg,PuertaAlcala-05.jpg,PuertaAlcala-06.jpg,PuertaAlcala-07.jpg,PuertaAlcala-08.jpg,PuertaAlcala-09.jpg,PuertaAlcala-10.jpg,PuertaAlcala-11.jpg$#  
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= puerta-alcala-Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_de_Alcala$# 
 ______________________
 #Sample#4
 #field#:id				=!= 4 $#
@@ -75,17 +65,15 @@ ______________________
 #field#:alt				=!= 4 $#
 #field#:Country			=!= España $#
 #field#:City			=!= Madrid $#
-#field#:description	x	=!= Lugar_description_Acerqué un cojín viejo y puse el gato 
-encima. Su cuerpo estaba desmadejado como la ropa recién lavada. Sobre el 
-cojín, el gato entreabrió los ojos, abrió un poco la boca, pero no maulló. 
-Al ver que, tras acomodarse sobre el cojín, bostezaba y volvía a dormirse, 
-fui a la cocina y ordené la comida que había comprado, metí en la nevera el 
-toofu, la verdura y el pescado. Por si acaso, fui a echarle una ojeada al 
-gato, que seguía durmiendo en la misma postura. Como su mirada nos recordaba 
-a la del hermano de Kumiko, lo llamábamos Noboru Wataya, pero ése no era su 
-verdadero nombre. Pasaron seis años sin que Kumiko y yo le pusiéramos uno. $#
+#field#:description	x	=!= La Puerta del Sol fue en sus orígenes uno de los accesos de la cerca que rodeaba Madrid en el siglo XV. Esta cerca recogía en su perímetro los arrabales medievales que habían ido creciendo extramuros, en torno a la muralla cristiana del siglo XII. El nombre de la puerta proviene de un sol que adornaba la entrada, colocado ahí por estar orientada la puerta hacia levante. Entre los edificios que le daban prestigio en los comienzos se encontraba Iglesia del Buen Suceso y San Felipe el Real.
+Aunque desde los siglos XVII al XIX la puerta tenía importancia como lugar de encuentro (aquí se encontraba uno de los mentideros más famosos de la villa desde el Siglo de Oro, las famosas gradas de San Felipe), no era una plaza definida, como la Plaza Mayor, y ocupaba la mitad del espacio actual. La Casa de Correos fue construida por el arquitecto francés Jaime Marquet entre 1766 y 1768; la misma fue posteriormente Ministerio de la Gobernación (Interior) y Dirección General de Seguridad del Estado durante la dictadura franquista y, actualmente, es sede de la Presidencia de la Comunidad de Madrid. Será esta Casa de Correos la que empiece a sentar las bases urbanísticas de lo que hoy es la Puerta del Sol y su creciente importancia como punto céntrico de Madrid. Tras la conversión de la Casa de Correos en sede del Ministerio de Gobernación (1847), se decide derribar algunas casas de la zona para realzar el edificio y darle seguridad. El resultado sería la creación de una gran plaza.
+Para ello, en aplicación de las leyes de desamortización de Mendizábal, se derriban, entre otros, los conventos de San Felipe y Nuestra Señora de las Victorias allí ubicados. Entre 1857 y 1862, Lucio del Valle, Juan Rivera y José Morer llevan a cabo la reforma de la plaza, dándole su fisonomía actual. Para ello mantienen la alineación de la Casa de Correos en uno de los lados y construyen edificios de viviendas con fachadas uniformes definiendo un espacio de forma semicircular.
+En 1959 es reformada por Manuel Herrero Palacios incorporando en su centro una zona ajardinada y las fuentes. En 1986 los arquitectos Antonio Riviere, Javier Ortega y Antón Capitel introducen una nueva reforma, adquiriendo más importancia la zona peatonal. Las farolas instaladas con motivo de esta remodelación, fueron apodadas popularmente como los supositorios y provocaron una gran polémica debido a su diseño moderno. Finalmente fueron sustituidas por las actuales farolas de estilo "fernandino", si bien en los dos postes centrales de la plaza los supositorios pervivieron algunos años más, para ser unificadas unos años más tarde con las del resto de la plaza.
+Entre 2004 y 2009 se realizaron las obras de construcción de un intercambiador de transportes, inaugurado el 27 de junio de 2009, que acerca la red ferroviaria de Cercanías a la estación subterránea de Sol. La estación se ha convertido por sus dimensiones en la más grande del mundo1 con 28 m de profundidad, 207 m de longitud y 20 m de ancho. Su vestíbulo tiene 7500 m². La entrada al intercomunicador, parecida a un iglú ha vuelto a cambiar la fisonomía de la Puerta del Sol.
+El 15 de mayo de 2011, tras una manifestación convocada por la plataforma Democracia Real Ya, decenas de manifestantes acamparon en la plaza esa misma noche, sumándose cada día más personas y siendo millares durante la semana siguiente, reclamando un cambio político, social y económico en España. Se convierte así la plaza en el símbolo del Movimiento 15M. El día 2 de agosto, la Policía Nacional desalojó a los últimos acampados$#
 #field#:ImagesToTrack#		=!= ShopAd.wtc $#
 #field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg,OsoMadrono-01.jpg,OsoMadrono-02.jpeg,OsoMadrono-03.jpeg,OsoMadrono-06.jpg,OsoMadrono-07.jpeg,OsoMadrono-08.JPG,OsoMadrono-09.jpeg,OsoMadrono-10.jpg,OsoMadrono-11.jpg,OsoMadrono-12.jpg,OsoMadrono-13.jpg$#
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= Esc-Oso_y_Madrono_Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_del_Sol$# 
 ______________________

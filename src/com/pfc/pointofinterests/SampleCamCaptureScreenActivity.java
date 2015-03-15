@@ -181,9 +181,9 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 							{
 								int i = Integer.parseInt(szIdPoiSelected);
 								String pp [] = szPoiInfo (i);
-								int iField = 1;
+								int iField = 12;
 
-								String url = "http://www.wikipedia.com" + pp[iField];
+								String url = pp[iField];
 								Intent intent = new Intent(Intent.ACTION_VIEW);
 								intent.setData(Uri.parse(url));
 								startActivity(intent);
