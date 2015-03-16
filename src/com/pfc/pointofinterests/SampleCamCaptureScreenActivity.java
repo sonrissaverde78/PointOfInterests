@@ -88,9 +88,7 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 		
 		myGallery.removeViewAt(0);
 	}
-	
 
-	
 	LinearLayout myGallery;
 	int iTotalImages = 0;
 	View ImagesScrollview[];

@@ -374,25 +374,25 @@ IrAndGeo.initIr = function()
     var trackerDataSetPath = "assets/cabeza-cibeles_2.wtc";
     //var trackerDataSetPath = "assets/leon-cibeles.wtc";
     IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
-                                                        {
-                                                            //onLoaded: IrAndGeo.loadingStepDone,
-                                                            onError: IrAndGeo.errorLoading
-                                                        });
+									{
+										//onLoaded: IrAndGeo.loadingStepDone,
+										onError: IrAndGeo.errorLoading
+									});
 
     // Create drawables to display on the recognized image
-    var buttonDeal = new AR.ImageDrawable(IrAndGeo.res.buttonDeal, 0.15, 
+    var buttonDeal = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, 
                                                                         {
                                                                             onClick: IrAndGeo.showDeal,
                                                                             offsetX: 0.35,
                                                                             offsetY: -0.275
                                                                         });
-    var buttonWeb = new AR.ImageDrawable(IrAndGeo.res.buttonWeb, 0.15, 
+    var buttonWeb = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.15, 
                                                                         {
                                                                             onClick: IrAndGeo.showWeb,
                                                                             offsetX: 0.175,
                                                                             offsetY: -0.525
                                                                         });
-    var buttonStores = new AR.ImageDrawable(IrAndGeo.res.buttonStores, 0.15, 
+    var buttonStores = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 0.15, 
                                                                         {
                                                                             onClick: IrAndGeo.showStores,
                                                                             offsetX: -0.1,
@@ -408,6 +408,13 @@ IrAndGeo.initIr = function()
 
     // Create the object by defining the tracker, target name and its drawables
     var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, "cabeza-cibeles_2", 
+                                                {
+                                                    drawables: 
+                                                    {
+                                                        cam: [buttonDeal, buttonWeb, buttonStores, IrAndGeo.dealDrawable]
+                                                    }
+                                                });
+	    var trackable2DObject_2 = new AR.Trackable2DObject(IrAndGeo.tracker, "pies-neptuno", 
                                                 {
                                                     drawables: 
                                                     {
