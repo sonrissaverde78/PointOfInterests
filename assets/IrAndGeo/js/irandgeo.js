@@ -371,7 +371,7 @@ IrAndGeo.initIr = function()
     IrAndGeo.TracerAlert("initIr()");
     // Create the tracker to recognize the shop ad
     //var trackerDataSetPath = "assets/ShopAd.wtc";
-    var trackerDataSetPath = "assets/irAndGeo.wtc";
+    var trackerDataSetPath = "assets/cabeza-cibeles.wtc";
     //var trackerDataSetPath = "assets/leon-cibeles.wtc";
     IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
                                                         {
@@ -407,7 +407,7 @@ IrAndGeo.initIr = function()
                                                                         });
 
     // Create the object by defining the tracker, target name and its drawables
-    var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, "ir_geo_poster", 
+    var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, "cabeza-cibeles", 
                                                 {
                                                     drawables: 
                                                     {
