@@ -230,12 +230,14 @@ IrAndGeo.onSpeakerSelected = function (marker)
 			alert ("onSpeackerSelected activated");
 			IrAndGeo.currentMarker.isSpeakerSelected = true;
 			IrAndGeo.startReadPoi(marker.poiData.id);
+			IrAndGeo.isSpeakerSelected = true;
 		}
 		else
 		{
 			alert ("onSpeackerSelected deactivated");
 			IrAndGeo.stopReadPoi(marker.poiData.id);
 			IrAndGeo.currentMarker.isSpeakerSelected = false;
+			IrAndGeo.isSpeakerSelected = false;
 		}
 	}
 
@@ -319,19 +321,46 @@ IrAndGeo.hideStores = function() {
     //document.getElementById("messageElement").style.display = "none";
 };
 
-IrAndGeo.showDeal = function() {
-    IrAndGeo.hideStores();
-    IrAndGeo.menuDrawables.forEach(function(obj, idx) {
-        obj.enabled = false;
-    });
-    IrAndGeo.dealDrawable.enabled = true;
+IrAndGeo.onClickImageReconizedSpeacker = function(id) {
+	
+	return function() 
+	{
+		alert (id + "el showDeal");
+		try 
+		{
+			if (IrAndGeo.isSpeakerSelected == false)
+			{
+				IrAndGeo.isSpeakerSelected = true;
+				IrAndGeo.startReadPoi(id);
+			}
+			else
+			{
+				IrAndGeo.isSpeakerSelected = false;
+				IrAndGeo.stopReadPoi(id);
+			}
+		} 
+		catch (err) 
+		{
+			alert("Market.prototype.getOnClickTringer Error" + err);
+		}
+		return true;
+    };
 };
 
 IrAndGeo.hideDeal = function() {
-    IrAndGeo.dealDrawable.enabled = false;
-    IrAndGeo.menuDrawables.forEach(function(obj, idx) {
-        obj.enabled = true;
-    });
+	return function() 
+	{
+		alert (id + "el showDeal");
+		try 
+		{
+			IrAndGeo.startReadPoi(id);
+		} 
+		catch (err) 
+		{
+			alert("Market.prototype.getOnClickTringer Error" + err);
+		}
+		return true;
+    };
 };
 
 IrAndGeo.showWeb = function() {
@@ -375,7 +404,7 @@ IrAndGeo.initImages = function(poiData2)
     // Create drawables to display on the recognized image
     var buttonDeal = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, 
                                                                         {
-                                                                            onClick: IrAndGeo.showDeal,
+                                                                            onClick: IrAndGeo.onClickImageReconizedSpeacker (poiData2.id),
                                                                             offsetX: 0.35,
                                                                             offsetY: -0.275
                                                                         });
@@ -414,6 +443,7 @@ IrAndGeo.initIr = function()
     // Create the tracker to recognize the shop ad
     //var trackerDataSetPath = "assets/ShopAd.wtc";
     var trackerDataSetPath = "assets/madrid-collection.wtc";
+	IrAndGeo.isSpeakerSelected = false;
     //var trackerDataSetPath = "assets/leon-cibeles.wtc";
     IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
 									{
