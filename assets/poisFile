@@ -16,7 +16,7 @@ Se asocia a Cibeles principalmente con la fertilidad. También encarna la natura
 #field#:ImagesToDraw#		=!= Esc-Cibeles-Madrid.jpg,Cibeles-01.jpg,Cibeles-02.jpg,Cibeles-03.jpg,Cibeles-04.jpg,Cibeles-05.jpg,Cibeles-06.jpg,Cibeles-07.jpg,Cibeles-08.jpg,Cibeles-09.jpg,Cibeles-10.jpg$# 
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= Esc-Cibeles-Madrid.jpg$#
-#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Cibeles$# 
+#field#:ImagesToTrack#		=!= cabeza-cibeles_2$# 
 ______________________
 #Sample#2
 #field#:id				=!= 2 $#
@@ -31,11 +31,11 @@ La fuente, que en un principio estuvo situada en el extremo del Prado de Apolo, 
 Neptuno, con apariencia de viejo, barbudo y con largos cabellos, se suele representar en el acto de empuñar el tridente, arrastrado por caballos y delfines sobre el carro. Neptuno, dios del mar, una de las doce divinidades del Olimpo, es hijo de Saturno y Rea, y hermano de Júpiter. Además tiene la facultad de desencadenar violentas tempestades y también de aplacarlas. Los marineros invocan su protección para asegurarse una navegación tranquila y privada de peligros. La tradición atribuye al Dios numerosos amores de los que nacen frecuentemente divinidades maléficas. En algunos relatos míticos, por ejemplo, Medusa se une a Neptuno generando el famoso caballo alado Pegaso y el gigante Crisaor. La consorte oficial del dios es Anfitrite, la nereida que en un primer momento huye, pero luego se convierte en su esposa. Al dios del mar se le suele representar con larga barba y cabellos abundantes, empuñando el tridente, con puntas a veces ganchudas. Su carro es arrastrado por delfines y caballos de mar o hipocampos. A veces se le representa a lomos de un delfín. Frecuentemente su imagen se asocia a la de Anfitrite en el llamado Triunfo de Neptuno; Anfitrite, junto al dios, cabalga sobre un delfín o se sienta sobre una concha arrastrada por animales marinos, mientras el dios del mar yace en su carro. Generalmente Neptuno y Anfitrite están acompañados de un cortejo de divinidades marinas, los tritones y las nereidas.
 Durante la Guerra Civil, la capital fue asolada por una hambruna. A la figura de Neptuno le fue colocado un cartel colgando de su cuello que decía Dadme de comer o quitadme el tenedor.3 En 2012, durante una manifestación sindical, las aguas de la fuente fueron teñidas de rojo.4
 El club de fútbol Atlético de Madrid junto con su hinchada rojiblanca va a esta fuente para celebrar sus títulos.$#
-#field#:ImagesToTrack#		=!= ShopAd.wtc$#
 #field#:ImagesToDraw#		=!= Esc-Neptuno-Madrid.jpg,Neptuno-01.jpg,Neptuno-02.jpg,Neptuno-03.jpg,Neptuno-04.jpg,Neptuno-05.jpg,Neptuno-06.jpg,Neptuno-07.jpg,Neptuno-08.jpg,Neptuno-09.jpg,Neptuno-10.jpg,Neptuno-11.jpg$#
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= Esc-Neptuno-Madrid.jpg$#
 #field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Fuente_de_Neptuno_%28Madrid%29$# 
+#field#:ImagesToTrack#		=!= pies-neptuno$#
 ______________________
 #Sample#3
 #field#:id				=!= 3 $#	
@@ -51,11 +51,11 @@ La puerta daba acceso a aquellos viajeros que entraban antiguamente a la poblaci
 Se trata de una puerta de estilo neoclásico y aspecto monumental similar a los Arcos de Triunfos romanos, se erigió mirando su exterior a oriente en el año 1778. La puerta ha sido posteriormente restaurada en cinco ocasiones en más de dos siglos de existencia, siendo la última a finales del siglo XX. La originalidad de su fábrica consiste en ser el primer arco de triunfo construido en Europa tras la caída del Imperio romano, siendo precursor de otros como el Arco de Triunfo de París y la Puerta de Brandeburgo en Berlín.
 Ha sufrido desde sus comienzos diversas transformaciones urbanísticas en su entorno. Pasando de ser la frontera exterior de Madrid, a un centro turístico de obligado paso que aparece insertada casi en el medio de la misma ciudad. Este cambio se ha debido al ensanche del siglo XIX a lo largo del barrio de Serrano y la prolongación de la calle de Alcalá. Finalmente es desde 1976 considerado por el Estado Español como un Monumento Histórico-Artístico, extendiendo su categoría a la misma Plaza de la Independencia.
 La puerta ya desde su ubicación final fue adquiriendo desde finales del siglo XVIII relevancia en el pueblo madrileño, y a finales del siglo XIX era ya uno de sus iconos más característicos que aparece en numerosas ilustraciones de la ciudad. Al ser uno de los monumentos más representativos, en su doble condición de mirada hacia el interior de la ciudad y al exterior de la misma. la Puerta de Alcalá ha servido como soporte para todo tipo de manifestaciones políticas y artísticas y en sus inmediaciones se han producido numerosos hechos históricos.$#
-#field#:ImagesToTrack#		=!= ShopAd.wtc$#
 #field#:ImagesToDraw#		=!= puerta-alcala-Madrid.jpg,PuertaAlcala-01.jpg,PuertaAlcala-02.jpg,PuertaAlcala-03.jpg,PuertaAlcala-04.jpg,PuertaAlcala-05.jpg,PuertaAlcala-06.jpg,PuertaAlcala-07.jpg,PuertaAlcala-08.jpg,PuertaAlcala-09.jpg,PuertaAlcala-10.jpg,PuertaAlcala-11.jpg$#  
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= puerta-alcala-Madrid.jpg$#
 #field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_de_Alcala$# 
+#field#:ImagesToTrack#		=!= alcala-front$#
 ______________________
 #Sample#4
 #field#:id				=!= 4 $#
@@ -71,9 +71,9 @@ Para ello, en aplicación de las leyes de desamortización de Mendizábal, se de
 En 1959 es reformada por Manuel Herrero Palacios incorporando en su centro una zona ajardinada y las fuentes. En 1986 los arquitectos Antonio Riviere, Javier Ortega y Antón Capitel introducen una nueva reforma, adquiriendo más importancia la zona peatonal. Las farolas instaladas con motivo de esta remodelación, fueron apodadas popularmente como los supositorios y provocaron una gran polémica debido a su diseño moderno. Finalmente fueron sustituidas por las actuales farolas de estilo "fernandino", si bien en los dos postes centrales de la plaza los supositorios pervivieron algunos años más, para ser unificadas unos años más tarde con las del resto de la plaza.
 Entre 2004 y 2009 se realizaron las obras de construcción de un intercambiador de transportes, inaugurado el 27 de junio de 2009, que acerca la red ferroviaria de Cercanías a la estación subterránea de Sol. La estación se ha convertido por sus dimensiones en la más grande del mundo1 con 28 m de profundidad, 207 m de longitud y 20 m de ancho. Su vestíbulo tiene 7500 m². La entrada al intercomunicador, parecida a un iglú ha vuelto a cambiar la fisonomía de la Puerta del Sol.
 El 15 de mayo de 2011, tras una manifestación convocada por la plataforma Democracia Real Ya, decenas de manifestantes acamparon en la plaza esa misma noche, sumándose cada día más personas y siendo millares durante la semana siguiente, reclamando un cambio político, social y económico en España. Se convierte así la plaza en el símbolo del Movimiento 15M. El día 2 de agosto, la Policía Nacional desalojó a los últimos acampados$#
-#field#:ImagesToTrack#		=!= ShopAd.wtc $#
 #field#:ImagesToDraw#		=!= Esc-Oso_y_Madrono_Madrid.jpg,OsoMadrono-01.jpg,OsoMadrono-02.jpeg,OsoMadrono-03.jpeg,OsoMadrono-06.jpg,OsoMadrono-07.jpeg,OsoMadrono-08.JPG,OsoMadrono-09.jpeg,OsoMadrono-10.jpg,OsoMadrono-11.jpg,OsoMadrono-12.jpg,OsoMadrono-13.jpg$#
 #field#:ImagesButtons#		=!= speaker-48.png$#
 #field#:MainImage#			=!= Esc-Oso_y_Madrono_Madrid.jpg$#
 #field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_del_Sol$# 
+#field#:ImagesToTrack#		=!= oso-madrono$#
 ______________________

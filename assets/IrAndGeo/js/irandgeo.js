@@ -99,8 +99,10 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
 		});
 
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
+		IrAndGeo.initImages(dbPoi[currentPlaceNr]);
         //World.markerList.push(new Marker(singlePoi));
     }
+	
 }
 
 //IrAndGeo.markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
@@ -366,19 +368,10 @@ IrAndGeo.errorLoading = function() {
     IrAndGeo.error = true;
 };
 
-IrAndGeo.initIr = function() 
+IrAndGeo.initImages = function(poiData2) 
 {
-    IrAndGeo.TracerAlert("initIr()");
+    alert("initImages()" + poiData2.ImagesToTrack);
     // Create the tracker to recognize the shop ad
-    //var trackerDataSetPath = "assets/ShopAd.wtc";
-    var trackerDataSetPath = "assets/cabeza-cibeles_2.wtc";
-    //var trackerDataSetPath = "assets/leon-cibeles.wtc";
-    IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
-									{
-										//onLoaded: IrAndGeo.loadingStepDone,
-										onError: IrAndGeo.errorLoading
-									});
-
     // Create drawables to display on the recognized image
     var buttonDeal = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, 
                                                                         {
@@ -407,21 +400,26 @@ IrAndGeo.initIr = function()
                                                                         });
 
     // Create the object by defining the tracker, target name and its drawables
-    var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, "cabeza-cibeles_2", 
+    var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, poiData2.ImagesToTrack, 
                                                 {
                                                     drawables: 
                                                     {
                                                         cam: [buttonDeal, buttonWeb, buttonStores, IrAndGeo.dealDrawable]
                                                     }
                                                 });
-	    var trackable2DObject_2 = new AR.Trackable2DObject(IrAndGeo.tracker, "pies-neptuno", 
-                                                {
-                                                    drawables: 
-                                                    {
-                                                        cam: [buttonDeal, buttonWeb, buttonStores, IrAndGeo.dealDrawable]
-                                                    }
-                                                });
-
+};
+IrAndGeo.initIr = function() 
+{
+    IrAndGeo.TracerAlert("initIr()");
+    // Create the tracker to recognize the shop ad
+    //var trackerDataSetPath = "assets/ShopAd.wtc";
+    var trackerDataSetPath = "assets/madrid-collection.wtc";
+    //var trackerDataSetPath = "assets/leon-cibeles.wtc";
+    IrAndGeo.tracker = new AR.Tracker(trackerDataSetPath, 
+									{
+										//onLoaded: IrAndGeo.loadingStepDone,
+										onError: IrAndGeo.errorLoading
+									});
 };
 
 // this function is called as soon as we receive GPS data 
