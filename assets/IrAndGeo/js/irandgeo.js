@@ -208,7 +208,7 @@ IrAndGeo.onWebInternetSelected = function (marker)
 { 
 	if (marker == IrAndGeo.currentMarker) 
 	{
-			IrAndGeo.GoToWiKi(IrAndGeo.currentMarker.poiData.id)
+			IrAndGeo.GoToWiKi(IrAndGeo.currentMarker.poiData.id);
 			
 	}
 };
@@ -216,7 +216,7 @@ IrAndGeo.onFindInternetSelected = function (marker)
 { 
 	if (marker == IrAndGeo.currentMarker) 
 	{
-			IrAndGeo.FindInternet(IrAndGeo.currentMarker.poiData.id)
+			IrAndGeo.FindInternet(IrAndGeo.currentMarker.poiData.id);
 			
 	}
 };
@@ -347,26 +347,22 @@ IrAndGeo.onClickImageReconizedSpeacker = function(id) {
     };
 };
 
-IrAndGeo.hideDeal = function() {
+IrAndGeo.onClickImageReconizedGoToWiKi = function(id) {
 	return function() 
 	{
-		alert (id + "el showDeal");
-		try 
-		{
-			IrAndGeo.startReadPoi(id);
-		} 
-		catch (err) 
-		{
-			alert("Market.prototype.getOnClickTringer Error" + err);
-		}
+		alert (id + "el GoToWiKi");
+		IrAndGeo.GoToWiKi(id);
 		return true;
     };
 };
 
-IrAndGeo.showWeb = function() {
-    IrAndGeo.hideStores();
-
-    AR.context.openInBrowser("http://www.wikitude.com");
+IrAndGeo.onClickImageReconizedFindInternet = function(id) {
+	return function() 
+	{
+		alert (id + "el FindInternet");
+		IrAndGeo.FindInternet(id);
+		return true;
+    };
 };
 
 IrAndGeo.loadingStepDone = function() 
@@ -408,15 +404,17 @@ IrAndGeo.initImages = function(poiData2)
                                                                             offsetX: 0.35,
                                                                             offsetY: -0.275
                                                                         });
+	 
+
     var buttonWeb = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.15, 
                                                                         {
-                                                                            onClick: IrAndGeo.showWeb,
+                                                                            onClick: IrAndGeo.onClickImageReconizedGoToWiKi(poiData2.id),
                                                                             offsetX: 0.175,
                                                                             offsetY: -0.525
                                                                         });
     var buttonStores = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 0.15, 
                                                                         {
-                                                                            onClick: IrAndGeo.showStores,
+                                                                            onClick: IrAndGeo.onClickImageReconizedFindInternet(poiData2.id),
                                                                             offsetX: -0.1,
                                                                             offsetY: -0.275
                                                                         });
