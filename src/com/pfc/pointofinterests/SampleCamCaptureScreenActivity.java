@@ -152,7 +152,6 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 				{
 					int i = Integer.parseInt(szIdPoiSelected);
 					updateLayoutScrollView(i);
-					// startVoiceRecognitionActivity();
 				}
 				else
 				{
@@ -200,6 +199,29 @@ public abstract class SampleCamCaptureScreenActivity extends AbstractArchitectCa
 									Intent intent = new Intent(Intent.ACTION_VIEW);
 									intent.setData(Uri.parse(url));
 									startActivity(intent);
+								}
+								else
+								{
+									szIdPoiSelected = invokedUri.getQueryParameter ("MakeQuestion");
+									if (szIdPoiSelected != null)
+									{
+										int i = Integer.parseInt(szIdPoiSelected);
+										String pp [] = szPoiInfo (i);
+										int iField = 1;
+										if (textToSpeech.isSpeaking() == true)
+											textToSpeech.stop();
+										do
+										{
+											
+										}while  (textToSpeech.isSpeaking() == true);
+										vReadText ("¿Tiene alguna pregunta?");
+										do
+										{
+											
+										}while  (textToSpeech.isSpeaking() == true);
+										textToSpeech.stop();
+										startVoiceRecognitionActivity();
+									}
 								}
 							}
 							

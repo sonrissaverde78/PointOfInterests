@@ -3,7 +3,7 @@ var kMarker_AnimationDuration_Resize = 1000;
 //IrAndGeo.Marker = function(poiData) {
 function Marker(poiData) {
 
-	alert ("Marker pp (): poiData.name " + poiData.name);
+	// alert ("Marker (): poiData.name " + poiData.name);
 
     this.poiData = poiData;
     this.isSelected = false;
@@ -14,11 +14,6 @@ function Marker(poiData) {
 
     this.animationGroup_idle = null;
     this.animationGroup_selected = null;
-
-//alert("markerLocation = new AR.GeoLocation "); 
-    // create the AR.GeoLocation from the poi data
-    // var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //, poiData.altitude);
-var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //,altitude);
 // alert("this.markerDrawable_idle "); 
     // create an AR.ImageDrawable for the marker in idle state
     // this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 1.5, {
@@ -31,8 +26,6 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         onClick: Marker.prototype.getOnClickPoi(this)
     });
 	
-
-// alert("this.markerDrawable_selected "); 
     // create an AR.ImageDrawable for the marker in selected state
     //this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.markerDrawable_selected, 1.5, {
     this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.res.marker, 0.4, {
@@ -62,7 +55,14 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
 		offsetX: 1.5,
         onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
-    
+	
+	this.buttonMicrophone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, 0.15, 
+	{
+		onClick: IrAndGeo.onClickImageReconizedMicrophone(poiData.id),
+		offsetX: 0.45,
+		offsetY: 0.0
+	});
+	
 	// create an AR.Label for the marker's Country 
     this.titleLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
         zOrder: 0,
@@ -94,17 +94,25 @@ var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //
         enabled: false,
         verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
     });
-
+    // create the AR.GeoLocation from the poi data  
+	var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude); //,altitude);
     /*
         Create the AR.GeoObject with the drawable objects and define the AR.ImageDrawable as an indicator target on the marker AR.GeoObject. The direction indicator is displayed automatically when necessary. AR.Drawable subclasses (e.g. AR.Circle) can be used as direction indicators.
     */
     this.markerObject = new AR.GeoObject( markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_FindInternet, this.markerDrawable_speaker, this.titleLabel, this.titleLabelSelected],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_FindInternet, this.markerDrawable_speaker, this.titleLabel, this.titleLabelSelected, this.buttonMicrophone],
             indicator: this.directionIndicatorDrawable
         }
     });
-// alert("return this "); 
+	var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, poiData.ImagesToTrack, 
+	{
+		drawables: 
+		{
+			cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.markerDrawable_WebInternet, this.markerDrawable_FindInternet, this.markerDrawable_speaker, this.titleLabel, this.titleLabelSelected, this.buttonMicrophone]
+		}
+	});
+
     return this;
 }
 Marker.prototype.getOnClickSpeacker = function(marker) {
@@ -123,9 +131,7 @@ Marker.prototype.getOnClickSpeacker = function(marker) {
 };
 Marker.prototype.getOnClickFindInternet = function(marker) {
 	return function() 
-	{
-		alert ("FindInternet selected?");
-		
+	{	
 		try 
 		{
 			IrAndGeo.onFindInternetSelected(marker);
@@ -140,9 +146,7 @@ Marker.prototype.getOnClickFindInternet = function(marker) {
 };
 Marker.prototype.getOnClickWebInternet = function(marker) {
 	return function() 
-	{
-		alert ("WebInternet selected?");
-		
+	{		
 		try 
 		{
 			IrAndGeo.onWebInternetSelected(marker);
@@ -163,7 +167,6 @@ Marker.prototype.getOnClickPoi = function(marker) {
     */
 
     return function() {
-		alert ("getOnClickPoi?");
         //if (!Marker.prototype.isAnyAnimationRunning(marker)) {
             if (marker.isSelected) {
 

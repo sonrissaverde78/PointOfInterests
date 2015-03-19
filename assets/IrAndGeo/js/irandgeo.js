@@ -99,7 +99,7 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
 		});
 
         IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
-		IrAndGeo.initImages(dbPoi[currentPlaceNr]);
+		//IrAndGeo.initImages(dbPoi[currentPlaceNr]);
         //World.markerList.push(new Marker(singlePoi));
     }
 	
@@ -168,6 +168,11 @@ IrAndGeo.GoToWiKi = function (id)
 	var architectSdkUrl = "architectsdk://markerselected?GoToWiki=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
 	document.location 	= architectSdkUrl;
 }
+IrAndGeo.MakeQuestion = function (id)
+{
+	var architectSdkUrl = "architectsdk://markerselected?MakeQuestion=" + encodeURIComponent(id) + "&title=" + encodeURIComponent(name) + "&description=" + encodeURIComponent(name);
+	document.location 	= architectSdkUrl;
+}
 IrAndGeo.createMarker = function(lat, lon, name, id)
 {
 //IrAndGeo.TracerAlert("createMarker()");
@@ -227,14 +232,14 @@ IrAndGeo.onSpeakerSelected = function (marker)
 		
 		if (IrAndGeo.currentMarker.isSpeakerSelected == false)
 		{
-			alert ("onSpeackerSelected activated");
+			// alert ("onSpeackerSelected activated");
 			IrAndGeo.currentMarker.isSpeakerSelected = true;
 			IrAndGeo.startReadPoi(marker.poiData.id);
 			IrAndGeo.isSpeakerSelected = true;
 		}
 		else
 		{
-			alert ("onSpeackerSelected deactivated");
+			// alert ("onSpeackerSelected deactivated");
 			IrAndGeo.stopReadPoi(marker.poiData.id);
 			IrAndGeo.currentMarker.isSpeakerSelected = false;
 			IrAndGeo.isSpeakerSelected = false;
@@ -277,10 +282,10 @@ IrAndGeo.onMarkerSelected = function (marker)
     // screen was clicked but no geo-object was hit
 AR.context.onScreenClick = function (marker) 
 {
-	alert ("onScreenClick");
+	// alert ("onScreenClick");
 	if (IrAndGeo.currentMarker) 
 	{
-		alert ("AR.context.onScreenClick() setDeselected");
+		// alert ("AR.context.onScreenClick() setDeselected");
 		IrAndGeo.currentMarker.setDeselected(IrAndGeo.currentMarker);
 		IrAndGeo.currentMarker.isSpeakerSelected = false;
 		IrAndGeo.stopReadPoi(IrAndGeo.currentMarker.poiData.id);
@@ -325,7 +330,7 @@ IrAndGeo.onClickImageReconizedSpeacker = function(id) {
 	
 	return function() 
 	{
-		alert (id + "el showDeal");
+		// alert (id + "el showDeal");
 		try 
 		{
 			if (IrAndGeo.isSpeakerSelected == false)
@@ -350,7 +355,7 @@ IrAndGeo.onClickImageReconizedSpeacker = function(id) {
 IrAndGeo.onClickImageReconizedGoToWiKi = function(id) {
 	return function() 
 	{
-		alert (id + "el GoToWiKi");
+		// alert (id + "el GoToWiKi");
 		IrAndGeo.GoToWiKi(id);
 		return true;
     };
@@ -359,12 +364,19 @@ IrAndGeo.onClickImageReconizedGoToWiKi = function(id) {
 IrAndGeo.onClickImageReconizedFindInternet = function(id) {
 	return function() 
 	{
-		alert (id + "el FindInternet");
+		// alert (id + "el FindInternet");
 		IrAndGeo.FindInternet(id);
 		return true;
     };
 };
-
+IrAndGeo.onClickImageReconizedMicrophone = function(id) {
+	return function() 
+	{
+		// alert (id + "el FindInternet");
+		IrAndGeo.MakeQuestion(id);
+		return true;
+    };
+};
 IrAndGeo.loadingStepDone = function() 
 {
     IrAndGeo.TracerAlert("loadingStepDone()");
@@ -395,45 +407,48 @@ IrAndGeo.errorLoading = function() {
 
 IrAndGeo.initImages = function(poiData2) 
 {
-    alert("initImages()" + poiData2.ImagesToTrack);
+    //alert("initImages()" + poiData2.ImagesToTrack);
     // Create the tracker to recognize the shop ad
     // Create drawables to display on the recognized image
     var buttonDeal = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, 
-                                                                        {
-                                                                            onClick: IrAndGeo.onClickImageReconizedSpeacker (poiData2.id),
-                                                                            offsetX: 0.35,
-                                                                            offsetY: -0.275
-                                                                        });
+	{
+		onClick: IrAndGeo.onClickImageReconizedSpeacker (poiData2.id),
+		offsetX: 0.0,
+		offsetY: 0.0
+	});
 	 
 
     var buttonWeb = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.15, 
-                                                                        {
-                                                                            onClick: IrAndGeo.onClickImageReconizedGoToWiKi(poiData2.id),
-                                                                            offsetX: 0.175,
-                                                                            offsetY: -0.525
-                                                                        });
+	{
+		onClick: IrAndGeo.onClickImageReconizedGoToWiKi(poiData2.id),
+		offsetX: 0.15,
+		offsetY: 0.0
+	});
     var buttonStores = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 0.15, 
-                                                                        {
-                                                                            onClick: IrAndGeo.onClickImageReconizedFindInternet(poiData2.id),
-                                                                            offsetX: -0.1,
-                                                                            offsetY: -0.275
-                                                                        });
+	{
+		onClick: IrAndGeo.onClickImageReconizedFindInternet(poiData2.id),
+		offsetX: 0.30,
+		offsetY: 0.0
+	});
+	
+	var buttonMicrophone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, 0.15, 
+	{
+		onClick: IrAndGeo.onClickImageReconizedMicrophone(poiData2.id),
+		offsetX: 0.45,
+		offsetY: 0.0
+	});
+	
+    IrAndGeo.menuDrawables = [buttonDeal, buttonWeb, buttonStores, buttonMicrophone];
 
-    IrAndGeo.menuDrawables = [buttonDeal, buttonWeb, buttonStores];
-    IrAndGeo.dealDrawable = new AR.ImageDrawable(IrAndGeo.res.deal, 0.3, 
-                                                                        {
-                                                                            enabled: false,
-                                                                            onClick: IrAndGeo.hideDeal
-                                                                        });
 
     // Create the object by defining the tracker, target name and its drawables
     var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, poiData2.ImagesToTrack, 
-                                                {
-                                                    drawables: 
-                                                    {
-                                                        cam: [buttonDeal, buttonWeb, buttonStores, IrAndGeo.dealDrawable]
-                                                    }
-                                                });
+	{
+		drawables: 
+		{
+			cam: [buttonDeal, buttonWeb, buttonStores, buttonMicrophone]
+		}
+	});
 };
 IrAndGeo.initIr = function() 
 {
@@ -516,7 +531,10 @@ IrAndGeo.markerDrawable_FindInternet = new AR.ImageResource("assets/buttons/Find
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
-
+IrAndGeo.markerDrawable_microphone = new AR.ImageResource("assets/buttons/microphone-3-128.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
 IrAndGeo.markerDrawable_ImageToShow = new AR.ImageResource("assets/marker_idle.png", {
 	//onLoaded: IrAndGeo.loadingStepDone,
 	onError: IrAndGeo.errorLoading
