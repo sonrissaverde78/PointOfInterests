@@ -4,7 +4,7 @@
 IrAndGeo = {};
 
 IrAndGeo.markerNames = ['Union Circle', 'Eastminster', 'Small Ben', 'Silver Gate', 'Uptown', 'Downtown', 'Countryside', 'Outer Circle'];
-IrAndGeo.PoiNames = [];
+
 IrAndGeo.stores = [];
 IrAndGeo.markerAnimations = [];
 IrAndGeo.error = false;
@@ -19,9 +19,11 @@ IrAndGeo.currentMarker = null;
 IrAndGeo.buttonsImagesPathAG;
 IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
-IrAndGeo.resourcesAG = [];
+
 IrAndGeo.markerDrawable_MainImage_2 = [];
 IrAndGeo.bTracerAlert = false;
+
+IrAndGeo.showPois = false;
 
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 {
@@ -129,13 +131,14 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
 
 
 		IrAndGeo.TracerAlert("otra 2 vez dbPoi[i].name " + dbPoi[i].name);
-		dbPoi[i].latitude = objLat;// parseFloat(objLat);
-        dbPoi[i].longitude = objLon;// parseFloat(objLon);
+		//dbPoi[i].latitude = objLat;// parseFloat(objLat);
+        //dbPoi[i].longitude = objLon;// parseFloat(objLon);
         IrAndGeo.TracerAlert("dbPoi[i].latitude<" 	+ objLat + ">");   
-		IrAndGeo.TracerAlert("dbPoi[i].longitude<" + objLon+ ">");       
+		IrAndGeo.TracerAlert("dbPoi[i].longitude<" + objLon + ">");       
 		
 
-		IrAndGeo.markerList.push(new Marker(dbPoi[i]));
+		IrAndGeo.markerList.push(new Marker(dbPoi[i], false));
+		
     }
 
     // create appearing animation
@@ -213,16 +216,21 @@ IrAndGeo.onWebInternetSelected = function (marker)
 { 
 	if (marker == IrAndGeo.currentMarker) 
 	{
-			IrAndGeo.GoToWiKi(IrAndGeo.currentMarker.poiData.id);
-			
+		IrAndGeo.GoToWiKi(IrAndGeo.currentMarker.poiData.id);	
 	}
 };
 IrAndGeo.onFindInternetSelected = function (marker)
 { 
 	if (marker == IrAndGeo.currentMarker) 
 	{
-			IrAndGeo.FindInternet(IrAndGeo.currentMarker.poiData.id);
-			
+		IrAndGeo.FindInternet(IrAndGeo.currentMarker.poiData.id);
+	}
+};
+IrAndGeo.onMicrophneSelected = function (marker)
+{ 
+	if (marker == IrAndGeo.currentMarker) 
+	{
+		IrAndGeo.MakeQuestion(IrAndGeo.currentMarker.poiData.id);
 	}
 };
 IrAndGeo.onSpeakerSelected = function (marker)
@@ -410,45 +418,45 @@ IrAndGeo.initImages = function(poiData2)
     //alert("initImages()" + poiData2.ImagesToTrack);
     // Create the tracker to recognize the shop ad
     // Create drawables to display on the recognized image
-    var buttonDeal = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, 
-	{
-		onClick: IrAndGeo.onClickImageReconizedSpeacker (poiData2.id),
-		offsetX: 0.0,
-		offsetY: 0.0
-	});
-	 
+    //var buttonDeal = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, 
+	//{
+	//	onClick: IrAndGeo.onClickImageReconizedSpeacker (poiData2.id),
+	//	offsetX: 0.0,
+	//	offsetY: 0.0
+	//});
+	// 
 
-    var buttonWeb = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.15, 
-	{
-		onClick: IrAndGeo.onClickImageReconizedGoToWiKi(poiData2.id),
-		offsetX: 0.15,
-		offsetY: 0.0
-	});
-    var buttonStores = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 0.15, 
-	{
-		onClick: IrAndGeo.onClickImageReconizedFindInternet(poiData2.id),
-		offsetX: 0.30,
-		offsetY: 0.0
-	});
+    //var buttonWeb = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.15, 
+	//{
+	//	onClick: IrAndGeo.onClickImageReconizedGoToWiKi(poiData2.id),
+	//	offsetX: 0.15,
+	//	offsetY: 0.0
+	//});
+    //var buttonStores = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 0.15, 
+	//{
+	//	onClick: IrAndGeo.onClickImageReconizedFindInternet(poiData2.id),
+	//	offsetX: 0.30,
+	//	offsetY: 0.0
+	//});
 	
-	var buttonMicrophone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, 0.15, 
-	{
-		onClick: IrAndGeo.onClickImageReconizedMicrophone(poiData2.id),
-		offsetX: 0.45,
-		offsetY: 0.0
-	});
+	//var buttonMicrophone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, 0.15, 
+	//{
+	//	onClick: IrAndGeo.onClickImageReconizedMicrophone(poiData2.id),
+	//	offsetX: 0.45,
+	//	offsetY: 0.0
+	//});
 	
-    IrAndGeo.menuDrawables = [buttonDeal, buttonWeb, buttonStores, buttonMicrophone];
+    //IrAndGeo.menuDrawables = [buttonDeal, buttonWeb, buttonStores, buttonMicrophone];
 
 
-    // Create the object by defining the tracker, target name and its drawables
-    var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, poiData2.ImagesToTrack, 
-	{
-		drawables: 
-		{
-			cam: [buttonDeal, buttonWeb, buttonStores, buttonMicrophone]
-		}
-	});
+    //// Create the object by defining the tracker, target name and its drawables
+    //var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, poiData2.ImagesToTrack, 
+	//{
+	//	drawables: 
+	//	{
+	//		cam: [buttonDeal, buttonWeb, buttonStores, buttonMicrophone]
+	//	}
+	//});
 };
 IrAndGeo.initIr = function() 
 {
@@ -470,7 +478,7 @@ AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy)
 {
     IrAndGeo.TracerAlert("onLocationChanged()" + "latitude: "+ latitude + " ,longitude: " + longitude + " altitude: " + longitude + " accuracy: "+ accuracy);
     // in order not to receive any further location updates the onLocationChanged trigger is set to null
-    AR.context.onLocationChanged = null;
+    // AR.context.onLocationChanged = null;
     // flag to store that a location was received
     IrAndGeo.receivedLocation = true;
     // initialize the scene
@@ -479,34 +487,39 @@ AR.context.onLocationChanged = function(latitude, longitude, altitude, accuracy)
     //altitude;
     var cssDivLeft = " style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'";
     var cssDivRight = " style='display: table-cell;vertical-align: middle; text-align: left;'";
-
-    document.getElementById('messageElement').innerHTML =
-    //"<div" + cssDivLeft + "> latitude: " + latitude + " longitude: " + longitude + " longitude: "" </div>";
-   "<div" + cssDivLeft + ">latitude " + latitude + " </div>" + 
-   "<div" + cssDivLeft + ">longitude " + longitude + " </div>" + 
-   "<div" + cssDivLeft + ">altitude " + altitude + " </div>" + 
-   "<div" + cssDivLeft + ">accuracy " + accuracy + " </div>";
+	var latitudeGMS = latitude;
+	latitudeGMS = IrAndGeo.dec2gms (latitude, 1);
+	var longitudeGMS = longitude;
+	longitudeGMS = IrAndGeo.dec2gms (longitude, 2);
+   // document.getElementById('messageElement').innerHTML = 
+   // //"<div" + cssDivLeft + "> latitude: " + latitude + " longitude: " + longitude + " longitude: "" </div>";
+   //"<div" + cssDivLeft + ">latitude \n" + latitudeGMS + " </div>" + 
+   //"<div" + cssDivLeft + ">longitude \n" + longitudeGMS + " </div>" + 
+   //"<div" + cssDivLeft + ">altitude \n" + altitude + " </div>";
  //   "<div" + cssDivLeft + ">longitude" + "</div>" +
  //   "<div" + cssDivLeft + ">altitude" + "</div>" +
  //   "<div" + cssDivLeft + ">accuracy" + "</div>" +
-
-
+	document.getElementById('messageElement').innerHTML =  '<table align="center">' + 
+														'<tr>' + 
+														  '<td align="center"><font size="2"><strong>' + 'latitude' + '</strong></td>' + 
+														  '<td align="center"><font size="2"><strong>' + 'longitude' + '</strong></td>' + 
+														  '<td align="center"><font size="2"><strong>' + 'altitude' + '</strong></td>' + 
+														'</tr>' + 
+														'<tr>' + 
+														  '<td align="center"><font size="2"><strong>' + latitudeGMS + '</strong></td>' + 
+														  '<td align="center"><font size="2"><strong>' + longitudeGMS + '</strong></td>' + 
+														  '<td align="center"><font size="2"><strong>' + altitude + '</strong></td>' + 
+														'</tr>' + 
+														'</table>'; 
 
     //"<div" + cssDivRight + "><img src='assets/ShopAdSmall.png'></img></div>";
-    IrAndGeo.setupScene(latitude, longitude, altitude);
-    //IrAndGeo.loadingStepDone();
+	if (IrAndGeo.showPois == false)
+	{
+		IrAndGeo.setupScene(latitude, longitude, altitude);
+		IrAndGeo.showPois = true;
+	}
 };
 
-IrAndGeo.initResources = function () 
-{
-    IrAndGeo.TracerAlert("initResources()");
-    IrAndGeo.resourcesAG [0] = new AR.ImageResource("assets/buttons/speaker-48.png", 
-    {
-        //onLoaded: IrAndGeo.loadingStepDone,
-        onError: IrAndGeo.errorLoading
-    });
-    IrAndGeo.markerDrawable_idle = IrAndGeo.resourcesAG;
-}
 IrAndGeo.TracerAlert = function (szString)
 {
 	if (IrAndGeo.bTracerAlert == true)
@@ -519,7 +532,7 @@ IrAndGeo.markerDrawable_speaker = new AR.ImageResource("assets/buttons/speaker-4
     onError: IrAndGeo.errorLoading
 });
 // Create the image resources that are used for the marker and the buttons
-IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/YourShop_Marker.png", {
+IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/point-of-interest.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
@@ -571,7 +584,31 @@ IrAndGeo.res.deal = new AR.ImageResource("assets/YourShop_Deal.png", {
     onError: IrAndGeo.errorLoading
 });
 
-//IrAndGeo.initResources();
-IrAndGeo.initIr();
+IrAndGeo.dec2gms = function(valor, tipo)
+{
+	grados    = Math.abs(parseInt(valor));
+	minutos   = (Math.abs(valor) - grados) * 60;
+	segundos  = minutos;
+	minutos   = Math.abs(parseInt(minutos));
+	segundos  = Math.round((segundos - minutos) * 60 * 1000000) / 1000000;
+	signo     = (valor < 0) ? -1 : 1;
+	direccion = (tipo == 1) ? 
+				((signo > 0) ? 'N' : 'S') : 
+				((signo > 0) ? 'E' : 'W');
+	
+	if(isNaN(direccion))
+		grados = grados * signo;
+	var segundosTruncados = "" + segundos;
+	return grados + "\u00b0 " + minutos + "' "+ segundosTruncados.substring(0, 3) + 
+					 "\"" + ((isNaN(direccion)) ? (' ' + direccion) : '');
+	//return {
+	//	'grados'   : grados,
+	//	'minutos'  : minutos,
+	//	'segundos' : segundos,
+	//	'direccion': direccion,
+	//	'valor'    : grados + "\u00b0 " + minutos + "' "+ segundos + 
+	//				 "\"" + ((isNaN(direccion)) ? (' ' + direccion) : '')
+	//};
+};
 
-//IrAndGeo.loadingStepDone();
+IrAndGeo.initIr();
