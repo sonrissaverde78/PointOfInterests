@@ -138,6 +138,7 @@ IrAndGeo.setupScene = function(lat, lon, alt) {
 		
 
 		IrAndGeo.markerList.push(new Marker(dbPoi[i], false));
+		IrAndGeo.markerList.push(new Marker(dbPoi[i], true));
 		
     }
 

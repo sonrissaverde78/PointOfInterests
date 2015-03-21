@@ -10,7 +10,6 @@ function Marker(poiData, ImageRecognition) {
     /*
         With AR.PropertyAnimations you are able to animate almost any property of ARchitect objects. This sample will animate the opacity of both background drawables so that one will fade out while the other one fades in. The scaling is animated too. The marker size changes over time so the labels need to be animated too in order to keep them relative to the background drawable. AR.AnimationGroups are used to synchronize all animations in parallel or sequentially.
     */
-
     this.animationGroup_idle = null;
     this.animationGroup_selected = null;
     // create an AR.ImageDrawable for the marker in idle state
@@ -90,8 +89,9 @@ function Marker(poiData, ImageRecognition) {
             fontStyle: AR.CONST.FONT_STYLE.BOLD
         }
     });    
+
     //Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
-	if (ImageRecognition == false)
+	if (ImageRecognition == true)
 	{
 		var trackable2DObject = new AR.Trackable2DObject(IrAndGeo.tracker, poiData.ImagesToTrack, 
 		{
@@ -132,7 +132,7 @@ function Marker(poiData, ImageRecognition) {
 				indicator: this.directionIndicatorDrawable
 			}
 		});	
-	
+
 	}	
     return this;
 }
