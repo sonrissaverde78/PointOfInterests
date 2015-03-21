@@ -1,0 +1,9 @@
+bin/.DS_Store
+bin/AndroidManifest.xml
+bin/classes.dex
+bin/R.txt
+bin/jarlist.cache
+bin/jarlist.ap_
+bin/classes/
+bin/dexedLibs/
+bin/res/
