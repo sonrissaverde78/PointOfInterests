@@ -17,13 +17,14 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.pfc.pointofinterests.PoiSQLiteHelper;
 public class PoiDatabase extends SampleCamCaptureScreenActivity 
 {
 	// Dabase handler and parameters.
 	private 	SQLiteDatabase 			db;						// Database handle.
- 	private 	String 					gdbName 		= "dbPoi.32";	// Database Name.
+ 	private 	String 					gdbName 		= "dbPoi.34";	// Database Name.
  	private 	PoiSQLiteHelper 		dbhPoi;					// DB Object.
 	private		int 					giVersionDB 	= 1;		// Database version.
 	private		String					tableName		= "tablePoi";	// Database main table of pois.
@@ -459,6 +460,7 @@ public class PoiDatabase extends SampleCamCaptureScreenActivity
 			//e.printStackTrace();
 			return 0;
 		}
+		Toast.makeText(getApplicationContext(), "iInsertPoisFromFile (): Total Samples added = " + iTotalPois, Toast.LENGTH_SHORT).show();
 		return iTotalPois;
 	}
 	

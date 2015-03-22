@@ -77,3 +77,57 @@ El 15 de mayo de 2011, tras una manifestación convocada por la plataforma Democ
 #field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_del_Sol$# 
 #field#:ImagesToTrack#		=!= oso-madrono$#
 ______________________
+#Sample#5
+#field#:id				=!= 5 $#
+#field#:name			=!= Dedos $#
+#field#:lat				=!= 40D27M41.92SN $#
+#field#:long			=!= 3D36M30.38SO $#
+#field#:alt				=!= 4 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Madrid, Parque Naciones $#
+#field#:description	x	=!= En el paseo central del Parque Juan Carlos I emerge, junto a una amplísima zona de juegos, esta potente escultura.
+Su autor,  Irarrázabal , ya hizo famosa esta potente imagen en una playa de Punta del Este o el el propio Desierto de Atacama: unos dedos que emergen desde desde la tierra, con una escala monumental que los convierte en monstruosos, o tal vez dolménicos, siempre telúricos. (Aunque ciertamente es la de Madrid la que tiene un carácter más clásico y menos expresionista).
+La obra es de una fuerte contundencia plástica tanto en sus llenos, los dedos como gruesas columnas, como en el vacío que genera en su interior, convirtiéndose en muchas ocasiones en un lugar de juego más dentro del parque en donde corretear, esconderse o ascender.En cuanto a su interpretación es sumamente abierta, y dependerá mucho del espectador, sus espectativas o su simple estado de ánimo.
+Mientras algunos críticos hablan de lo telúrico, de la fuerza madre que asciende desde el suelo, otros le dan un matiz de denuncia sobre la opresión (a mi particularmente me genera una fuerte angustia la creación de sus huellas dactilares que humaniza la escultura y la carga de sentimiento, de individualidad, ... acaso de control policial?). Fuente http://seordelbiombo.blogspot.com.es/2012/08/dedos-irarrazabal-las-esculturas-del.html$#
+#field#:ImagesToDraw#		=!= ParqueNaciones_Dedos_00.jpeg,ParqueNaciones_Dedos_01.jpeg,ParqueNaciones_Dedos_02.jpeg,ParqueNaciones_Dedos_04.jpeg,ParqueNaciones_Dedos_05.jpeg,ParqueNaciones_Dedos_06.jpeg,ParqueNaciones_Dedos_07.jpg,ParqueNaciones_Dedos_08.jpg,ParqueNaciones_Dedos_09.jpg$#
+#field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= Esc-Oso_y_Madrono_Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_del_Sol$# 
+#field#:ImagesToTrack#		=!= oso-madrono$#
+______________________
+#Sample#6
+#field#:id				=!= 6 $#
+#field#:name			=!= Espacio México $#
+#field#:lat				=!= 40D27M33.49SN $#
+#field#:long			=!= 3D36M24.44SO $#
+#field#:alt				=!= 4 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Madrid, Parque Naciones $#
+#field#:description	x	=!= rueda de hormigón, de ocho metros de diámetro, que llama la atención por su color rojo intenso, pero, sobre todo, por su desafiante posición.
+Este enorme disco está colocado de pie, presidiendo la cima de un cerro artificial de 17 metros de altura, con unos apoyos tan escasos que se diría que, en cualquier momento, va a empezar a rodar pendiente abajo.
+Se trata de una donación de la Ciudad de México al pueblo madrileño, con motivo de la designación de nuestra ciudad como Capital Europea de la Cultura. Fue inaugurada el 23 de julio de 1992, coincidiendo con la Segunda Cumbre Iberoamericana, celebrada en Madrid, en un acto que contó con la asistencia de Carlos Salinas de Gortari, presidente de México entre 1988 y 1994.
+Se debe a los artistas mexicanos Andrés Casillas y Margarita García Cornejo, quienes se inspiraron en las tradiciones más remotas de su país para realizar una obra plagada de simbolismos. Las alusiones al sol, al calendario azteca, al juego de pelota de las ciudades mayas y a la piedra de los sacrificios son muy directas, tanto por las formas como por los colores empleados.
+Del mismo modo, el emplazamiento elegido, en lo más alto de una colina, constituye una clara referencia a las pirámides precolombinas, sin olvidar que el acceso, dispuesto a modo de gran rampa, también remite a estas construcciones mayas y aztecas.
+Espacio México es uno de los diecinueve monumentos que decoran la denominada Senda de las Esculturas del Parque Juan Carlos I, un paseo en el que se suceden obras escultóricas de gran tamaño, la mayor parte de ellas realizadas entre 1991 y 1992.$#
+#field#:ImagesToDraw#		=!= ParqueNaciones_EspacioMexico_00.jpeg,ParqueNaciones_EspacioMexico_01.jpeg,ParqueNaciones_EspacioMexico_02.jpeg,ParqueNaciones_EspacioMexico_04.jpeg,ParqueNaciones_EspacioMexico_05.jpeg,ParqueNaciones_EspacioMexico_06.jpeg,ParqueNaciones_EspacioMexico_07.jpeg,ParqueNaciones_EspacioMexico_08.jpeg,ParqueNaciones_EspacioMexico_09.jpeg$#
+#field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= Esc-Oso_y_Madrono_Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_del_Sol$# 
+#field#:ImagesToTrack#		=!= oso-madrono$#
+______________________
+#Sample#7
+#field#:id				=!= 7 $#
+#field#:name			=!= Victimas Del Holocausto $#
+#field#:lat				=!= 40D27M49.57SN $#
+#field#:long			=!= 3D36M21.47SO $#
+#field#:alt				=!= 4 $#
+#field#:Country			=!= España $#
+#field#:City			=!= Madrid, Parque Naciones $#
+#field#:description	x	=!= En el Parque Juan Carlos I, en el jardín de las Tres Culturas, se alza desde 2008 un monumento, obra de Samuel Nahon, en memoria de las víctimas del Holocausto. Fue el primero dedicado en España a los seis millones de judíos víctimas de la Shoá. Su creación se aprobó con la unanimidad de los grupos políticos en el Pleno del Ayuntamiento madrileño. Todos los años, puntualmente, se celebra esta ceremonia porque “es la mejor forma de honrarlas, de reforzar nuestro compromiso de combatir toda expresión de odio e intolerancia contra el pueblo judío”, señaló la alcaldesa Ana Botella.
+Este monumento dedicado a las víctimas de la Shoá “es un faro que ilumina nuestra esperanza y es la demostración de que nuestra ciudad está abierta al recuerdo y a la defensa de la libertad y la dignidad humana contra cualquiera de sus enemigos”, puntualizó Ana Botella. “Una esperanza –añadió- en una Europa que nunca más reniegue de sus principios y valores. Que nunca más destruya los fundamentos de su propia identidad”. Para la alcaldesa eso fue lo que significó el plan exterminador desatado por los nazis contra los judíos: el intento de aniquilar el espíritu de la civilización occidental, basado en el reconocimiento de la libertad y la dignidad del hombre, cuyas raíces profundas se asientan en los más fructíferos estratos del judaísmo.$#
+#field#:ImagesToDraw#		=!= ParqueNaciones_VictHolocausto_00.jpeg,ParqueNaciones_VictHolocausto_01.jpeg,ParqueNaciones_VictHolocausto_02.jpeg,ParqueNaciones_VictHolocausto_04.jpeg,ParqueNaciones_VictHolocausto_05.jpeg,ParqueNaciones_VictHolocausto_06.jpeg,ParqueNaciones_VictHolocausto_07.jpeg$#
+#field#:ImagesButtons#		=!= speaker-48.png$#
+#field#:MainImage#			=!= Esc-Oso_y_Madrono_Madrid.jpg$#
+#field#:UrlWikipedia		=!= http://es.wikipedia.org/wiki/Puerta_del_Sol$# 
+#field#:ImagesToTrack#		=!= oso-madrono$#
+______________________

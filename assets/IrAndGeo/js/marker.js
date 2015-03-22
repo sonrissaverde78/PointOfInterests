@@ -12,9 +12,33 @@ function Marker(poiData, ImageRecognition) {
     */
     this.animationGroup_idle = null;
     this.animationGroup_selected = null;
+	
+	// Drawables sizes
+	if (ImageRecognition == true)
+	{
+		DrawablesSizes = 0.7;
+		DrawablesMarkerIdleSize = 0.5;
+		DrawablesMarkerSelectedSize = 1.0;
+		offsetXSpeacker = DrawablesSizes * 1;
+		offsetXFindInternet = DrawablesSizes * 2;
+		offsetXWebInternet = DrawablesSizes * 3;
+		offsetXMicrophone = DrawablesSizes * 4;
+		offsetYDrawablesButtons = -(DrawablesSizes)/2;
+	}
+	else
+	{
+		DrawablesSizes = 5.0;
+		DrawablesMarkerIdleSize = 4.0;
+		DrawablesMarkerSelectedSize = 6.0;
+		offsetXSpeacker = DrawablesSizes * 1;
+		offsetXFindInternet = DrawablesSizes * 2;
+		offsetXWebInternet = DrawablesSizes * 3;
+		offsetXMicrophone = DrawablesSizes * 4;
+		offsetYDrawablesButtons = -(DrawablesSizes)/2;
+	}	
     // create an AR.ImageDrawable for the marker in idle state
     // this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 1.5, {
-    this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.res.marker, 2.0, {
+    this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.res.marker, DrawablesMarkerIdleSize, {
         zOrder: 0,
 		enabled: true,
         opacity: 1.0,
@@ -25,7 +49,7 @@ function Marker(poiData, ImageRecognition) {
     });
 	
     // create an AR.ImageDrawable for the marker in selected state
-    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.res.marker, 2.8, {
+    this.markerDrawable_selected = new AR.ImageDrawable(IrAndGeo.res.markerSelected, DrawablesMarkerSelectedSize, {
         zOrder: 0,
 		enabled: true,
         opacity: 0.0,
@@ -34,38 +58,39 @@ function Marker(poiData, ImageRecognition) {
         onClick: null
     });
 	
-	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, 0.15, {
+	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, DrawablesSizes, {
         zOrder: 1,
 		enabled: false,
         opacity: 1.0,
-		offsetX: 0.15,
-		offsetY: 0.0,
+		offsetX: offsetXSpeacker,
+		offsetY: offsetYDrawablesButtons,
         onClick: null
     });
-	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, 0.15, {
+
+	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, DrawablesSizes, {
         zOrder: 1,
 		enabled: false,
         opacity: 1.0,
-		offsetX: 0.30,
-		offsetY: 0.0,
+		offsetX: offsetXWebInternet,
+		offsetY: offsetYDrawablesButtons,
         onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
- 	this.markerDrawable_FindInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, 0.15, {
+ 	this.markerDrawable_FindInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, DrawablesSizes, {
         zOrder: 1,
 		enabled: false,
         opacity: 1.0,
-		offsetX: 0.45,
-		offsetY: 0,
+		offsetX: offsetXFindInternet,
+		offsetY: offsetYDrawablesButtons,
         onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
 	
-	this.markerDrawable_microphone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, 0.15, 
+	this.markerDrawable_microphone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, DrawablesSizes, 
 	{
 		zOrder: 1,
 		enabled: false,
 		opacity: 1.0,
-		offsetX: 0.60,
-		offsetY: 0.0,
+		offsetX: offsetXMicrophone,
+		offsetY: offsetYDrawablesButtons,
 		onClick: null	// Marker.prototype.getOnClickWebInternet(this)
 	});
 	
@@ -246,7 +271,7 @@ Marker.prototype.setSelected = function(marker)
         // create AR.PropertyAnimation that animates the opacity to 0.0 in order to hide the idle-state-drawable
         var hideIdleDrawableAnimation = new AR.PropertyAnimation(marker.markerDrawable_idle, "opacity", null, 0.0, kMarker_AnimationDuration_ChangeDrawable);
         // create AR.PropertyAnimation that animates the opacity to 1.0 in order to show the selected-state-drawable
-        var showSelectedDrawableAnimation = new AR.PropertyAnimation(marker.markerDrawable_selected, "opacity", null, 1.0, kMarker_AnimationDuration_ChangeDrawable);
+        var showSelectedDrawableAnimation = new AR.PropertyAnimation(marker.markerDrawable_selected, "opacity", null, 0.6, kMarker_AnimationDuration_ChangeDrawable);
 
         // create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.2
         var idleDrawableResizeAnimation = new AR.PropertyAnimation(marker.markerDrawable_idle, 'scaling', null, 1.2, kMarker_AnimationDuration_Resize, new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
@@ -287,34 +312,40 @@ Marker.prototype.setSelected = function(marker)
 			{
 				distanceToUserString = (Math.round(distanceToUserValue) + " m");
 			}
-			marker.markerDrawable_speaker.scale = 2.0;
+			
 			marker.DistanceLabel.text = "" + distanceToUserString;
 		}
 	}
+	DrawablesScale = 10.0;
 	
-	
+	// Activate Drawales of the poi
 	marker.markerDrawable_speaker.enabled 		= true;
 	marker.markerDrawable_WebInternet.enabled 	= true;
 	marker.markerDrawable_FindInternet.enabled 	= true;
 	marker.markerDrawable_microphone.enabled 	= true;
-	
-	marker.markerDrawable_selected.opacity  = 1;
-	marker.markerDrawable_idle.opacity = 0;
+	marker.markerDrawable_selected.opacity  = 0.5;
 	marker.titleLabelSelected.opacity  	= 1;
+
+/*	marker.markerDrawable_speaker.scale 		= DrawablesScale;
+	marker.markerDrawable_WebInternet.scale 	= DrawablesScale;
+	marker.markerDrawable_FindInternet.scale 	= DrawablesScale;
+	marker.markerDrawable_microphone.scale 	= DrawablesScale;
+	marker.markerDrawable_selected.scale  = DrawablesScale;
+	marker.titleLabelSelected.scale  	= DrawablesScale;	*/
+	
+	// Deactivate Drawales of the poi.
+	marker.markerDrawable_idle.opacity = 0;	
 	marker.titleLabel.opacity	= 0;
 	
-
-	
+	// Activate trigers for drawables.
 	marker.markerDrawable_speaker.onClick 		= Marker.prototype.getOnClickSpeacker(marker);
 	marker.markerDrawable_WebInternet.onClick 	= Marker.prototype.getOnClickWebInternet(marker);
 	marker.markerDrawable_FindInternet.onClick 	= Marker.prototype.getOnClickFindInternet(marker);
 	marker.markerDrawable_microphone.onClick 	= Marker.prototype.getOnClickMicrophone(marker);
+    marker.markerDrawable_selected.onClick 		= Marker.prototype.getOnClickPoi(marker);
 
     // removes function that is set on the onClick trigger of the idle-state marker
     marker.markerDrawable_idle.onClick = null;
-    // sets the click trigger function for the selected state marker
-    marker.markerDrawable_selected.onClick = Marker.prototype.getOnClickPoi(marker);
-
 
     // starts the selected-state animation
     marker.animationGroup_selected.start();
@@ -359,18 +390,26 @@ Marker.prototype.setDeselected = function(marker) {
 		if (marker.directionIndicatorDrawable != null)
 			marker.directionIndicatorDrawable.enabled = false;
 	}	
+
+	DrawablesScale = 1.0;
 	
+/*	marker.markerDrawable_speaker.scale 		= DrawablesScale;
+	marker.markerDrawable_WebInternet.scale 	= DrawablesScale;
+	marker.markerDrawable_FindInternet.scale 	= DrawablesScale;
+	marker.markerDrawable_microphone.scale 	= DrawablesScale;
+	marker.markerDrawable_selected.scale  = DrawablesScale;
+	marker.titleLabelSelected.scale  	= DrawablesScale;	
+	*/
 	marker.markerDrawable_WebInternet.enabled = false;
 	marker.markerDrawable_FindInternet.enabled = false;
 	marker.markerDrawable_microphone.enabled = false;
 	marker.markerDrawable_speaker.enabled = false;
 	marker.titleLabelSelected.opacity  	= 0;
-	marker.titleLabel.opacity	= 1;
-	
-	
-	
 	marker.markerDrawable_selected.opacity  = 0;
-	marker.markerDrawable_idle.opacity = 1;
+	
+	marker.titleLabel.opacity	= 1;
+	marker.markerDrawable_idle.opacity = 1;	
+
     // sets the click trigger function for the idle state marker
     marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickPoi(marker);
     // removes function that is set on the onClick trigger of the selected-state marker.

@@ -10,9 +10,11 @@ IrAndGeo.markerAnimations = [];
 IrAndGeo.error = false;
 IrAndGeo.receivedLocation = false;
 var imageDrawable = [];
+
+
 IrAndGeo.res = {};
 var dbPoi = [];
-var iTotalPois = 0;
+
 IrAndGeo.markerList = [];
 IrAndGeo.currentMarker = null;
 
@@ -20,9 +22,8 @@ IrAndGeo.buttonsImagesPathAG;
 IrAndGeo.ImagesToTrackPathAG;
 IrAndGeo.ImagesToDrawPathAG;
 
-IrAndGeo.markerDrawable_MainImage_2 = [];
+IrAndGeo.TotalLoadedPois = 0;
 IrAndGeo.bTracerAlert = false;
-
 IrAndGeo.showPois = false;
 
 IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
@@ -78,7 +79,8 @@ IrAndGeo.GetExecuteOperationFromJSon = function(InputInfo)
 }
 IrAndGeo.loadPoisFromJSon = function(poiData)
 {
-    IrAndGeo.TracerAlert("loadPoisFromJSon poiData.length " + poiData.length);
+	IrAndGeo.TotalLoadedPois = poiData.length;
+    alert("loadPoisFromJSon poiData.length " + IrAndGeo.TotalLoadedPois);
     var singlePoi; 
     // loop through POI-information and create an AR.GeoObject (=Marker) per POI
     for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
@@ -96,29 +98,23 @@ IrAndGeo.loadPoisFromJSon = function(poiData)
         };
         dbPoi[currentPlaceNr] = singlePoi;
 		IrAndGeo.TracerAlert("poiData[currentPlaceNr].MainImage x" + "assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage);
-		dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage, {
-		onError: IrAndGeo.errorLoading
-		});
+		//dbPoi[currentPlaceNr].markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].MainImage, {
+		//onError: IrAndGeo.errorLoading
+		//});
 
-        IrAndGeo.TracerAlert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
+        alert("dbPoi[currentPlaceNr].name          "    + " " + dbPoi[currentPlaceNr].name);
 		//IrAndGeo.initImages(dbPoi[currentPlaceNr]);
         //World.markerList.push(new Marker(singlePoi));
     }
 	
 }
 
-//IrAndGeo.markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/" + dbPoi[currentPlaceNr].ImagesToDraw, {
-//IrAndGeo.markerDrawable_MainImage = new AR.ImageResource("assets/ImagesToDraw/Esc-Cibeles-Madrid.jpg", {
-////onLoaded: IrAndGeo.loadingStepDone,
-//onError: IrAndGeo.errorLoading
-//});
-
 IrAndGeo.setupScene = function(lat, lon, alt) {
     // create 8 random markers with different marker names
     IrAndGeo.TracerAlert("setupScene()");
     var ppoi;
 
-    for (var i = 0; i < 4; i++) 
+    for (var i = 0; i < IrAndGeo.TotalLoadedPois; i++) 
     {
         var objLat = lat + ((Math.random() - 0.5) / 1000);
         var objLon = lon + ((Math.random() - 0.5) / 1000);
@@ -534,6 +530,10 @@ IrAndGeo.markerDrawable_speaker = new AR.ImageResource("assets/buttons/speaker-4
 });
 // Create the image resources that are used for the marker and the buttons
 IrAndGeo.res.marker = new AR.ImageResource("assets/buttons/point-of-interest.png", {
+    //onLoaded: IrAndGeo.loadingStepDone,
+    onError: IrAndGeo.errorLoading
+});
+IrAndGeo.res.markerSelected = new AR.ImageResource("assets/buttons/point-of-interest_selected.png", {
     //onLoaded: IrAndGeo.loadingStepDone,
     onError: IrAndGeo.errorLoading
 });
