@@ -24,6 +24,8 @@ function Marker(poiData, ImageRecognition) {
 		offsetXWebInternet = DrawablesSizes * 3;
 		offsetXMicrophone = DrawablesSizes * 4;
 		offsetYDrawablesButtons = -(DrawablesSizes)/2;
+		titleLabelScale = 0.5;
+		titleLabelSelectedScale = 0.7;
 	}
 	else
 	{
@@ -35,6 +37,8 @@ function Marker(poiData, ImageRecognition) {
 		offsetXWebInternet = DrawablesSizes * 3;
 		offsetXMicrophone = DrawablesSizes * 4;
 		offsetYDrawablesButtons = -(DrawablesSizes)/2;
+		titleLabelScale = 5.0;
+		titleLabelSelectedScale = 6.0;
 	}	
     // create an AR.ImageDrawable for the marker in idle state
     // this.markerDrawable_idle = new AR.ImageDrawable(IrAndGeo.markerDrawable_idle, 1.5, {
@@ -59,7 +63,7 @@ function Marker(poiData, ImageRecognition) {
     });
 	
 	this.markerDrawable_speaker = new AR.ImageDrawable(IrAndGeo.markerDrawable_speaker, DrawablesSizes, {
-        zOrder: 1,
+        zOrder: 2,
 		enabled: false,
         opacity: 1.0,
 		offsetX: offsetXSpeacker,
@@ -68,7 +72,7 @@ function Marker(poiData, ImageRecognition) {
     });
 
 	this.markerDrawable_WebInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_WebInternet, DrawablesSizes, {
-        zOrder: 1,
+        zOrder: 2,
 		enabled: false,
         opacity: 1.0,
 		offsetX: offsetXWebInternet,
@@ -76,7 +80,7 @@ function Marker(poiData, ImageRecognition) {
         onClick: null// Marker.prototype.getOnClickWebInternet(this)
     });
  	this.markerDrawable_FindInternet = new AR.ImageDrawable(IrAndGeo.markerDrawable_FindInternet, DrawablesSizes, {
-        zOrder: 1,
+        zOrder: 2,
 		enabled: false,
         opacity: 1.0,
 		offsetX: offsetXFindInternet,
@@ -86,7 +90,7 @@ function Marker(poiData, ImageRecognition) {
 	
 	this.markerDrawable_microphone = new AR.ImageDrawable(IrAndGeo.markerDrawable_microphone, DrawablesSizes, 
 	{
-		zOrder: 1,
+		zOrder: 2,
 		enabled: false,
 		opacity: 1.0,
 		offsetX: offsetXMicrophone,
@@ -95,8 +99,8 @@ function Marker(poiData, ImageRecognition) {
 	});
 	
 	// create an AR.Label for the marker's Country 
-    this.titleLabel = new AR.Label(poiData.name.trunc(20), 0.5, {
-        zOrder: 0,
+    this.titleLabel = new AR.Label(poiData.name.trunc(20), titleLabelScale, {
+        zOrder: 1,
         offsetY: -1.0,
 		opacity: 1.0,
         style: {
@@ -105,8 +109,8 @@ function Marker(poiData, ImageRecognition) {
         }
 		
     });
-    this.titleLabelSelected = new AR.Label(poiData.name.trunc(20), 0.7, {
-        zOrder: 0,
+    this.titleLabelSelected = new AR.Label(poiData.name.trunc(20), titleLabelSelectedScale, {
+        zOrder: 1,
         offsetY: -1.0,
 		opacity: 0.0,
         style: {
